@@ -14,6 +14,10 @@ void keyReleased(){
   game1.releaseKey();
 }
 
+void mouseClicked() {
+  game1.clickMouse();
+}
+
 void draw(){
   game1.display();
 }

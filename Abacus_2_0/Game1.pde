@@ -1,8 +1,10 @@
+GameStateManager gamestateManager;
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
 
 class Game1 {
 
   void initiate() {
+    gamestateManager = new GameStateManager();
   }
 
   void pressKey() {
@@ -20,7 +22,12 @@ class Game1 {
       period = false;
     }
   }
+  
+  void clickMouse(){
+    for (TextBox t : textBoxes) t.pressed(mouseX, mouseY);
+  }
 
   void display() {
+    gamestateManager.manage();
   }
 }
