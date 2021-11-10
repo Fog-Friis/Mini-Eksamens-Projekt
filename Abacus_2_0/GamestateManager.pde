@@ -1,49 +1,46 @@
 int gamestate;
 
-class GameStateManager{
-  
-  void setupManager(){
-    
+class GameStateManager {
+
+  void setupManager() {
   }
-  
-  
+
+
   //start teacher screens at case 100
-  void manage(){
-    switch(gamestate){
-      case 0:
+  void manage() {
+    switch(gamestate) {
+    case 0:
       LoginScreen();
       break;
-      
-      case 1:
+
+    case 1:
       RegisterScreen();
       break;
-      
-      case 2:      
+
+    case 2:      
       break;
-      
-      case 3:
+
+    case 3:
       break;
-      
-      case 4:
+
+    case 4:
       break;
-      
-      default:
+
+    default:
       gamestate = 0;
       break;
     }
   }  
-  
-  void LoginScreen(){
-    
+
+  void LoginScreen() {
   }
-  
-  void RegisterScreen(){
-    
+
+  void RegisterScreen() {
   }
-  
-  void StudentMenu(){
+
+  void StudentMenu() {
   }
-  
-  void TeacherMenu(){
+
+  void TeacherMenu() {
   }
 }
