@@ -19,5 +19,6 @@ void mouseClicked() {
 }
 
 void draw(){
+  background(255);
   game1.display();
 }

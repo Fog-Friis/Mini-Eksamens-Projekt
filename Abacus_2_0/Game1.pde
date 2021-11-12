@@ -1,10 +1,12 @@
 GameStateManager gamestateManager;
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
+boolean enter;
 
 class Game1 {
 
   void initiate() {
     gamestateManager = new GameStateManager();
+    gamestateManager.setupManager();
   }
 
   void pressKey() {
@@ -15,12 +17,21 @@ class Game1 {
     if (keyCode == 46) {
       period = true;
     }
+    
+    if (key == ENTER){
+      enter = true;
+    }
   }
 
   void releaseKey() {
     if (keyCode == 46) {
       period = false;
     }
+    
+    if (key == ENTER){
+      enter = false;
+    }
+    
   }
   
   void clickMouse(){
