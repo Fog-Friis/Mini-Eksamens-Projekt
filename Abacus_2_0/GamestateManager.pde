@@ -2,6 +2,9 @@ int gamestate;
 TextBox regUserTB, regEmailTB, regPassword1, regPassword2;
 TextBox logUserTB, logPasswordTB;
 
+Button loginBut, registerScreenBut;
+Button registerBut, backBut;
+
 class GameStateManager {
 
   void setupManager() {
@@ -12,6 +15,12 @@ class GameStateManager {
 
     textBoxes.add(logUserTB);
     textBoxes.add(logPasswordTB);
+    
+    loginBut = new Button(new PVector(width/2 + 30, height / 2 + 20), new PVector(155,40), 40, color(0,0,255), color(0,0,180), color(200,200,255), "login", 50, 0);
+    registerScreenBut = new Button(new PVector(width/2 - 180, height / 2 + 20), new PVector(160,40), 40, color(0,0,255), color(0,0,180), color(200,200,255), "register", 50, 0);
+    
+    buttons.add(loginBut);
+    buttons.add(registerScreenBut);
     
     //setup register screeen
     regUserTB = new TextBox(new PVector(width/2-200, height/3.7), new PVector(400, 70), false, 2);
@@ -66,6 +75,11 @@ class GameStateManager {
     for (TextBox t : textBoxes) {
       t.display();
     }
+    
+    for (Button b : buttons){
+      b.display();
+    }
+    
     textSize(32);
     text("Brugernavn", width/2-200, height/3.2-10);
     text("Adgangskode", width/2-200, height/2.4-10);

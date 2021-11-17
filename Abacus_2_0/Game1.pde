@@ -1,5 +1,6 @@
 GameStateManager gamestateManager;
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
+ArrayList<Button> buttons = new ArrayList<Button>();
 boolean enter;
 
 class Game1 {
@@ -36,6 +37,14 @@ class Game1 {
   
   void clickMouse(){
     for (TextBox t : textBoxes) t.pressed(mouseX, mouseY);
+  }
+  
+  void pressMouse(){
+    for (Button b : buttons) b.pressed();
+  }
+  
+  void releaseMouse(){
+    for (Button b : buttons) b.release();
   }
 
   void display() {

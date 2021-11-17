@@ -1,47 +1,96 @@
-boolean toggleColor;
-float sizebutton = 200; 
-
-
 class Button {
-  PVector pos, size;
-  color col;
-  String caption;
-  boolean visible=true;
 
-  Button(float x, float y, float sizeX, float sizeY, String txt, color c) {
-    pos = new PVector(x, y);
-    size = new PVector(sizeX, sizeY);
-    caption = txt;
-    col = c;
-    visible = true;
+  PVector pos;
+  PVector size;
+
+  color col, overCol, pressedCol;
+
+  float radius, textSize;
+
+  PVector box1size, box1pos, box2size, box2pos;
+  PVector circle1pos, circle2pos, circle3pos, circle4pos;
+
+  int visible;
+
+  boolean clicked;
+
+  String Text;
+
+  //Constructor
+  Button(PVector p, PVector s, float r, color col, color ocol, color pcol, String Text, float textSize, int visible) {
+
+    this.pos = p;
+    this.size = s;
+    this.radius = r;
+    this.col = col;
+    this.overCol = ocol;
+    this.pressedCol = pcol;
+    this.Text = Text;
+    this.textSize = textSize;
+
+    box1pos = new PVector(pos.x, pos.y-radius/2);
+    box2pos = new PVector(pos.x-radius/2, pos.y);
+
+    box1size = new PVector(size.x, size.y+radius);
+    box2size = new PVector(size.x+radius, size.y);
+
+    circle1pos = new PVector(pos.x, pos.y);
+    circle2pos = new PVector(pos.x+size.x, pos.y);
+    circle3pos = new PVector(pos.x+size.x, pos.y+size.y);
+    circle4pos = new PVector(pos.x, pos.y+size.y);
   }
-  
-  //metode til at tjekke om musens position er i knappen
-  boolean containsMouse(){
-    if(mouseX <= size.x && mouseX >= pos.x && mouseY <= size.y && mouseY >= pos.y){
-    return true;
+
+  boolean over() {
+    if ((mouseX <= box1pos.x+box1size.x && mouseX >= box1pos.x && mouseY <= box1pos.y+box1size.y && mouseY >= box1pos.y) ||
+      (mouseX <= box2pos.x+box2size.x && mouseX >= box2pos.x && mouseY <= box2pos.y+box2size.y && mouseY >= box2pos.y) ||
+      (dist(mouseX, mouseY, circle1pos.x, circle1pos.y)<radius/2) ||
+      (dist(mouseX, mouseY, circle2pos.x, circle2pos.y)<radius/2) ||
+      (dist(mouseX, mouseY, circle3pos.x, circle3pos.y)<radius/2) ||
+      (dist(mouseX, mouseY, circle4pos.x, circle4pos.y)<radius/2)) {
+      return true;
     } else {
       return false;
-    }    
+    }
   }
 
-  void show() {
-    rectMode(CORNER);
-    fill(col);
-    strokeWeight(3);
-    float rect1 = pos.x-sizebutton/1.4;
-    float rect2 = pos.y-sizebutton/7;
-    float rect3 = sizebutton;
-    float rect4 = sizebutton/3;
-    
-    //rect(pos.x-sizebutton/1.4, pos.y-sizebutton/7, sizebutton, sizebutton/3);
-    rect(rect1, rect2, rect3, rect4);
-    fill(0);
-    float fontSize = sizebutton * 0.20;
-    textSize(fontSize);
-    // float tw = textWidth(caption);
-    float tx = pos.x - sizebutton*0.6 ;
-    float ty = pos.y + (fontSize / 2);
-    text(caption, tx, ty);
+  void pressed() {
+    if (over()) {
+      clicked = true;
+    }
+  }
+
+  void release() {
+    clicked = false;
+  }
+
+  void display() {
+
+    if(visible == gamestate){
+    noStroke();
+
+    if (clicked) {
+      fill(pressedCol);
+    } else if (over()) {
+      fill(overCol);
+    } else {
+      fill(col);
+    }
+
+    //rectangles
+    rect(box1pos.x, box1pos.y, box1size.x, box1size.y);
+    rect(box2pos.x, box2pos.y, box2size.x, box2size.y);
+
+    //rounded corners
+    circle(circle1pos.x, circle1pos.y, radius);
+    circle(circle2pos.x, circle2pos.y, radius);
+    circle(circle3pos.x, circle3pos.y, radius);
+    circle(circle4pos.x, circle4pos.y, radius);
+
+    textAlign(CENTER);
+    fill(0, 0, 0);
+    textSize(textSize);
+    text(Text, pos.x+size.x/2, pos.y+2*textSize/3);
+    textAlign(CORNER);
+    }
   }
 }

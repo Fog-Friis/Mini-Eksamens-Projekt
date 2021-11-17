@@ -18,6 +18,14 @@ void mouseClicked() {
   game1.clickMouse();
 }
 
+void mousePressed(){
+  game1.pressMouse();
+}
+
+void mouseReleased(){
+  game1.releaseMouse();
+}
+
 void draw(){
   background(255);
   game1.display();
