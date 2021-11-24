@@ -67,7 +67,9 @@ public class TextBox {
       } else {
         text(Text, position.x + (textWidth("a") / 2), position.y + TEXTSIZE);
       }
-    } else {
+    } else{
+      //sletter texten når man ikke er på menuen længere
+      clearText();
     }
   }
 
