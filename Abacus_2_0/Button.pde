@@ -27,6 +27,8 @@ class Button {
     this.pressedCol = pcol;
     this.Text = Text;
     this.textSize = textSize;
+    this.visible = visible;
+
 
     box1pos = new PVector(pos.x, pos.y-radius/2);
     box2pos = new PVector(pos.x-radius/2, pos.y);

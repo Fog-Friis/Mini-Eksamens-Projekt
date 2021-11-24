@@ -2,12 +2,14 @@ GameStateManager gamestateManager;
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
 ArrayList<Button> buttons = new ArrayList<Button>();
 boolean enter;
+ErrorHandler errorHandler;
 
 class Game1 {
 
   void initiate() {
     gamestateManager = new GameStateManager();
     gamestateManager.setupManager();
+    errorHandler = new ErrorHandler();
   }
 
   void pressKey() {
@@ -47,7 +49,12 @@ class Game1 {
     for (Button b : buttons) b.release();
   }
 
-  void display() {
+  void display() {    
     gamestateManager.manage();
+    
+    for (TextBox t : textBoxes) t.display();
+    for (Button b : buttons) b.display();
+    
+    errorHandler.display();
   }
 }

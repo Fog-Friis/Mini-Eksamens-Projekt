@@ -15,13 +15,13 @@ class GameStateManager {
 
     textBoxes.add(logUserTB);
     textBoxes.add(logPasswordTB);
-    
-    loginBut = new Button(new PVector(width/2 + 30, height / 2 + 20), new PVector(155,40), 40, color(0,0,255), color(0,0,180), color(200,200,255), "login", 50, 0);
-    registerScreenBut = new Button(new PVector(width/2 - 180, height / 2 + 20), new PVector(160,40), 40, color(0,0,255), color(0,0,180), color(200,200,255), "register", 50, 0);
-    
+
+    loginBut = new Button(new PVector(width/2 + 30, height / 2 + 20), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "login", 50, 0);
+    registerScreenBut = new Button(new PVector(width/2 - 180, height / 2 + 20), new PVector(160, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "register", 50, 0);
+
     buttons.add(loginBut);
     buttons.add(registerScreenBut);
-    
+
     //setup register screeen
     regUserTB = new TextBox(new PVector(width/2-200, height/3.7), new PVector(400, 70), false, 2);
     regEmailTB = new TextBox(new PVector(width/2-200, height/3.7+110), new PVector(400, 70), false, 2);
@@ -32,6 +32,12 @@ class GameStateManager {
     textBoxes.add(regEmailTB);
     textBoxes.add(regPassword1);
     textBoxes.add(regPassword2);
+
+    registerBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "register", 50, 2);
+    backBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "back", 50, 2);
+
+    buttons.add(registerBut);
+    buttons.add(backBut);
   }
 
 
@@ -53,14 +59,15 @@ class GameStateManager {
       break;
 
     case 2:
-      RegisterScreenElev();
+      RegisterScreenStudent();
       break;
 
     case 3:
-      StudentMenu();
+      RegisterScreenTeacher();
       break;
 
     case 4:
+      StudentMenu();
       break;
 
     default:
@@ -72,15 +79,12 @@ class GameStateManager {
   void LoginScreen() {
     fill(240);
     stroke(6);
-    rect(width/2.8,height/5,550,600);
-    for (TextBox t : textBoxes) {
-      t.display();
+    rect(width/2.8, height/5, 550, 600);
+
+    if (registerScreenBut.clicked) {
+      gamestate = 1;
     }
-    
-    for (Button b : buttons){
-      b.display();
-    }
-    
+
     textSize(32);
     text("Brugernavn", width/2-200, height/3.2-10);
     text("Adgangskode", width/2-200, height/2.4-10);
@@ -91,13 +95,15 @@ class GameStateManager {
   void ChooseRegister() {
   }
 
-  void RegisterScreenElev() {
+  void RegisterScreenStudent() {
     fill(240);
     stroke(6);
-    rect(width/2.8,height/6.8,550,700);
-    for (TextBox t : textBoxes) {
-      t.display();
+    rect(width/2.8, height/6.8, 550, 700);
+
+    if (backBut.clicked == true) {
+      gamestate = 0;
     }
+
     textSize(32);
     text("Brugernavn", width/2-200, height/3.7-10);
     text("Adgangskode", width/2-200, height/3.7+100);
@@ -105,6 +111,9 @@ class GameStateManager {
     text("Lære-ID", width/2-200, height/3.7+320);
     textSize(48);
     text("Registrer lærer", width/2.37, height/5.3);
+  }
+
+  void RegisterScreenTeacher() {
   }
 
   void StudentMenu() {
