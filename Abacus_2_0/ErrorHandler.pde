@@ -1,20 +1,31 @@
-class ErrorHandler {
-
   int errorType;
+
+class ErrorHandler {
   
-  void update(){
-    if (regUserTB.TextLength == 0) {
+  String errorText = "";
+  
+  void loginUpdate(){
+    
+    if(logUserTB.TextLength == 0){
       errorType = 1;
-    } else if (regEmailTB.TextLength == 0) {
-      errorType = 2;
-    } else if (regPassword1.TextLength == 0) {
+    } else if (logPasswordTB.TextLength == 0) {  
+      errorType = 2;      
+    } else {
+      errorType = 0;
+    }
+  }
+  
+  void registerUpdate(){
+    if (regUserTB.TextLength == 0) {
       errorType = 3;
-    } else if (regPassword2.TextLength == 0) {
+    } else if (regEmailTB.TextLength == 0) {
       errorType = 4;
-    } else if (logUserTB.TextLength == 0) {
+    } else if (regPassword1.TextLength == 0) {
       errorType = 5;
-    } else if (logPasswordTB.TextLength == 0) {
+    } else if (regPassword2.TextLength == 0) {
       errorType = 6;
+    } else if(regPassword1.Text != regPassword2.Text){
+      errorType = 7;
     } else {
       errorType = 0;
     }
@@ -22,41 +33,46 @@ class ErrorHandler {
 
   void display() {
 
-    fill(255, 0, 0);
-
     switch (errorType) {
     case 0:
+    errorText = "";
       break;
 
     case 1:
-    text("Error, please type username.", width / 4, 9*height / 10);
+    errorText = "Error, please type username.";
       break;
 
     case 2:
-    text("Error, please type username.", width / 4, 9*height / 10);
+    errorText = "Error, please type password.";
       break;
 
     case 3:
-    text("Error, please type username.", width / 4, 9*height / 10);
+    errorText = "Error, please type username.";
       break;
 
     case 4:
-    text("Error, please type username.", width / 4, 9*height / 10);
+    errorText = "Error, please type email.";
       break;
 
     case 5:
-    text("Error, please type username.", width / 4, 9*height / 10);
+    errorText = "Error, please type password.";
       break;
 
     case 6:
-    text("Error, please type username.", width / 4, 9*height / 10);
+    errorText = "Error, please confirm password.";
+      break;
+      
+    case 7:
+    errorText = "Error, passwords don't match";
       break;
 
     default:
       errorType = 0;
       break;
     }
-
+    
+    fill(255, 0, 0);
+    text(errorText, width / 4, 9 * height / 10);
     fill(0, 0, 0);
   }
 }

@@ -83,7 +83,12 @@ class GameStateManager {
     if (registerScreenBut.clicked) {
       gamestate = 1;
     }
-
+    
+    if (loginBut.clicked) {
+      errorHandler.loginUpdate();
+    }
+    
+    fill(0);
     textSize(32);
     text("Brugernavn", width/2-200, height/3.2-10);
     text("Adgangskode", width/2-200, height/2.4-10);
@@ -99,10 +104,18 @@ class GameStateManager {
     stroke(6);
     rect(width/2.8, height/6.8, 550, 700);
 
-    if (backBut.clicked == true) {
+    if (backBut.clicked) {
       gamestate = 0;
     }
-
+    
+    if (registerBut.clicked){
+      errorHandler.registerUpdate();
+      if (errorType == 0){
+        //register user :)
+      }
+    }
+    
+    fill(0);
     textSize(32);
     text("Brugernavn", width/2-200, height/3.7-10);
     text("Adgangskode", width/2-200, height/3.7+100);
