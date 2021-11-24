@@ -13,7 +13,7 @@ class DataBaseHandler{
   int maxID = 0;
   int maxID2 = -1;
   String usernameInput, passwordInput;
-  boolean lærerlogin = false;
+  boolean underviserlogin = false;
   String QUERY, QUERY2, QUERY3, QUERY4;
   
 void loginCheck(){
@@ -22,7 +22,7 @@ void loginCheck(){
       
       hashedPassword = outputString;
    //   usernameInput = //Her skal navnen af textboxen være
-       if (lærerlogin == true){
+       if (underviserlogin == true){
        String QUERY = "SELECT password FROM underviser WHERE brugernavn = '"+usernameInput+"';";
        }
        else{
@@ -59,7 +59,7 @@ void loginCheck(){
   void register(){
   try{
     
-    if (lærerlogin == true){
+    if (underviserlogin == true){
        String QUERY2 = "SELECT underviserID, MAX(underviserID) FROM underviser GROUP BY underviserID";
        }
        else{
@@ -88,7 +88,7 @@ void loginCheck(){
   
    try {
      hashedPassword = outputString;
-     if (lærerlogin == true){
+     if (underviserlogin == true){
      //  String QUERY3 = ("INSERT INTO underviser (underviserID, brugernavn, password) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
        }
        else{
@@ -107,7 +107,7 @@ catch(Exception e){
 
   try{
     
-      if (lærerlogin == true){
+      if (underviserlogin == true){
       String QUERY4 = "SELECT underviserID, MAX(underviserID) FROM underviser GROUP BY underviserID";
        }
        else{
