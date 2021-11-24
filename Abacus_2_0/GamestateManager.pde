@@ -4,11 +4,21 @@ TextBox logUserTB, logPasswordTB;
 
 Button loginBut, registerScreenBut;
 Button registerBut, backBut;
+Button logoutBut, resultaterElevBut;
+Button resultaterLærerBut;
+Button prøverElevBut;
+Button prøverLærerBut;
+
+PFont Comic;
+PFont norm;
 
 class GameStateManager {
 
   void setupManager() {
 
+    norm = createFont("Arial",18);
+    Comic = createFont("Comic Sans MS",18);
+    
     //setup login screen
     logUserTB = new TextBox(new PVector(width/2-200, height/3.2), new PVector(400, 70), false, 0);
     logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), false, 0);
@@ -38,6 +48,30 @@ class GameStateManager {
 
     buttons.add(registerBut);
     buttons.add(backBut);
+    
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 4);
+    resultaterElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 4);
+    
+    buttons.add(logoutBut);
+    buttons.add(resultaterElevBut);
+    
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 5);
+    resultaterLærerBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 5);
+    
+    buttons.add(logoutBut);
+    buttons.add(resultaterLærerBut);
+    
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 6);
+    prøverElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 6);
+    
+    buttons.add(logoutBut);
+    buttons.add(prøverElevBut);
+    
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
+    prøverLærerBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 7);
+    
+    buttons.add(logoutBut);
+    buttons.add(prøverLærerBut);
   }
 
 
@@ -67,7 +101,19 @@ class GameStateManager {
       break;
 
     case 4:
-      StudentMenu();
+      StudentPrøveMenu();
+      break;
+
+    case 5:
+      TeacherPrøveMenu();
+      break;
+
+    case 6:
+      StudentResultatMenu();
+      break;
+
+    case 7:
+      TeacherResultatMenu();
       break;
 
     default:
@@ -80,7 +126,6 @@ class GameStateManager {
     fill(240);
     stroke(6);
     rect(width/2.8, height/5, 550, 600);
-
     if (registerScreenBut.clicked) {
       gamestate = 1;
     }
@@ -88,7 +133,6 @@ class GameStateManager {
     if (loginBut.clicked) {
       errorHandler.loginUpdate();
     }
-    
     fill(0);
     textSize(32);
     text("Brugernavn", width/2-200, height/3.2-10);
@@ -108,14 +152,12 @@ class GameStateManager {
     if (backBut.clicked) {
       gamestate = 0;
     }
-    
     if (registerBut.clicked){
       errorHandler.registerUpdate();
       if (errorType == 0){
         //register user :)
       }
     }
-    
     fill(0);
     textSize(32);
     text("Brugernavn", width/2-200, height/3.7-10);
@@ -129,14 +171,61 @@ class GameStateManager {
   void RegisterScreenTeacher() {
   }
 
-  void StudentMenu() {
+  void StudentPrøveMenu() {
+    textFont(Comic);
+    text("ELEV",10,10,99,99);
+    textFont(norm);
     textSize(48);
     fill(0);
-    rect(0,width/22,width,width/36);
+    rect(0,height/12,width,height/27);
     text("Prøver:", width/9.8,height/4.7,999,999);
+    text("Status:", width-width/3.84,height/4.7,999,999);
     rect(0,height/3.6,width,2);
+    if (logoutBut.clicked == true) {
+      gamestate = 0;
+    }
   }
 
-  void TeacherMenu() {
+  void TeacherPrøveMenu() {
+    textFont(Comic);
+    text("LÆRE",10,10,99,99);
+    textFont(norm);
+    textSize(48);
+    fill(0);
+    rect(0,height/12,width,height/27);
+    text("Prøver:", width/9.8,height/4.7,999,999);
+    text("Status:", width-width/3.84,height/4.7,999,999);
+    rect(0,height/3.6,width,2);
+    if (logoutBut.clicked == true) {
+      gamestate = 0;
+    }
+  }
+  void StudentResultatMenu() {
+    textFont(Comic);
+    text("ELEV",10,10,99,99);
+    textFont(norm);
+    textSize(48);
+    fill(0);
+    rect(0,height/12,width,height/27);
+    text("Resultater:", width/9.8,height/4.7,999,999);
+    text("Karakter:", width-width/3.84,height/4.7,999,999);
+    rect(0,height/3.6,width,2);
+    if (logoutBut.clicked == true) {
+      gamestate = 0;
+    }
+  }
+  void TeacherResultatMenu() {
+    textFont(Comic);
+    text("LÆRE",10,10,99,99);
+    textFont(norm);
+    textSize(48);
+    fill(0);
+    rect(0,height/12,width,height/27);
+    text("Resultater:", width/9.8,height/4.7,999,999);
+    text("Besvaret:", width-width/3.84,height/4.7,999,999);
+    rect(0,height/3.6,width,2);
+    if (logoutBut.clicked == true) {
+      gamestate = 0;
+    }
   }
 }
