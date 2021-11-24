@@ -26,7 +26,7 @@ void loginCheck(){
        String QUERY = "SELECT password FROM underviser WHERE brugernavn = '"+usernameInput+"';";
        }
        else{
-       String QUERY = "SELECT password FROM elever WHERE brugernavn = '"+usernameInput+"';";
+       String QUERY = "SELECT password FROM elev WHERE brugernavn = '"+usernameInput+"';";
        }
        
       Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -60,10 +60,10 @@ void loginCheck(){
   try{
     
     if (lærerlogin == true){
-       String QUERY2 = "SELECT ID, MAX(ID) FROM underviser GROUP BY ID";
+       String QUERY2 = "SELECT underviserID, MAX(underviserID) FROM underviser GROUP BY underviserID";
        }
        else{
-       String QUERY2 = "SELECT ID, MAX(ID) FROM elever GROUP BY ID";
+       String QUERY2 = "SELECT elevID, MAX(elevID) FROM elev GROUP BY elevID";
        }
       
      Connection conn2 = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -89,10 +89,10 @@ void loginCheck(){
    try {
      hashedPassword = outputString;
      if (lærerlogin == true){
-     //  String QUERY3 = ("INSERT INTO underviser (ID, brugernavn, password) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
+     //  String QUERY3 = ("INSERT INTO underviser (underviserID, brugernavn, password) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
        }
        else{
-      //  String QUERY3 = ("INSERT INTO elever (ID, brugernavn, password) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
+      //  String QUERY3 = ("INSERT INTO elev (elevID, brugernavn, password) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
        }
 //      
       Connection conn3 = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -108,10 +108,10 @@ catch(Exception e){
   try{
     
       if (lærerlogin == true){
-       String QUERY4 = "SELECT ID, MAX(ID) FROM underviser GROUP BY ID";
+      String QUERY4 = "SELECT underviserID, MAX(underviserID) FROM underviser GROUP BY underviserID";
        }
        else{
-       String QUERY4 = "SELECT ID, MAX(ID) FROM elever GROUP BY ID";
+       String QUERY4 = "SELECT elevID, MAX(elevID) FROM elev GROUP BY elevID";
        }
      Connection conn4 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt4 = conn4.createStatement(); 
