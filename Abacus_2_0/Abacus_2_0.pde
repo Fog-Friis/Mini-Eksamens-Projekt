@@ -4,6 +4,8 @@ void setup(){
   fullScreen();
   game1 = new Game1();
   game1.initiate();
+  //String[] Fontlist= PFont.list();
+  //printArray(Fontlist);
 }
 
 void keyPressed(){
