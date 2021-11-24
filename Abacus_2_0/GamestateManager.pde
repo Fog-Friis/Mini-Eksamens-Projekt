@@ -67,6 +67,7 @@ class GameStateManager {
       break;
 
     case 4:
+      StudentMenu();
       break;
 
     default:
@@ -129,6 +130,11 @@ class GameStateManager {
   }
 
   void StudentMenu() {
+    textSize(48);
+    fill(0);
+    rect(0,width/22,width,width/36);
+    text("Prøver:", width/9.8,height/4.7,999,999);
+    rect(0,height/3.6,width,2);
   }
 
   void TeacherMenu() {
