@@ -22,9 +22,6 @@ class GameStateManager {
     norm = createFont("Arial", 18);
     Comic = createFont("Comic Sans MS", 18);
 
-    img = loadImage("Elev-billed.png");
-    img2 = loadImage("Lære-billed.png");
-
     //setup login screen
     logUserTB = new TextBox(new PVector(width/2-200, height/3.2), new PVector(400, 70), false, 0);
     logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), false, 0);
@@ -180,8 +177,6 @@ class GameStateManager {
     textSize(23);
     text("Er du lærer eller elev?", width/2.265, height/4.2, 550, 500);
     fill(200);
-    image(img, width/2.63, height/2.25, 200, 200);
-    image(img2, width/1.96, height/2.2, 220, 200);
     if (TilbageBut.clicked) {
       gamestate = 0;
     }

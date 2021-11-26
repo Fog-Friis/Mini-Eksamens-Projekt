@@ -27,7 +27,7 @@ void mouseWheel(MouseEvent e){
 }
 
 void mouseReleased(){
-  game1.releaseMouse();
+  
 }
 
 void draw(){
