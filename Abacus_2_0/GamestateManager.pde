@@ -256,7 +256,7 @@ class GameStateManager {
 
   void TeacherProeveMenu() {
     textFont(Comic);
-    text("LÆRE", 10, 10, 99, 99);
+    text("LÆREr", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
     fill(0);
@@ -290,7 +290,7 @@ class GameStateManager {
   }
   void TeacherResultatMenu() {
     textFont(Comic);
-    text("LÆRE", 10, 10, 99, 99);
+    text("LÆREr", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
     fill(0);
