@@ -23,11 +23,11 @@ void mousePressed(){
 }
 
 void mouseWheel(MouseEvent e){
-  
+  scroll = e.getCount();
 }
 
 void mouseReleased(){
-  
+  game1.releaseMouse(); 
 }
 
 void draw(){

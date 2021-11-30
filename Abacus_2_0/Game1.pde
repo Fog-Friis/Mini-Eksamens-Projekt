@@ -20,8 +20,8 @@ class Game1 {
     if (keyCode == 46) {
       period = true;
     }
-    
-    if (key == ENTER){
+
+    if (key == ENTER) {
       enter = true;
     }
   }
@@ -30,27 +30,31 @@ class Game1 {
     if (keyCode == 46) {
       period = false;
     }
-    
-    if (key == ENTER){
+
+    if (key == ENTER) {
       enter = false;
     }
-    
   }
-  
+
   void display() {    
     gamestateManager.manage();
-    
+
     for (TextBox t : textBoxes) t.display();
     for (Button b : buttons) b.display();
-    
+
     errorHandler.display();
   }
-  
-  void pressMouse(){
+
+  void pressMouse() {    
     for (TextBox t : textBoxes) t.pressed(mouseX, mouseY);
+      for (dropdownObject o : objects) o.pressed();
   }
-  
-  void clickMouse(){
+
+  void releaseMouse() {
+      for (dropdownObject o : objects) o.released();
+  }
+
+  void clickMouse() {
     for (Button b : buttons) b.pressed();
   }
 }
