@@ -11,11 +11,10 @@ Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 
 DropdownMenu uddannelsesInstitution;
+DropdownMenu klasseValg;
 
 PFont Comic;
 PFont norm;
-
-boolean uddelProeve;
 
 class GameStateManager {
 
@@ -95,20 +94,29 @@ class GameStateManager {
 
     buttons.add(opretProeveBut);
     buttons.add(uddelProeveBut);
-    buttons.add(loginBut);
-    buttons.add(registerScreenBut);
-
     buttons.add(logoutBut);
     buttons.add(resultaterLaererBut);
-
+    
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 6);
-    proeverElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 6);
+    resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 6);
+    
+    buttons.add(logoutBut);
+    buttons.add(resultaterLaererBut);
+    
+    klasseValg= new DropdownMenu(new PVector(width/2,height/2), new PVector(500,50), "Vælg uddannelses institution", 40, 10, 6);
+    
+    dropdownMenus.add(klasseValg);
+    
+    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
+
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
+    proeverElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 7);
 
     buttons.add(logoutBut);
     buttons.add(proeverElevBut);
 
-    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
-    proeverLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 7);
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 8);
+    proeverLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 8);
 
     buttons.add(logoutBut);
     buttons.add(proeverLaererBut);
@@ -149,10 +157,14 @@ class GameStateManager {
       break;
 
     case 6:
-      StudentResultatMenu();
+      TeacherUddelProeveMenu();
       break;
 
     case 7:
+      StudentResultatMenu();
+      break;
+
+    case 8:
       TeacherResultatMenu();
       break;
 
@@ -262,11 +274,11 @@ class GameStateManager {
     text("Prøver:", width/9.8, height/4.7, 999, 999);
     text("Status:", width-width/3.84, height/4.7, 999, 999);
     rect(0, height/3.6, width, 2);
-    if (logoutBut.clicked == true) {
+    if (logoutBut.clicked) {
       gamestate = 0;
     }
-    if (resultaterElevBut.clicked == true) {
-      gamestate = 6;
+    if (resultaterElevBut.clicked) {
+      gamestate = 7;
     }
   }
 
@@ -280,24 +292,41 @@ class GameStateManager {
     text("Prøver:", width/9.8, height/4.7, 999, 999);
     text("Status:", width-width/3.84, height/4.7, 999, 999);
     rect(0, height/3.6, width, 2);
-    if (logoutBut.clicked == true) {
+    if (logoutBut.clicked) {
       gamestate = 0;
     }
-    if (resultaterLaererBut.clicked == true) {
-      gamestate = 7;
+    if (resultaterLaererBut.clicked) {
+      gamestate = 8;
     }
-    if (uddelProeveBut.clicked == true) {
-      uddelProeve = !uddelProeve;
-    }
-    if(uddelProeve){
-      stroke(0);
-      fill(240);
-      rect(width/2-400, height/6.8, 800, 700);
-      fill(0);
-      textSize(38);
-      text("Uddel opgavesæt",width/2-140,height/6.8+60,999,100);
+    if (uddelProeveBut.clicked) {
+      gamestate = 6;
     }
   }
+  void TeacherUddelProeveMenu() {
+    textFont(Comic);
+    text("LÆREr", 10, 10, 99, 99);
+    textFont(norm);
+    textSize(48);
+    fill(0);
+    rect(0, height/12, width, height/27);
+    text("Prøver:", width/9.8, height/4.7, 999, 999);
+    text("Status:", width-width/3.84, height/4.7, 999, 999);
+    rect(0, height/3.6, width, 2);
+    if (logoutBut.clicked) {
+      gamestate = 0;
+    }
+    if (resultaterLaererBut.clicked) {
+      gamestate = 8;
+    }
+    stroke(0);
+    fill(240);
+    rect(width/2-400, height/5.5, 800, 800);
+    fill(0);
+    textSize(38);
+    text("Uddel opgavesæt",width/2-140,height/6.8+60,999,100);
+  }
+  
+  
   void StudentResultatMenu() {
     textFont(Comic);
     text("ELEV", 10, 10, 99, 99);
@@ -308,10 +337,10 @@ class GameStateManager {
     text("Resultater:", width/9.8, height/4.7, 999, 999);
     text("Karakter:", width-width/3.84, height/4.7, 999, 999);
     rect(0, height/3.6, width, 2);
-    if (logoutBut.clicked == true) {
+    if (logoutBut.clicked) {
       gamestate = 0;
     }
-    if (proeverElevBut.clicked == true) {
+    if (proeverElevBut.clicked) {
       gamestate = 4;
     }
   }
