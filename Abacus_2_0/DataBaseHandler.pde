@@ -2,9 +2,9 @@ import java.sql.*;
 
 class DataBaseHandler{
 
-  java.sql.Statement stmt, stmt2, stmt3, stmt4;
-  ResultSet rs, rs2, rs3, rs4;
-  Connection conn, conn2, conn3, conn4; 
+  java.sql.Statement stmt, stmt2, stmt3, stmt4, stmt5, stmt6, stmt7, stmt8, stmt9, stmt10;
+  ResultSet rs, rs2, rs3, rs4, rs5, rs6, rs7, rs8, rs9, rs10;
+  Connection conn, conn2, conn3, conn4, conn5, conn6, conn7, conn8, conn9, conn10; 
   String USER = "root";
   String PASS = "";
   String DB_URL = "jdbc:mysql://localhost:3306/mep";
@@ -14,8 +14,8 @@ class DataBaseHandler{
   int maxID2 = -1;
   String usernameInput, passwordInput;
   boolean underviserlogin = false;
-  String QUERY, QUERY2, QUERY3, QUERY4;
-  
+  String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY8, QUERY9, QUERY10;
+  String result;
 void loginCheck(){
   
       try{
@@ -136,6 +136,83 @@ else{
 //It works
 
 }
-
   }
+}
+
+void opretKlasse(){
+result = "";
+for (int i = 0; i < 6; i++) {
+   result += char (int(random (65, 65+24)));
+}
+for (int i = 0; i < 2; i++) {
+  result +=(int(random (10)));
+}
+
+       String QUERY5 = "SELECT klasseID, MAX(klasseID) FROM klasse GROUP BY klasseID";
+       
+      
+     Connection conn5 = DriverManager.getConnection(DB_URL, USER, PASS);
+      java.sql.Statement stmt5 = conn5.createStatement(); 
+     ResultSet rs5 = stmt5.executeQuery(QUERY5);
+     
+     while (rs5.next()) {
+     maxID = ((int)rs5.getInt("ID"));
+     maxID2 = maxID+1;
+     
+     
+      
+     
+    }
+    conn5.close();
+  }
+  
+ 
+  catch(Exception e){
+    println(e);  
+  }   
+
+   try {
+
+
+     String QUERY6 = ("INSERT INTO klasse (klasseID, klassenavn, aargang, underviserID) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
+     
+      Connection conn6 = DriverManager.getConnection(DB_URL, USER, PASS);
+      java.sql.Statement stmt6 = conn6.createStatement();
+      stmt6.executeUpdate(QUERY6);
+    conn6.close();
+       
+}
+catch(Exception e){
+    println(e);      
+  }  
+
+  try{
+    
+
+      String QUERY7 = "SELECT klasseID, MAX(klasseID) FROM klasse GROUP BY klasseID";
+
+     Connection conn7 = DriverManager.getConnection(DB_URL, USER, PASS);
+      java.sql.Statement stmt7 = conn7.createStatement(); 
+     ResultSet rs7 = stmt7.executeQuery(QUERY7);
+     
+     while (rs7.next()) {
+     maxID2 = ((int)rs7.getInt("ID"));
+         
+        
+    }
+    conn4.close();
+  }
+  
+ 
+  catch(Exception e){
+    println(e);  
+  } 
+if (maxID2 == maxID){
+    // say error
+}
+else{
+//It works
+println("klasse oprettet");
+}
+
 }
