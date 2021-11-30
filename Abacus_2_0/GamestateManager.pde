@@ -8,12 +8,12 @@ Button registerBut, backBut;
 Button logoutBut, resultaterElevBut;
 Button resultaterLaererBut;
 Button proeverElevBut;
-Button proeverLaererBut;
+Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 
 PFont Comic;
 PFont norm;
 
-PImage img, img2;
+boolean uddelProeve;
 
 class GameStateManager {
 
@@ -82,6 +82,13 @@ class GameStateManager {
 
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 5);
     resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 5);
+    opretProeveBut = new Button(new PVector(width/4, height - 200), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Opret opgavesæt", 40, 5);
+    uddelProeveBut = new Button(new PVector(width/4, height - 100), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Uddel opgavesæt", 40, 5);
+
+    buttons.add(opretProeveBut);
+    buttons.add(uddelProeveBut);
+    buttons.add(loginBut);
+    buttons.add(registerScreenBut);
 
     buttons.add(logoutBut);
     buttons.add(resultaterLaererBut);
@@ -150,6 +157,7 @@ class GameStateManager {
   void LoginScreen() {
     fill(240);
     stroke(6);
+    strokeWeight(2);
     rect(width/2.8, height/5, 550, 600);
     if (registerScreenBut.clicked) {
       gamestate = 1;
@@ -269,6 +277,17 @@ class GameStateManager {
     }
     if (resultaterLaererBut.clicked == true) {
       gamestate = 7;
+    }
+    if (uddelProeveBut.clicked == true) {
+      uddelProeve = !uddelProeve;
+    }
+    if(uddelProeve){
+      stroke(0);
+      fill(240);
+      rect(width/2-400, height/6.8, 800, 700);
+      fill(0);
+      textSize(38);
+      text("Uddel opgavesæt",width/2-140,height/6.8+60,999,100);
     }
   }
   void StudentResultatMenu() {
