@@ -78,24 +78,25 @@ class DropdownMenu {
         if (d.visible) {
           textAlign(CORNER);
           textSize(d.size.y/2);
+          fill(0);
           text(d.Text, d.loc.x, d.loc.y+(d.number+1)*size.y-size.y/2);
         }
       }
-
+      
+      fill(140,140,140);
       rect(pos.x, pos.y, size.x, size.y);           
 
       fill(0);
-
       textAlign(CORNER);
-      textSize(size.y);
-      text(Text, pos.x, pos.y-5+size.y);
+      textSize(textSize);
+      text(Text, pos.x+10, pos.y+size.y/2+5);
 
       pushMatrix();
       translate(pos.x+size.x-30, pos.y + size.y - size.y/2);
       rotate(PI);
       scale(scale);
       triangle(-10, -5, 10, -5, 0, 5);
-      fill(255);
+      fill(140,140,140);
       noStroke();
       triangle(-10, -10, 10, -10, 0, 0);
       stroke(0);
@@ -154,15 +155,14 @@ class dropdownObject {
     if (visible) {
 
       if (clicked) {
-        fill(0, 255, 0);
+          fill(100, 100, 100);
       } else if (over()) {
-        fill(255, 0, 0);
+        fill(200, 200, 200);
       } else {
-        fill(0, 0, 255);
+        fill(170, 170, 170);
       }
 
       rect(loc.x, (number)*size.y+loc.y, size.x, size.y);
-      fill(0);
       fill(255);
     }
   }
