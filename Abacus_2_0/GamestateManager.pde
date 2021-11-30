@@ -9,6 +9,10 @@ Button logoutBut, resultaterElevBut;
 Button resultaterLaererBut;
 Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
+Button opgaveTilbageBut,opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
+
+int currentopgave = 1, maxopgaver=25;
+String opgavetekst = "test123";
 
 DropdownMenu uddannelsesInstitution;
 DropdownMenu klasseValg;
@@ -120,6 +124,23 @@ class GameStateManager {
 
     buttons.add(logoutBut);
     buttons.add(proeverLaererBut);
+    
+    //Testscreen
+    opgaveTilbageBut = new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "opgaveTilbage", 24, 9);
+    opgaveFremBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgavefrem", 24, 9);
+    opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 9);
+    svar1But = new Button(new PVector(width-width/3.4, height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 9);
+    svar2But = new Button(new PVector(width-width/3.4, height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
+    svar3But = new Button(new PVector(width-width/3.4, height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
+    svar4But = new Button(new PVector(width-width/3.4, height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
+    
+     buttons.add(opgaveTilbageBut);
+     buttons.add(opgaveFremBut);
+     buttons.add(opgaveSlutBut);
+     buttons.add(svar1But);
+     buttons.add(svar2But);
+     buttons.add(svar3But);
+     buttons.add(svar4But);
   }
 
 
@@ -168,6 +189,10 @@ class GameStateManager {
       TeacherResultatMenu();
       break;
 
+     case 9:
+     testscreen();
+     break;
+     
     default:
       gamestate = 0;
       break;
@@ -361,4 +386,12 @@ class GameStateManager {
       gamestate = 5;
     }
   }
+   void testscreen() {
+    textFont(Comic);
+    text("Elev nr 12", 10, 10, 99, 99);
+    textFont(norm);
+    textSize(48);
+    fill(0);
+    text(currentopgave+": "+opgavetekst, width/9.8, height/4.7, 999, 999);
+  }  
 }
