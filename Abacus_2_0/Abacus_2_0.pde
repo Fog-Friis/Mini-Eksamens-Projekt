@@ -4,8 +4,6 @@ void setup(){
   fullScreen();
   game1 = new Game1();
   game1.initiate();
-  //String[] Fontlist= PFont.list();
-  //printArray(Fontlist);
 }
 
 void keyPressed(){
@@ -24,8 +22,12 @@ void mousePressed(){
   game1.pressMouse();
 }
 
+void mouseWheel(MouseEvent e){
+  
+}
+
 void mouseReleased(){
-  game1.releaseMouse();
+  
 }
 
 void draw(){

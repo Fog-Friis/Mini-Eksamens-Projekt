@@ -61,12 +61,11 @@ class Button {
     }
   }
 
-  void release() {
-    clicked = false;
-  }
 
   void display() {
-
+    
+    clicked=false;
+    
     if(visible == gamestate){
     noStroke();
 

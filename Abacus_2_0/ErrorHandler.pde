@@ -16,15 +16,15 @@ class ErrorHandler {
   }
   
   void registerUpdate(){
-    if (regUserTB.TextLength == 0) {
+    if (regUserLaererTB.TextLength == 0) {
       errorType = 3;
-    } else if (regEmailTB.TextLength == 0) {
+    } else if (regEmailLaererTB.TextLength == 0) {
       errorType = 4;
-    } else if (regPassword1.TextLength == 0) {
+    } else if (regPasswordLaerer1.TextLength == 0) {
       errorType = 5;
-    } else if (regPassword2.TextLength == 0) {
+    } else if (regPasswordLaerer2.TextLength == 0) {
       errorType = 6;
-    } else if(regPassword1.Text != regPassword2.Text){
+    } else if(regPasswordLaerer1.Text != regPasswordLaerer2.Text){
       errorType = 7;
     } else {
       errorType = 0;
