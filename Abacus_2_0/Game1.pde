@@ -1,6 +1,7 @@
 GameStateManager gamestateManager;
 ArrayList<TextBox> textBoxes = new ArrayList<TextBox>();
 ArrayList<Button> buttons = new ArrayList<Button>();
+ArrayList<DropdownMenu> dropdownMenus = new ArrayList<DropdownMenu>();
 boolean enter;
 ErrorHandler errorHandler;
 
@@ -47,11 +48,17 @@ class Game1 {
 
   void pressMouse() {    
     for (TextBox t : textBoxes) t.pressed(mouseX, mouseY);
-      for (dropdownObject o : objects) o.pressed();
+
+    for (DropdownMenu d : dropdownMenus) {
+      d.pressed();
+      for (dropdownObject o : d.objects) o.pressed();
+    }
   }
 
   void releaseMouse() {
-      for (dropdownObject o : objects) o.released();
+    for (DropdownMenu d : dropdownMenus) {
+      for (dropdownObject o : d.objects) o.released();
+    }
   }
 
   void clickMouse() {

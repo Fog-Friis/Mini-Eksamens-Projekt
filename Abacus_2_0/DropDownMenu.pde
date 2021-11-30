@@ -1,5 +1,4 @@
 float scroll;
-ArrayList<dropdownObject> objects;
 
 class DropdownMenu {
 
@@ -15,7 +14,7 @@ class DropdownMenu {
 
   boolean clicked = false;
 
-  objects = new ArrayList<dropdownObject>();
+  ArrayList<dropdownObject> objects = new ArrayList<dropdownObject>();
 
   DropdownMenu(PVector pos, PVector size, String Text, int textSize, int shownObjects, int visible) {
     this.pos = pos;
