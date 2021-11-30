@@ -14,7 +14,7 @@ class DataBaseHandler{
   int maxID2 = -1;
   String usernameInput, passwordInput;
   boolean underviserlogin = false;
-  String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY8, QUERY9, QUERY10;
+  String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY9, QUERY10;
   String result;
 void loginCheck(){
   
@@ -138,7 +138,7 @@ else{
 }
   }
 }
-
+/*
 void opretKlasse(){
 result = "";
 for (int i = 0; i < 6; i++) {
@@ -147,7 +147,7 @@ for (int i = 0; i < 6; i++) {
 for (int i = 0; i < 2; i++) {
   result +=(int(random (10)));
 }
-
+      try{
        String QUERY5 = "SELECT klasseID, MAX(klasseID) FROM klasse GROUP BY klasseID";
        
       
@@ -164,7 +164,7 @@ for (int i = 0; i < 2; i++) {
      
     }
     conn5.close();
-  }
+}
   
  
   catch(Exception e){
@@ -216,3 +216,4 @@ println("klasse oprettet");
 }
 
 }
+*/
