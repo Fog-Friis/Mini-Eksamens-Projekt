@@ -10,6 +10,8 @@ Button resultaterLaererBut;
 Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 
+DropdownMenu uddannelsesInstitution;
+
 PFont Comic;
 PFont norm;
 
@@ -56,6 +58,12 @@ class GameStateManager {
 
     buttons.add(registerBut);
     buttons.add(backBut);
+    
+    uddannelsesInstitution= new DropdownMenu(new PVector(width/2,height/2), new PVector(500,50), "Vælg uddannelses institution", 40, 1, 2);
+    
+    dropdownMenus.add(uddannelsesInstitution);
+    
+    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false)); 
 
     //setup register screeen
     regUserLaererTB = new TextBox(new PVector(width/2-200, height/3.7), new PVector(400, 70), false, 2);

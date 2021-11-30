@@ -42,6 +42,7 @@ class Game1 {
 
     for (TextBox t : textBoxes) t.display();
     for (Button b : buttons) b.display();
+    for (DropdownMenu d : dropdownMenus) d.display();
 
     errorHandler.display();
   }
