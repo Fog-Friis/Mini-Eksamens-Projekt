@@ -11,9 +11,12 @@ Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut,opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
 
-int currentopgave = 1, maxopgaver=25;
-String opgavetekst = "test123";
-
+int[] elevSvarNR = new int[10];
+int[] realtSvarNR = new int[10];
+int currentopgave = 1, maxopgaver=10;
+String[] opgavetekst = new String[10];
+String currentOpgaveTekst;
+boolean update = false;
 DropdownMenu uddannelsesInstitution;
 DropdownMenu klasseValg;
 
@@ -126,8 +129,8 @@ class GameStateManager {
     buttons.add(proeverLaererBut);
     
     //Testscreen
-    opgaveTilbageBut = new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "opgaveTilbage", 24, 9);
-    opgaveFremBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgavefrem", 24, 9);
+       opgaveFremBut= new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgave frem", 24, 9);
+      opgaveTilbageBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "opgave Tilbage", 24, 9);
     opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 9);
     svar1But = new Button(new PVector(width-width/3.4, height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 9);
     svar2But = new Button(new PVector(width-width/3.4, height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
@@ -386,12 +389,63 @@ class GameStateManager {
       gamestate = 5;
     }
   }
-   void testscreen() {
+  void updatetest(){
+                  background(255);
     textFont(Comic);
     text("Elev nr 12", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
     fill(0);
-    text(currentopgave+": "+opgavetekst, width/9.8, height/4.7, 999, 999);
+    text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/4.7, 999, 999);
+  }
+   void testscreen() {
+    if (update == false){
+      updatetest();
+      update = true;
+    }
+        //lav en load funktion på menuskærmen
+    opgavetekst[0]= "hey1";
+    opgavetekst[1]= "hey2";
+    opgavetekst[2]= "hey3";
+    opgavetekst[3]= "hey4";
+    opgavetekst[4]= "hey5";
+    opgavetekst[5]= "hey6";
+    opgavetekst[6]= "hey7";
+    opgavetekst[7]= "hey8";
+    opgavetekst[8]= "hey9";
+    opgavetekst[9]= "hey19";
+    currentOpgaveTekst =opgavetekst[0];
+    
+        
+
+    
+
+    
+    if (opgaveTilbageBut.clicked == true && currentopgave != 1) {
+      currentopgave -= 1;
+      currentOpgaveTekst = opgavetekst[currentopgave-1];
+updatetest();
+    }
+    if (opgaveFremBut.clicked == true && currentopgave != maxopgaver) {
+      currentopgave += 1;
+      currentOpgaveTekst = opgavetekst[currentopgave-1];
+      updatetest();
+    }
+    if (opgaveSlutBut.clicked == true) {
+      gamestate = 0;
+      println(elevSvarNR);
+    }
+    if (svar1But.clicked == true) {
+       elevSvarNR[currentopgave-1] = 1;
+    }
+        if (svar2But.clicked == true) {
+       elevSvarNR[currentopgave-1] = 2;
+    }
+        if (svar3But.clicked == true) {
+       elevSvarNR[currentopgave-1] = 3;
+    }
+        if (svar4But.clicked == true) {
+       elevSvarNR[currentopgave-1] = 4;
+    }
   }  
 }
