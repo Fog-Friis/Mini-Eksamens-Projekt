@@ -65,7 +65,7 @@ class GameStateManager {
     buttons.add(registerElevBut);
     buttons.add(backElevBut);
 
-    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2);
+    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2, new ArrayList<dropdownObject>());
 
     dropdownMenus.add(uddannelsesInstitution);
 
