@@ -1,5 +1,3 @@
-float scroll;
-
 class DropdownMenu {
 
   PVector pos;
@@ -9,24 +7,34 @@ class DropdownMenu {
   int visible;
   int shownObjects;
   int scale = 1;
+  int scroll;
 
   float theta = PI/4;
 
   boolean clicked = false;
 
-  ArrayList<dropdownObject> objects = new ArrayList<dropdownObject>();
+  ArrayList<dropdownObject> objects;
 
-  DropdownMenu(PVector pos, PVector size, String Text, int textSize, int shownObjects, int visible) {
+  DropdownMenu(PVector pos, PVector size, String Text, int textSize, int shownObjects, int visible, ArrayList<dropdownObject> objects) {
     this.pos = pos;
     this.size = size;
     this.Text = Text;
     this.textSize = textSize;
-    this.shownObjects = shownObjects+2;
+    this.shownObjects = shownObjects;
     this.visible = visible;
+    this.objects = objects;
   }
 
   boolean over() {
     if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y && mouseY >= pos.y) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  boolean overObjects() {
+    if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y+size.y*shownObjects && mouseY >= pos.y+size.y) {
       return true;
     } else {
       return false;
@@ -51,7 +59,7 @@ class DropdownMenu {
     }
 
     for (dropdownObject d : objects) {
-      if (d.loc.y+size.y*d.number <= pos.y) {
+      if (d.loc.y+size.y*(d.number) <= pos.y) {
         d.visible = false;
       }
 
@@ -73,20 +81,20 @@ class DropdownMenu {
     if (visible == gamestate) { 
 
       for (dropdownObject d : objects) {
+
         d.display();
 
         if (d.visible) {
           textAlign(CORNER);
           textSize(d.size.y/2);
-          fill(0);
           text(d.Text, d.loc.x, d.loc.y+(d.number+1)*size.y-size.y/2);
         }
       }
-      
-      fill(140,140,140);
+
       rect(pos.x, pos.y, size.x, size.y);           
 
       fill(0);
+
       textAlign(CORNER);
       textSize(textSize);
       text(Text, pos.x+10, pos.y+size.y/2+5);
@@ -96,7 +104,7 @@ class DropdownMenu {
       rotate(PI);
       scale(scale);
       triangle(-10, -5, 10, -5, 0, 5);
-      fill(140,140,140);
+      fill(255);
       noStroke();
       triangle(-10, -10, 10, -10, 0, 0);
       stroke(0);
@@ -105,12 +113,10 @@ class DropdownMenu {
       fill(255);
     }
 
-    if (objects.size() > shownObjects) {
-      for (dropdownObject d : objects) {
-        d.loc.y -= scroll;
-      }
+    println(objects.size(), shownObjects);
+    for (dropdownObject d : objects) {
+      d.loc.y -= scroll;
     }
-    //println(d.loc.y);
     scroll = 0;
   }
 }
@@ -155,11 +161,11 @@ class dropdownObject {
     if (visible) {
 
       if (clicked) {
-          fill(100, 100, 100);
+        fill(0, 255, 0);
       } else if (over()) {
-        fill(200, 200, 200);
+        fill(255, 0, 0);
       } else {
-        fill(170, 170, 170);
+        fill(0, 0, 255);
       }
 
       rect(loc.x, (number)*size.y+loc.y, size.x, size.y);

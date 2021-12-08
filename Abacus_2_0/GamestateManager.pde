@@ -1,15 +1,16 @@
 int gamestate;
-TextBox regUserLaererTB, regEmailLaererTB, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB;
+TextBox regUserLaererTB, regLaererID, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB;
 TextBox logUserTB, logPasswordTB;
 
 Button loginBut, registerScreenBut;
 Button ElevRegisterBut, LaererRegisterBut, TilbageBut;
-Button registerBut, backBut;
+Button registerElevBut, backElevBut, registerLaererBut, backLaererBut;
 Button logoutBut, resultaterElevBut;
 Button resultaterLaererBut;
 Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
+
 
 int[] elevSvarNR = new int[25];
 int[] realtSvarNR = new int[25];
@@ -19,10 +20,11 @@ String[] opgaveSvar1 = new String[25];
 String[] opgaveSvar2 = new String[25];
 String[] opgaveSvar3 = new String[25];
 String[] opgaveSvar4 = new String[25];
-String currentOpgaveTekst;
+
+String currentOpgaveTekst, currentSvar1Tekst, currentSvar2Tekst, currentSvar3Tekst, currentSvar4Tekst;
 boolean update = false;
 DropdownMenu uddannelsesInstitution;
-DropdownMenu klasseValg;
+DropdownMenu klasseValg, testValg;
 
 PFont Comic;
 PFont norm;
@@ -63,6 +65,7 @@ class GameStateManager {
     textBoxes.add(regPasswordElevTB);
     textBoxes.add(regVerifikationElevTB);
 
+
     registerBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 3);
     backBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
 
@@ -75,22 +78,36 @@ class GameStateManager {
 
     uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false)); 
 
+
+    registerElevBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 50, 3);
+    backElevBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
+
+    buttons.add(registerElevBut);
+    buttons.add(backElevBut);
+
+    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2, new ArrayList<dropdownObject>());
+
+    dropdownMenus.add(uddannelsesInstitution);
+
+    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false));
+
+
     //setup register screeen
     regUserLaererTB = new TextBox(new PVector(width/2-200, height/3.7), new PVector(400, 70), false, 2);
-    regEmailLaererTB = new TextBox(new PVector(width/2-200, height/3.7+110), new PVector(400, 70), false, 2);
-    regPasswordLaerer1 = new TextBox(new PVector(width/2-200, height/3.7+220), new PVector(400, 70), false, 2);
-    regPasswordLaerer2 = new TextBox(new PVector(width/2-200, height/3.7+330), new PVector(400, 70), false, 2);
+    regPasswordLaerer1 = new TextBox(new PVector(width/2-200, height/3.7+110), new PVector(400, 70), false, 2);
+    regPasswordLaerer2 = new TextBox(new PVector(width/2-200, height/3.7+220), new PVector(400, 70), false, 2);
+    regLaererID = new TextBox(new PVector(width/2-200, height/3.7+410), new PVector(400, 70), false, 2);
 
     textBoxes.add(regUserLaererTB);
-    textBoxes.add(regEmailLaererTB);
     textBoxes.add(regPasswordLaerer1);
     textBoxes.add(regPasswordLaerer2);
+    textBoxes.add(regLaererID);
 
-    registerBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 2);
-    backBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 2);
+    registerLaererBut = new Button(new PVector(width/2 + 30, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 50, 2);
+    backLaererBut = new Button(new PVector(width/2 -180, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 2);
 
-    buttons.add(registerBut);
-    buttons.add(backBut);
+    buttons.add(registerLaererBut);
+    buttons.add(backLaererBut);
 
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 4);
     resultaterElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 4);
@@ -114,11 +131,23 @@ class GameStateManager {
     buttons.add(logoutBut);
     buttons.add(resultaterLaererBut);
 
+
     klasseValg= new DropdownMenu(new PVector(width/2, height/2), new PVector(500, 50), "Vælg uddannelses institution", 40, 10, 6);
 
     dropdownMenus.add(klasseValg);
 
     uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
+
+    klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
+    testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
+
+    dropdownMenus.add(klasseValg);
+    dropdownMenus.add(testValg);
+
+    klasseValg.objects.add(new dropdownObject(klasseValg.pos, klasseValg.size, "3a2 I guess (database her)", 1, false));
+    testValg.objects.add(new dropdownObject(testValg.pos, testValg.size, "IDK IQ something navn", 1, false));
+
+
 
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
     proeverElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 7);
@@ -133,6 +162,7 @@ class GameStateManager {
     buttons.add(proeverLaererBut);
 
     //Testscreen
+
     opgaveFremBut= new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Frem", 24, 9);
     opgaveTilbageBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Tilbage", 24, 9);
     opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 9);
@@ -140,6 +170,15 @@ class GameStateManager {
     svar2But = new Button(new PVector(width-width/2.5, height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
     svar3But = new Button(new PVector(width-width/2.5, height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
     svar4But = new Button(new PVector(width-width/2.5, height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
+
+    opgaveFremBut= new Button(new PVector(width-width/7, 250), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgave frem", 24, 9);
+    opgaveTilbageBut = new Button(new PVector(width-width/1.1, 250), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "opgave Tilbage", 24, 9);
+    opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 9);
+    svar1But = new Button(new PVector(width-width/3.4, height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 9);
+    svar2But = new Button(new PVector(width-width/3.4, height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
+    svar3But = new Button(new PVector(width-width/3.4, height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
+    svar4But = new Button(new PVector(width-width/3.4, height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
+
 
     buttons.add(opgaveTilbageBut);
     buttons.add(opgaveFremBut);
@@ -169,11 +208,11 @@ class GameStateManager {
       break;
 
     case 2:
-      RegisterScreenStudent();
+      RegisterScreenTeacher();
       break;
 
     case 3:
-      RegisterScreenTeacher();
+      RegisterScreenStudent();
       break;
 
     case 4:
@@ -199,6 +238,7 @@ class GameStateManager {
     case 9:
       updatetest();
       testscreen();
+
       break;
 
     default:
@@ -249,15 +289,15 @@ class GameStateManager {
     }
   }
 
-  void RegisterScreenTeacher() {
+  void RegisterScreenStudent() {
     fill(240);
     stroke(6);
     rect(width/2.8, height/6.8, 550, 700);
 
-    if (backBut.clicked) {
+    if (backElevBut.clicked) {
       gamestate = 0;
     }
-    if (registerBut.clicked) {
+    if (registerElevBut.clicked) {
       errorHandler.registerUpdate();
       if (errorType == 0) {
         //register user :)
@@ -273,15 +313,15 @@ class GameStateManager {
     text("Registrer elev  ", width/2.37, height/5.3);
   }
 
-  void RegisterScreenStudent() {
+  void RegisterScreenTeacher() {
     fill(240);
     stroke(6);
-    rect(width/2.8, height/6.8, 550, 700);
+    rect(width/2.8, height/6.8, 550, 770);
 
-    if (backBut.clicked) {
+    if (backLaererBut.clicked) {
       gamestate = 0;
     }
-    if (registerBut.clicked) {
+    if (registerLaererBut.clicked) {
       errorHandler.registerUpdate();
       if (errorType == 0) {
         //register user :)
@@ -292,7 +332,7 @@ class GameStateManager {
     text("Brugernavn", width/2-200, height/3.7-10);
     text("Adgangskode", width/2-200, height/3.7+100);
     text("Gentag adgangskode", width/2-200, height/3.7+210);
-    text("Lære-ID", width/2-200, height/3.7+320);
+    text("Lære-ID", width/2-200, height/3.7+400);
     textSize(48);
     text("Registrer lærer", width/2.37, height/5.3);
   }
@@ -396,69 +436,69 @@ class GameStateManager {
   }
   void updatetest() {
     currentopgave = 1;
-    currentOpgaveTekst =opgavetekst[currentopgave-1];
+    
     /*
-    opgavetekst[0]= 
-      opgaveSvar1[0]= 
-      opgaveSvar2[0]= 
-      opgaveSvar3[0]= 
-      opgaveSvar4[0]= 
-
-      opgavetekst[1]= 
-      opgaveSvar1[1]= 
-      opgaveSvar2[1]= 
-      opgaveSvar3[1]= 
-      opgaveSvar4[1]= 
-
-      opgavetekst[2]= 
-      opgaveSvar1[2]= 
-      opgaveSvar2[2]= 
-      opgaveSvar3[2]= 
-      opgaveSvar4[2]= 
-
-      opgavetekst[3]= 
-      opgaveSvar1[3]= 
-      opgaveSvar2[3]= 
-      opgaveSvar3[3]= 
-      opgaveSvar4[3]= 
-
-      opgavetekst[4]= 
-      opgaveSvar1[4]= 
-      opgaveSvar2[4]= 
-      opgaveSvar3[4]= 
-      opgaveSvar4[4]= 
-
-      opgavetekst[5]= 
-      opgaveSvar1[5]= 
-      opgaveSvar2[5]= 
-      opgaveSvar3[5]= 
-      opgaveSvar4[5]= 
-
-      opgavetekst[6]= 
-      opgaveSvar1[6]= 
-      opgaveSvar2[6]= 
-      opgaveSvar3[6]= 
-      opgaveSvar4[6]= 
-
-      opgavetekst[7]= 
-      opgaveSvar1[7]= 
-      opgaveSvar2[7]= 
-      opgaveSvar3[7]= 
-      opgaveSvar4[7]= 
-
-      opgavetekst[8]= 
-      opgaveSvar1[8]= 
-      opgaveSvar2[8]= 
-      opgaveSvar3[8]= 
-      opgaveSvar4[8]= 
-
-      opgavetekst[9]= 
-      opgaveSvar1[9]= 
-      opgaveSvar2[9]= 
-      opgaveSvar3[9]= 
-      opgaveSvar4[9]=
-      */
-  }
+     opgavetekst[0]= 
+     opgaveSvar1[0]= 
+     opgaveSvar2[0]= 
+     opgaveSvar3[0]= 
+     opgaveSvar4[0]= 
+     
+     opgavetekst[1]= 
+     opgaveSvar1[1]= 
+     opgaveSvar2[1]= 
+     opgaveSvar3[1]= 
+     opgaveSvar4[1]= 
+     
+     opgavetekst[2]= 
+     opgaveSvar1[2]= 
+     opgaveSvar2[2]= 
+     opgaveSvar3[2]= 
+     opgaveSvar4[2]= 
+     
+     opgavetekst[3]= 
+     opgaveSvar1[3]= 
+     opgaveSvar2[3]= 
+     opgaveSvar3[3]= 
+     opgaveSvar4[3]= 
+     
+     opgavetekst[4]= 
+     opgaveSvar1[4]= 
+     opgaveSvar2[4]= 
+     opgaveSvar3[4]= 
+     opgaveSvar4[4]= 
+     
+     opgavetekst[5]= 
+     opgaveSvar1[5]= 
+     opgaveSvar2[5]= 
+     opgaveSvar3[5]= 
+     opgaveSvar4[5]= 
+     
+     opgavetekst[6]= 
+     opgaveSvar1[6]= 
+     opgaveSvar2[6]= 
+     opgaveSvar3[6]= 
+     opgaveSvar4[6]= 
+     
+     opgavetekst[7]= 
+     opgaveSvar1[7]= 
+     opgaveSvar2[7]= 
+     opgaveSvar3[7]= 
+     opgaveSvar4[7]= 
+     
+     opgavetekst[8]= 
+     opgaveSvar1[8]= 
+     opgaveSvar2[8]= 
+     opgaveSvar3[8]= 
+     opgaveSvar4[8]= 
+     
+     opgavetekst[9]= 
+     opgaveSvar1[9]= 
+     opgaveSvar2[9]= 
+     opgaveSvar3[9]= 
+     opgaveSvar4[9]=
+     */
+ 
   //Checker antal maxopgaver
   /*
     if (maxopgaver >= 11)
@@ -582,7 +622,12 @@ class GameStateManager {
    opgaveSvar4[24]=
    }
    */
-
+   currentSvar1Tekst
+   currentSvar2Tekst
+   currentSvar3Tekst
+   currentSvar4Tekst
+   currentOpgaveTekst =opgavetekst[currentopgave-1];
+  }
   void testscreen() {
 
     if (update == false) {
@@ -603,12 +648,21 @@ class GameStateManager {
     textSize(48);
     fill(0);   
 
-
-
-
+    background(255);
+    fill(110, 255, 110);
+    rect(0, 80, width, 150);
+    textFont(Comic);
+    fill(0);
+    text("Elev nr 12", 10, 10, 99, 99);
+    textFont(norm);
+    textSize(48);
+    fill(0);
+    text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/4.7, 999, 999);
     if (opgaveTilbageBut.clicked == true && currentopgave != 1) {
       currentopgave -= 1;
       currentOpgaveTekst =opgavetekst[currentopgave-1];
+      currentOpgaveTekst = opgavetekst[currentopgave-1];
+      updatetest();
     }
     if (opgaveFremBut.clicked == true && currentopgave != maxopgaver) {
       currentopgave += 1;

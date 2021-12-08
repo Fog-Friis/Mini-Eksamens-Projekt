@@ -18,7 +18,7 @@ class ErrorHandler {
   void registerUpdate(){
     if (regUserLaererTB.TextLength == 0) {
       errorType = 3;
-    } else if (regEmailLaererTB.TextLength == 0) {
+    } else if (regLaererID.TextLength == 0) {
       errorType = 4;
     } else if (regPasswordLaerer1.TextLength == 0) {
       errorType = 5;

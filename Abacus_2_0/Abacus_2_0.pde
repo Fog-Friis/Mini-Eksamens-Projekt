@@ -23,7 +23,11 @@ void mousePressed(){
 }
 
 void mouseWheel(MouseEvent e){
-  scroll = e.getCount();
+  for (DropdownMenu d : dropdownMenus) {
+    if (d.objects.size() > d.shownObjects-1 && d.overObjects() == true) {
+      d.scroll = e.getCount();
+    }
+  }
 }
 
 void mouseReleased(){
