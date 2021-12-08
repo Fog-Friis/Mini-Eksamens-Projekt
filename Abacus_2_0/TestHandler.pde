@@ -7,143 +7,115 @@ java.sql.Statement Tstmt, Tstmt2, Tstmt3, Tstmt4, Tstmt5, Tstmt6, Tstmt7, Tstmt8
 ResultSet Trs, Trs2, Trs3, Trs4, Trs5, Trs6, Trs7, Trs8, Trs9, Trs10;
 Connection Tconn, Tconn2, Tconn3, Tconn4, Tconn5, Tconn6, Tconn7, Tconn8, Tconn9, Tconn10; 
 String TQUERY, TQUERY2, TQUERY3, TQUERY4, TQUERY5, TQUERY6, TQUERY7, TQUERY8, TQUERY9, TQUERY10;
+int opgaveID;
 
 
-void hentOpgave() {
-  switch(currentopgave) {
 
-  case 1:
+void hentOpgave() {   
 
-    break;
+  
+  String TQUERY2 = "SELECT opgave'"+currentopgave+"'Svar1 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
+  String TQUERY3 = "SELECT opgave'"+currentopgave+"'Svar2 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
+  String TQUERY4 = "SELECT opgave'"+currentopgave+"'Svar3 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
+  String TQUERY5 = "SELECT opgave'"+currentopgave+"'Svar4 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
 
-  case 2:
+  //opgavetekst
+  try {
 
-    break;
 
-  case 3:
+    Connection Tconn = DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt = Tconn.createStatement();
+    ResultSet Trs = Tstmt.executeQuery(TQUERY);
 
-    break;
-
-  case 4:
-
-    break;
-
-  case 5:
-
-    break;
-
-  case 6:
-
-    break;
-
-  case 7:
-
-    break;
-
-  case 8:
-
-    break;
-
-  case 9:
-
-    break;
-
-  case 10:
-
-    break;
-
-  case 11:
-
-    break;
-
-  case 12:
-
-    break;
-
-  case 13:
-
-    break;
-
-  case 14:
-
-    break;
-
-  case 15:
-
-    break;
-
-  case 16:
-
-    break;
-
-  case 17:
-
-    break;
-
-  case 18:
-
-    break;
-
-  case 19:
-
-    break;
-
-  case 20:
-
-    break;
-
-  case 21:
-
-    break;
-
-  case 22:
-
-    break;
-
-  case 23:
-
-    break;
-
-  case 24:
-
-    break;
-
-  case 25:
-
-    break;
-  default:
-
-    break;
-
-    if (underviserlogin == true) {
-      String QUERY = "SELECT password FROM underviser WHERE brugernavn = '"+usernameInput+"';";
-    } else {
-      String QUERY = "SELECT password FROM elev WHERE brugernavn = '"+usernameInput+"';";
+    while (Trs.next()) {
+      opgavetekst[currentopgave-1] = Trs.getString("");
     }
+    Tconn.close();
+  }
+  catch(Exception e) {
+    println(e);
+  }
+  //svar1
+  try {
 
-    try {
-      //   usernameInput = //Her skal navnen af textboxen være
 
+    Connection Tconn2= DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt2= Tconn2.createStatement();
+    ResultSet Trs2= Tstmt2.executeQuery(TQUERY2);
 
-      Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-      java.sql.Statement stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery(QUERY);
-
-      while (rs.next()) {
-        test = rs.getString("password"); 
-        if (test.equals(hashedPassword) == true) {
-          //Skift gamestate
-        } else {
-
-          //   System.out.print(hashedPassword+"=");
-          //   System.out.print(test);
-          System.out.print("password don't match");
-        }
-      }
-      conn.close();
+    while (Trs2.next()) {
+      opgaveSvar1[currentopgave-1] = Trs2.getString("");
     }
-    catch(Exception e) {
-      println(e);
+    Tconn2.close();
+  }
+  catch(Exception e) {
+    println(e);
+  }
+  //svar2
+  try {
+
+
+    Connection Tconn3= DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt3= Tconn3.createStatement();
+    ResultSet Trs3= Tstmt3.executeQuery(TQUERY3);
+
+    while (Trs3.next()) {
+      opgaveSvar2[currentopgave-1] = Trs3.getString("");
     }
+    Tconn3.close();
+  }
+  catch(Exception e) {
+    println(e);
+  }
+  //svar3
+  try {
+
+
+    Connection Tconn4= DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt4= Tconn4.createStatement();
+    ResultSet Trs4= Tstmt4.executeQuery(TQUERY4);
+
+    while (Trs4.next()) {
+      opgaveSvar3[currentopgave-1] = Trs4.getString("");
+    }
+    Tconn4.close();
+  }
+  catch(Exception e) {
+    println(e);
+  }
+  //svar4
+  try {
+
+
+    Connection Tconn5= DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt5= Tconn5.createStatement();
+    ResultSet Trs5= Tstmt5.executeQuery(TQUERY5);
+
+    while (Trs5.next()) {
+      opgaveSvar4[currentopgave-1] = Trs5.getString("");
+    }
+    Tconn5.close();
+  }
+  catch(Exception e) {
+    println(e);
   }
 }
+
+void antalOpgaver(){
+String TQUERY6 = "SELECT opgaveAntal FROM opgavetabel WHERE opgaveID = '"+opgaveID+"';";
+ try {
+
+    Connection Tconn6= DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt6= Tconn6.createStatement();
+    ResultSet Trs6= Tstmt6.executeQuery(TQUERY6);
+
+    while (Trs6.next()) {
+      maxopgaver = Trs6.getInt("");
+    }
+    Tconn6.close();
+  }
+  catch(Exception e) {
+    println(e);
+  }
+}
+void tjekSvar(){}

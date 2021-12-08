@@ -1,19 +1,21 @@
 import java.sql.*;
+boolean underviserlogin = false;
+String USER = "root";
+  String PASS = "";
+  String DB_URL = "jdbc:mysql://localhost:3306/mep";
 
 class DataBaseHandler{
 
   java.sql.Statement stmt, stmt2, stmt3, stmt4, stmt5, stmt6, stmt7, stmt8, stmt9, stmt10;
   ResultSet rs, rs2, rs3, rs4, rs5, rs6, rs7, rs8, rs9, rs10;
   Connection conn, conn2, conn3, conn4, conn5, conn6, conn7, conn8, conn9, conn10; 
-  String USER = "root";
-  String PASS = "";
-  String DB_URL = "jdbc:mysql://localhost:3306/mep";
+  
   String test;
   String hashedPassword = "testpassword";
   int maxID = 0;
   int maxID2 = -1;
   String usernameInput, passwordInput;
-  boolean underviserlogin = false;
+
   String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY9, QUERY10;
   String result;
 void loginCheck(){

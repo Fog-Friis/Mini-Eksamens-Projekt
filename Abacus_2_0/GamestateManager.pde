@@ -66,13 +66,13 @@ class GameStateManager {
     textBoxes.add(regVerifikationElevTB);
 
 
-    registerBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 3);
-    backBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
+    //    registerBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 3);
+    //    backBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
 
-    buttons.add(registerBut);
-    buttons.add(backBut);
+    //    buttons.add(registerBut);
+    //    buttons.add(backBut);
 
-    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2);
+    //    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2);
 
     dropdownMenus.add(uddannelsesInstitution);
 
@@ -132,14 +132,14 @@ class GameStateManager {
     buttons.add(resultaterLaererBut);
 
 
-    klasseValg= new DropdownMenu(new PVector(width/2, height/2), new PVector(500, 50), "Vælg uddannelses institution", 40, 10, 6);
+    //  klasseValg= new DropdownMenu(new PVector(width/2, height/2), new PVector(500, 50), "Vælg uddannelses institution", 40, 10, 6);
 
     dropdownMenus.add(klasseValg);
 
     uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
 
-    klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
-    testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
+    //  klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
+    //  testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
 
     dropdownMenus.add(klasseValg);
     dropdownMenus.add(testValg);
@@ -236,9 +236,11 @@ class GameStateManager {
       break;
 
     case 9:
+      currentopgave = 1;
+      setupTekst();
+      hentOpgave();
       updatetest();
       testscreen();
-
       break;
 
     default:
@@ -434,206 +436,41 @@ class GameStateManager {
       gamestate = 5;
     }
   }
+  void setupTekst() {
+    opgavetekst[1] = "IkkeLoadet";
+    opgavetekst[2] = "IkkeLoadet";
+    opgavetekst[3] = "IkkeLoadet";
+    opgavetekst[4] = "IkkeLoadet";
+    opgavetekst[5] = "IkkeLoadet";
+    opgavetekst[6] = "IkkeLoadet";
+    opgavetekst[7] = "IkkeLoadet";
+    opgavetekst[8] = "IkkeLoadet";
+    opgavetekst[9] = "IkkeLoadet";
+    opgavetekst[10] = "IkkeLoadet";
+    opgavetekst[11] = "IkkeLoadet";
+    opgavetekst[12] = "IkkeLoadet";
+    opgavetekst[13] = "IkkeLoadet";
+    opgavetekst[14] = "IkkeLoadet";
+    opgavetekst[15] = "IkkeLoadet";
+    opgavetekst[16] = "IkkeLoadet";
+    opgavetekst[17] = "IkkeLoadet";
+    opgavetekst[18] = "IkkeLoadet";
+    opgavetekst[19] = "IkkeLoadet";
+    opgavetekst[20] = "IkkeLoadet";
+    opgavetekst[21] = "IkkeLoadet";
+    opgavetekst[22] = "IkkeLoadet";
+    opgavetekst[23] = "IkkeLoadet";
+    opgavetekst[24] = "IkkeLoadet";
+  }
   void updatetest() {
-    currentopgave = 1;
-    
-    /*
-     opgavetekst[0]= 
-     opgaveSvar1[0]= 
-     opgaveSvar2[0]= 
-     opgaveSvar3[0]= 
-     opgaveSvar4[0]= 
-     
-     opgavetekst[1]= 
-     opgaveSvar1[1]= 
-     opgaveSvar2[1]= 
-     opgaveSvar3[1]= 
-     opgaveSvar4[1]= 
-     
-     opgavetekst[2]= 
-     opgaveSvar1[2]= 
-     opgaveSvar2[2]= 
-     opgaveSvar3[2]= 
-     opgaveSvar4[2]= 
-     
-     opgavetekst[3]= 
-     opgaveSvar1[3]= 
-     opgaveSvar2[3]= 
-     opgaveSvar3[3]= 
-     opgaveSvar4[3]= 
-     
-     opgavetekst[4]= 
-     opgaveSvar1[4]= 
-     opgaveSvar2[4]= 
-     opgaveSvar3[4]= 
-     opgaveSvar4[4]= 
-     
-     opgavetekst[5]= 
-     opgaveSvar1[5]= 
-     opgaveSvar2[5]= 
-     opgaveSvar3[5]= 
-     opgaveSvar4[5]= 
-     
-     opgavetekst[6]= 
-     opgaveSvar1[6]= 
-     opgaveSvar2[6]= 
-     opgaveSvar3[6]= 
-     opgaveSvar4[6]= 
-     
-     opgavetekst[7]= 
-     opgaveSvar1[7]= 
-     opgaveSvar2[7]= 
-     opgaveSvar3[7]= 
-     opgaveSvar4[7]= 
-     
-     opgavetekst[8]= 
-     opgaveSvar1[8]= 
-     opgaveSvar2[8]= 
-     opgaveSvar3[8]= 
-     opgaveSvar4[8]= 
-     
-     opgavetekst[9]= 
-     opgaveSvar1[9]= 
-     opgaveSvar2[9]= 
-     opgaveSvar3[9]= 
-     opgaveSvar4[9]=
-     */
- 
-  //Checker antal maxopgaver
-  /*
-    if (maxopgaver >= 11)
-   {
-   opgavetekst[10]=
-   opgaveSvar1[10]=
-   opgaveSvar2[10]=
-   opgaveSvar3[10]=
-   opgaveSvar4[10]=
-   }
-   if (maxopgaver >= 12)
-   {
-   opgavetekst[11]= 
-   opgaveSvar1[11]=
-   opgaveSvar2[11]=
-   opgaveSvar3[11]=
-   opgaveSvar4[11]=
-   }
-   if (maxopgaver >= 13)
-   {
-   opgavetekst[12]= 
-   opgaveSvar1[12]=
-   opgaveSvar2[12]=
-   opgaveSvar3[12]=
-   opgaveSvar4[12]=
-   }
-   if (maxopgaver >= 14)
-   {
-   opgavetekst[13]= 
-   opgaveSvar1[13]=
-   opgaveSvar2[13]=
-   opgaveSvar3[13]=
-   opgaveSvar4[13]=
-   }
-   if (maxopgaver >= 15)
-   {
-   opgavetekst[14]=
-   opgaveSvar1[14]=
-   opgaveSvar2[14]=
-   opgaveSvar3[14]=
-   opgaveSvar4[14]=
-   }
-   if (maxopgaver >= 16)
-   {
-   opgavetekst[15]= 
-   opgaveSvar1[15]=
-   opgaveSvar2[15]=
-   opgaveSvar3[15]=
-   opgaveSvar4[15]=
-   }
-   if (maxopgaver >= 17)
-   {
-   opgavetekst[16]=
-   opgaveSvar1[16]=
-   opgaveSvar2[16]=
-   opgaveSvar3[16]=
-   opgaveSvar4[16]=
-   }
-   if (maxopgaver >= 18)
-   {
-   opgavetekst[17]= 
-   opgaveSvar1[17]=
-   opgaveSvar2[17]=
-   opgaveSvar3[17]=
-   opgaveSvar4[17]=
-   }
-   if (maxopgaver >= 19)
-   {
-   opgavetekst[18]= 
-   opgaveSvar1[18]=
-   opgaveSvar2[18]=
-   opgaveSvar3[18]=
-   opgaveSvar4[18]=
-   }
-   if (maxopgaver >= 20)
-   {
-   opgavetekst[19]=
-   opgaveSvar1[19]=
-   opgaveSvar2[19]=
-   opgaveSvar3[19]=
-   opgaveSvar4[19]=
-   }
-   if (maxopgaver >= 21)
-   {
-   opgavetekst[20]= 
-   opgaveSvar1[20]=
-   opgaveSvar2[20]=
-   opgaveSvar3[20]=
-   opgaveSvar4[20]=
-   }
-   if (maxopgaver >= 22)
-   {
-   opgavetekst[21]=
-   opgaveSvar1[21]=
-   opgaveSvar2[21]=
-   opgaveSvar3[21]=
-   opgaveSvar4[21]=
-   }
-   if (maxopgaver >= 23)
-   {
-   opgavetekst[22]= 
-   opgaveSvar1[22]=
-   opgaveSvar2[22]=
-   opgaveSvar3[22]=
-   opgaveSvar4[22]=
-   }
-   if (maxopgaver >= 24)
-   {
-   opgavetekst[23]=
-   opgaveSvar1[23]=
-   opgaveSvar2[23]=
-   opgaveSvar3[23]=
-   opgaveSvar4[23]=
-   }
-   if (maxopgaver >=25 )
-   {
-   opgavetekst[24]= 
-   opgaveSvar1[24]=
-   opgaveSvar2[24]=
-   opgaveSvar3[24]=
-   opgaveSvar4[24]=
-   }
-   */
-   currentSvar1Tekst
-   currentSvar2Tekst
-   currentSvar3Tekst
-   currentSvar4Tekst
-   currentOpgaveTekst =opgavetekst[currentopgave-1];
+    currentSvar1Tekst =opgaveSvar1[currentopgave-1];
+    currentSvar2Tekst =opgaveSvar2[currentopgave-1];
+    currentSvar3Tekst =opgaveSvar3[currentopgave-1];
+    currentSvar4Tekst =opgaveSvar4[currentopgave-1];
+    currentOpgaveTekst =opgavetekst[currentopgave-1];
   }
   void testscreen() {
 
-    if (update == false) {
-      updatetest();
-      update = true;
-    }
     background(255);
     text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/4.7, 999, 999);
     text(opgaveSvar1[currentopgave-1], width/1.45, height/3.4, 999, 999);
@@ -660,13 +497,19 @@ class GameStateManager {
     text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/4.7, 999, 999);
     if (opgaveTilbageBut.clicked == true && currentopgave != 1) {
       currentopgave -= 1;
-      currentOpgaveTekst =opgavetekst[currentopgave-1];
-      currentOpgaveTekst = opgavetekst[currentopgave-1];
+      if  (opgavetekst[currentopgave-1].equals("IkkeLoadet") == true) {
+        hentOpgave();
+      } else {}
+      
       updatetest();
     }
     if (opgaveFremBut.clicked == true && currentopgave != maxopgaver) {
       currentopgave += 1;
-      currentOpgaveTekst =opgavetekst[currentopgave-1];
+      if  (opgavetekst[currentopgave-1].equals("IkkeLoadet") == true) {
+        hentOpgave();
+      } else {}
+      
+      updatetest();
     }
     if (opgaveSlutBut.clicked == true) {
       gamestate = 0;
