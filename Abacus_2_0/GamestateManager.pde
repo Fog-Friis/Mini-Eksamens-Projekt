@@ -14,7 +14,7 @@ Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3
 
 int[] elevSvarNR = new int[25];
 int[] realtSvarNR = new int[25];
-int currentopgave =1, maxopgaver=10;
+int currentopgave =1, maxopgaver;
 String[] opgavetekst = new String[25];
 String[] opgaveSvar1 = new String[25];
 String[] opgaveSvar2 = new String[25];
@@ -229,6 +229,7 @@ class GameStateManager {
 
     case 9:
       opgaveID =1;
+      antalOpgaver();
       setupTekst();
       hentOpgave();
       updatetest();
@@ -485,15 +486,14 @@ class GameStateManager {
     }
     if (opgaveFremBut.clicked == true && currentopgave != maxopgaver) {
       currentopgave += 1;
-     gamestate =9;
-     //  hentOpgave();
-    //  updatetest();
+      gamestate =9;
+    
       
     }
     if (opgaveSlutBut.clicked == true) {
       tjekSvar();
       gamestate = 4;
-      
+      println(rigtigesvar);
     }
     if (svar1But.clicked == true) {
       elevSvarNR[currentopgave-1] = 1;

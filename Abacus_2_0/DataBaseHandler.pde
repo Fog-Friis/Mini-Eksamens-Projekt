@@ -3,7 +3,7 @@ boolean underviserlogin = false;
 String USER = "root";
   String PASS = "";
   String DB_URL = "jdbc:mysql://localhost:3306/mep";
-
+int lokalunderviserID;
 class DataBaseHandler{
 
   java.sql.Statement stmt, stmt2, stmt3, stmt4, stmt5, stmt6, stmt7, stmt8, stmt9, stmt10;
@@ -53,7 +53,29 @@ void loginCheck(){
     catch(Exception e){
       println(e);  
     }
+
+    if (underviserlogin == true){
+       try{
+       String QUERY8 = "SELECT lokalunderviserID FROM underviser WHERE brugernavn = "+usernameInput+";";
+       
+       
+      Connection conn8 = DriverManager.getConnection(DB_URL, USER, PASS);
+      java.sql.Statement stmt8 = conn8.createStatement();
+      ResultSet rs8 = stmt8.executeQuery(QUERY8);
+
+      while (rs8.next()) {
+          lokalunderviserID = rs8.getInt("lokalunderviserID"); 
+
+        }
+      conn8.close();
+       }
+       catch(Exception e){
+      println(e);  
+    }
+    }
 }
+    
+
    
 
   
@@ -91,12 +113,12 @@ void loginCheck(){
    try {
      hashedPassword = outputString;
      if (underviserlogin == true){
-     //  String QUERY3 = ("INSERT INTO underviser (underviserID, brugernavn, password) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
+    //   String QUERY3 = ("INSERT INTO underviser (underviserID, brugernavn, password) VALUES ('"+maxID2+"', '"+textFraUsernametextbox+"', '"+hashedPassword+"');");
        }
        else{
-      //  String QUERY3 = ("INSERT INTO elev (elevID, brugernavn, password) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
+    //    String QUERY3 = ("INSERT INTO elev (elevID, brugernavn, password) VALUES ('"+maxID2+"', '"+textFraUsernametextbox+"', '"+hashedPassword+"');");
        }
-//      
+     
       Connection conn3 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt3 = conn3.createStatement();
       stmt3.executeUpdate(QUERY3);
@@ -132,25 +154,25 @@ catch(Exception e){
     println(e);  
   } 
 if (maxID2 == maxID){
-  //Der er ikke blevet oprettet en ny bruger
+  println("Username in use");
 }
 else{
 //It works
 
 }
   }
-}
-/*
+
+
 void opretKlasse(){
 result = "";
-for (int i = 0; i < 6; i++) {
+for (int i = 0; i <= 3; i++) {
    result += char (int(random (65, 65+24)));
 }
-for (int i = 0; i < 2; i++) {
+for (int i = 0; i <= 1; i++) {
   result +=(int(random (10)));
 }
-      try{
-       String QUERY5 = "SELECT klasseID, MAX(klasseID) FROM klasse GROUP BY klasseID";
+     try{
+     String QUERY5 = "SELECT klasseID, MAX(klasseID) FROM klasse GROUP BY klasseID";
        
       
      Connection conn5 = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -160,9 +182,7 @@ for (int i = 0; i < 2; i++) {
      while (rs5.next()) {
      maxID = ((int)rs5.getInt("ID"));
      maxID2 = maxID+1;
-     
-     
-      
+       result += maxID;
      
     }
     conn5.close();
@@ -176,12 +196,12 @@ for (int i = 0; i < 2; i++) {
    try {
 
 
-     String QUERY6 = ("INSERT INTO klasse (klasseID, klassenavn, aargang, underviserID) VALUES ('"+maxID2+"', '"+//textFraUsernametextbox+"', '"+hashedPassword+"');");
+   //  String QUERY6 = ("INSERT INTO klasse (klasseID, klassenavn, aargang, underviserID) VALUES ("+maxID2+", "+textFraUsernametextbox+", "+textboxaargang+", "+lokalunderviserID+");");
      
       Connection conn6 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt6 = conn6.createStatement();
       stmt6.executeUpdate(QUERY6);
-    conn6.close();
+      conn6.close();
        
 }
 catch(Exception e){
@@ -202,7 +222,7 @@ catch(Exception e){
          
         
     }
-    conn4.close();
+    conn7.close();
   }
   
  
@@ -210,7 +230,7 @@ catch(Exception e){
     println(e);  
   } 
 if (maxID2 == maxID){
-    // say error
+    println("klasse med samme navn");
 }
 else{
 //It works
@@ -218,4 +238,4 @@ println("klasse oprettet");
 }
 
 }
-*/
+}
