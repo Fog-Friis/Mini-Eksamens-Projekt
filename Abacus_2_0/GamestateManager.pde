@@ -74,9 +74,9 @@ class GameStateManager {
 
     //    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2);
 
-    dropdownMenus.add(uddannelsesInstitution);
+  //  dropdownMenus.add(uddannelsesInstitution);
 
-    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false)); 
+  //  uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false)); 
 
 
     registerElevBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 50, 3);
@@ -85,11 +85,11 @@ class GameStateManager {
     buttons.add(registerElevBut);
     buttons.add(backElevBut);
 
-    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2, new ArrayList<dropdownObject>());
+//    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2, new ArrayList<dropdownObject>());
 
-    dropdownMenus.add(uddannelsesInstitution);
+  //  dropdownMenus.add(uddannelsesInstitution);
 
-    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false));
+  //  uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false));
 
 
     //setup register screeen
@@ -132,20 +132,20 @@ class GameStateManager {
     buttons.add(resultaterLaererBut);
 
 
-    //  klasseValg= new DropdownMenu(new PVector(width/2, height/2), new PVector(500, 50), "Vælg uddannelses institution", 40, 10, 6);
+   //   klasseValg= new DropdownMenu(new PVector(width/2, height/2), new PVector(500, 50), "Vælg uddannelses institution", 40, 10, 6);
 
-    dropdownMenus.add(klasseValg);
+  //  dropdownMenus.add(klasseValg);
 
-    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
+  //  uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
 
-    //  klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
-    //  testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
+   //   klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
+   //   testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
 
     dropdownMenus.add(klasseValg);
     dropdownMenus.add(testValg);
 
-    klasseValg.objects.add(new dropdownObject(klasseValg.pos, klasseValg.size, "3a2 I guess (database her)", 1, false));
-    testValg.objects.add(new dropdownObject(testValg.pos, testValg.size, "IDK IQ something navn", 1, false));
+ //   klasseValg.objects.add(new dropdownObject(klasseValg.pos, klasseValg.size, "3a2 I guess (database her)", 1, false));
+ //   testValg.objects.add(new dropdownObject(testValg.pos, testValg.size, "IDK IQ something navn", 1, false));
 
 
 
@@ -236,6 +236,7 @@ class GameStateManager {
       break;
 
     case 9:
+      opgaveID =1;
       currentopgave = 1;
       setupTekst();
       hentOpgave();
@@ -437,6 +438,7 @@ class GameStateManager {
     }
   }
   void setupTekst() {
+    opgavetekst[0] = "IkkeLoadet";
     opgavetekst[1] = "IkkeLoadet";
     opgavetekst[2] = "IkkeLoadet";
     opgavetekst[3] = "IkkeLoadet";

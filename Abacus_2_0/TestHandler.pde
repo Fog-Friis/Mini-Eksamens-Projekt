@@ -13,22 +13,19 @@ int opgaveID;
 
 void hentOpgave() {   
 
-  
-  String TQUERY2 = "SELECT opgave'"+currentopgave+"'Svar1 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
-  String TQUERY3 = "SELECT opgave'"+currentopgave+"'Svar2 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
-  String TQUERY4 = "SELECT opgave'"+currentopgave+"'Svar3 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
-  String TQUERY5 = "SELECT opgave'"+currentopgave+"'Svar4 FROM opgavesvar1 WHERE opgaveID = '"+opgaveID+"';";
-
+String TQUERY = "SELECT opgaveTekst"+currentopgave+" FROM opgavetext WHERE opgaveID = 1;";
+  String TQUERY2 = "SELECT opgave"+currentopgave+"Svar1 FROM opgavesvar1 WHERE opgaveID = "+opgaveID+";";
+  String TQUERY3 = "SELECT opgave"+currentopgave+"Svar2 FROM opgavesvar2 WHERE opgaveID = "+opgaveID+";";
+  String TQUERY4 = "SELECT opgave"+currentopgave+"Svar3 FROM opgavesvar3 WHERE opgaveID = "+opgaveID+";";
+  String TQUERY5 = "SELECT opgave"+currentopgave+"Svar4 FROM opgavesvar4 WHERE opgaveID = "+opgaveID+";";
   //opgavetekst
   try {
-
-
     Connection Tconn = DriverManager.getConnection(DB_URL, USER, PASS);
     java.sql.Statement Tstmt = Tconn.createStatement();
     ResultSet Trs = Tstmt.executeQuery(TQUERY);
 
     while (Trs.next()) {
-      opgavetekst[currentopgave-1] = Trs.getString("");
+      opgavetekst[currentopgave-1] = Trs.getString("opgaveTekst"+currentopgave);
     }
     Tconn.close();
   }
@@ -44,7 +41,7 @@ void hentOpgave() {
     ResultSet Trs2= Tstmt2.executeQuery(TQUERY2);
 
     while (Trs2.next()) {
-      opgaveSvar1[currentopgave-1] = Trs2.getString("");
+      opgaveSvar1[currentopgave-1] = Trs2.getString("opgave"+currentopgave+"Svar1");
     }
     Tconn2.close();
   }
@@ -60,7 +57,7 @@ void hentOpgave() {
     ResultSet Trs3= Tstmt3.executeQuery(TQUERY3);
 
     while (Trs3.next()) {
-      opgaveSvar2[currentopgave-1] = Trs3.getString("");
+      opgaveSvar2[currentopgave-1] = Trs3.getString("opgave"+currentopgave+"Svar2");
     }
     Tconn3.close();
   }
@@ -76,7 +73,7 @@ void hentOpgave() {
     ResultSet Trs4= Tstmt4.executeQuery(TQUERY4);
 
     while (Trs4.next()) {
-      opgaveSvar3[currentopgave-1] = Trs4.getString("");
+      opgaveSvar3[currentopgave-1] = Trs4.getString("opgave"+currentopgave+"Svar3");
     }
     Tconn4.close();
   }
@@ -92,7 +89,7 @@ void hentOpgave() {
     ResultSet Trs5= Tstmt5.executeQuery(TQUERY5);
 
     while (Trs5.next()) {
-      opgaveSvar4[currentopgave-1] = Trs5.getString("");
+      opgaveSvar4[currentopgave-1] = Trs5.getString("opgave"+currentopgave+"Svar4");
     }
     Tconn5.close();
   }
