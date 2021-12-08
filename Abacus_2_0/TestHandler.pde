@@ -18,7 +18,6 @@ String TQUERY = "SELECT opgaveTekst"+currentopgave+" FROM opgavetext WHERE opgav
   String TQUERY3 = "SELECT opgave"+currentopgave+"Svar2 FROM opgavesvar2 WHERE opgaveID = "+opgaveID+";";
   String TQUERY4 = "SELECT opgave"+currentopgave+"Svar3 FROM opgavesvar3 WHERE opgaveID = "+opgaveID+";";
   String TQUERY5 = "SELECT opgave"+currentopgave+"Svar4 FROM opgavesvar4 WHERE opgaveID = "+opgaveID+";";
-  //opgavetekst
   try {
     Connection Tconn = DriverManager.getConnection(DB_URL, USER, PASS);
     java.sql.Statement Tstmt = Tconn.createStatement();
@@ -115,4 +114,6 @@ String TQUERY6 = "SELECT opgaveAntal FROM opgavetabel WHERE opgaveID = '"+opgave
     println(e);
   }
 }
-void tjekSvar(){}
+void tjekSvar(){
+
+}

@@ -166,18 +166,10 @@ class GameStateManager {
     opgaveFremBut= new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Frem", 24, 9);
     opgaveTilbageBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Tilbage", 24, 9);
     opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 9);
-    svar1But = new Button(new PVector(width-width/2.5, height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 9);
-    svar2But = new Button(new PVector(width-width/2.5, height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
-    svar3But = new Button(new PVector(width-width/2.5, height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
-    svar4But = new Button(new PVector(width-width/2.5, height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
-
-    opgaveFremBut= new Button(new PVector(width-width/7, 250), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgave frem", 24, 9);
-    opgaveTilbageBut = new Button(new PVector(width-width/1.1, 250), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "opgave Tilbage", 24, 9);
-    opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 9);
-    svar1But = new Button(new PVector(width-width/3.4, height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 9);
-    svar2But = new Button(new PVector(width-width/3.4, height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
-    svar3But = new Button(new PVector(width-width/3.4, height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
-    svar4But = new Button(new PVector(width-width/3.4, height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
+    svar1But = new Button(new PVector(width-width/3., height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 9);
+    svar2But = new Button(new PVector(width-width/3., height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
+    svar3But = new Button(new PVector(width-width/3., height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
+    svar4But = new Button(new PVector(width-width/3., height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
 
 
     buttons.add(opgaveTilbageBut);
@@ -237,7 +229,6 @@ class GameStateManager {
 
     case 9:
       opgaveID =1;
-      currentopgave = 1;
       setupTekst();
       hentOpgave();
       updatetest();
@@ -474,48 +465,35 @@ class GameStateManager {
   void testscreen() {
 
     background(255);
-    text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/4.7, 999, 999);
-    text(opgaveSvar1[currentopgave-1], width/1.45, height/3.4, 999, 999);
-    text(opgaveSvar2[currentopgave-1], width/1.45, height/2.3, 999, 999);
-    text(opgaveSvar3[currentopgave-1], width/1.45, height/1.75, 999, 999);
-    text(opgaveSvar4[currentopgave-1], width/1.45, height/1.4, 999, 999);
+    text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/3.7, 999, 999);
+    text(opgaveSvar1[currentopgave-1], width/1.3, height/3.4, 999, 999);
+    text(opgaveSvar2[currentopgave-1], width/1.3, height/2.3, 999, 999);
+    text(opgaveSvar3[currentopgave-1], width/1.3, height/1.75, 999, 999);
+    text(opgaveSvar4[currentopgave-1], width/1.3, height/1.4, 999, 999);
 
     text("dit svar:"+elevSvarNR[currentopgave-1], width/1.43, height/4.2, 999, 999);
     textFont(Comic);
     text("Prøvesæt1", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
-    fill(0);   
 
-    background(255);
-    fill(110, 255, 110);
-    rect(0, 80, width, 150);
-    textFont(Comic);
-    fill(0);
-    text("Elev nr 12", 10, 10, 99, 99);
-    textFont(norm);
-    textSize(48);
-    fill(0);
-    text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/4.7, 999, 999);
     if (opgaveTilbageBut.clicked == true && currentopgave != 1) {
       currentopgave -= 1;
-      if  (opgavetekst[currentopgave-1].equals("IkkeLoadet") == true) {
-        hentOpgave();
-      } else {}
+      gamestate = 9;
+
       
-      updatetest();
     }
     if (opgaveFremBut.clicked == true && currentopgave != maxopgaver) {
       currentopgave += 1;
-      if  (opgavetekst[currentopgave-1].equals("IkkeLoadet") == true) {
-        hentOpgave();
-      } else {}
+     gamestate =9;
+     //  hentOpgave();
+    //  updatetest();
       
-      updatetest();
     }
     if (opgaveSlutBut.clicked == true) {
-      gamestate = 0;
-      println(elevSvarNR);
+      tjekSvar();
+      gamestate = 4;
+      
     }
     if (svar1But.clicked == true) {
       elevSvarNR[currentopgave-1] = 1;
