@@ -66,12 +66,6 @@ class GameStateManager {
     textBoxes.add(regVerifikationElevTB);
 
 
-    //    registerBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 3);
-    //    backBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
-
-    //    buttons.add(registerBut);
-    //    buttons.add(backBut);
-
     //    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2);
 
   //  dropdownMenus.add(uddannelsesInstitution);
@@ -228,9 +222,12 @@ class GameStateManager {
       break;
 
     case 9:
+    if (update == false){
       opgaveID =1;
       antalOpgaver();
       setupTekst();
+      update = true;
+    }
       hentOpgave();
       updatetest();
       testscreen();
@@ -430,31 +427,13 @@ class GameStateManager {
     }
   }
   void setupTekst() {
-    opgavetekst[0] = "IkkeLoadet";
-    opgavetekst[1] = "IkkeLoadet";
-    opgavetekst[2] = "IkkeLoadet";
-    opgavetekst[3] = "IkkeLoadet";
-    opgavetekst[4] = "IkkeLoadet";
-    opgavetekst[5] = "IkkeLoadet";
-    opgavetekst[6] = "IkkeLoadet";
-    opgavetekst[7] = "IkkeLoadet";
-    opgavetekst[8] = "IkkeLoadet";
-    opgavetekst[9] = "IkkeLoadet";
-    opgavetekst[10] = "IkkeLoadet";
-    opgavetekst[11] = "IkkeLoadet";
-    opgavetekst[12] = "IkkeLoadet";
-    opgavetekst[13] = "IkkeLoadet";
-    opgavetekst[14] = "IkkeLoadet";
-    opgavetekst[15] = "IkkeLoadet";
-    opgavetekst[16] = "IkkeLoadet";
-    opgavetekst[17] = "IkkeLoadet";
-    opgavetekst[18] = "IkkeLoadet";
-    opgavetekst[19] = "IkkeLoadet";
-    opgavetekst[20] = "IkkeLoadet";
-    opgavetekst[21] = "IkkeLoadet";
-    opgavetekst[22] = "IkkeLoadet";
-    opgavetekst[23] = "IkkeLoadet";
-    opgavetekst[24] = "IkkeLoadet";
+  for (int i = 0; i <= 24; i++)
+    {
+    opgavetekst[i] = "IkkeLoadet";
+    elevSvarNR[i] = 0;
+    }
+   
+    
   }
   void updatetest() {
     currentSvar1Tekst =opgaveSvar1[currentopgave-1];
@@ -492,7 +471,8 @@ class GameStateManager {
     }
     if (opgaveSlutBut.clicked == true) {
       tjekSvar();
-      gamestate = 4;
+      gamestate = 7;
+      update = false;
       println(rigtigesvar);
     }
     if (svar1But.clicked == true) {
