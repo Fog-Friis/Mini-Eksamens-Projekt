@@ -1,5 +1,6 @@
 class Button {
 
+  float scroll;
   PVector pos;
   PVector size;
 
@@ -43,12 +44,12 @@ class Button {
   }
 
   boolean over() {
-    if ((mouseX <= box1pos.x+box1size.x && mouseX >= box1pos.x && mouseY <= box1pos.y+box1size.y && mouseY >= box1pos.y) ||
-      (mouseX <= box2pos.x+box2size.x && mouseX >= box2pos.x && mouseY <= box2pos.y+box2size.y && mouseY >= box2pos.y) ||
-      (dist(mouseX, mouseY, circle1pos.x, circle1pos.y)<radius/2) ||
-      (dist(mouseX, mouseY, circle2pos.x, circle2pos.y)<radius/2) ||
-      (dist(mouseX, mouseY, circle3pos.x, circle3pos.y)<radius/2) ||
-      (dist(mouseX, mouseY, circle4pos.x, circle4pos.y)<radius/2)) {
+    if ((mouseX <= box1pos.x+box1size.x && mouseX >= box1pos.x && mouseY <= box1pos.y+box1size.y+scroll && mouseY >= box1pos.y+scroll) ||
+      (mouseX <= box2pos.x+box2size.x && mouseX >= box2pos.x && mouseY <= box2pos.y+box2size.y+scroll && mouseY >= box2pos.y+scroll) ||
+      (dist(mouseX, mouseY-scroll, circle1pos.x, circle1pos.y)<radius/2) ||
+      (dist(mouseX, mouseY-scroll, circle2pos.x, circle2pos.y)<radius/2) ||
+      (dist(mouseX, mouseY-scroll, circle3pos.x, circle3pos.y)<radius/2) ||
+      (dist(mouseX, mouseY-scroll, circle4pos.x, circle4pos.y)<radius/2)) {
       return true;
     } else {
       return false;
@@ -63,6 +64,9 @@ class Button {
 
 
   void display() {
+    
+    pushMatrix();
+    translate(0,scroll);
     
     clicked=false;
     
@@ -93,5 +97,7 @@ class Button {
     text(Text, pos.x+size.x/2, pos.y+2*textSize/3);
     textAlign(CORNER);
     }
-  }
+    translate(0,0);
+    popMatrix();
+  }  
 }

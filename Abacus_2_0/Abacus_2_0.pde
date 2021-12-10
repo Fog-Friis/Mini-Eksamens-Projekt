@@ -22,13 +22,13 @@ void mousePressed(){
   game1.pressMouse();
 }
 
-void mouseWheel(MouseEvent e){
+/*void mouseWheel(MouseEvent e){
   for (DropdownMenu d : dropdownMenus) {
     if (d.objects.size() > d.shownObjects-1 && d.overObjects() == true) {
       d.scroll = e.getCount();
     }
   }
-}
+}*/
 
 void mouseReleased(){
   game1.releaseMouse(); 

@@ -10,6 +10,7 @@ public class TextBox {
   public int TEXTSIZE = 48;
   public boolean isProtected;
   int visible;
+  float scroll;
 
   // COLORS
   public color Background = color(140, 140, 140);
@@ -38,7 +39,10 @@ public class TextBox {
   }
 
   void display() {
-
+    
+    pushMatrix();
+    translate(0,scroll);
+    
     if (visible == gamestate) {
       // DRAWING THE BACKGROUND
       if (selected) {
@@ -71,6 +75,8 @@ public class TextBox {
       //sletter texten når man ikke er på menuen længere
       clearText();
     }
+    translate(0,0);
+    popMatrix();
   }
 
   // IF THE KEYCODE IS ENTER RETURN 1
@@ -114,49 +120,6 @@ public class TextBox {
             }
             addText('.');
           }
-          /*if (AE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('æ');
-           }
-           }
-           if (OE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('ø');
-           }
-           }
-           if (AA == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('å');
-           }
-           }
-           
-           if (shift && AE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('Æ');
-           }
-           }
-           if (shift && OE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('Ø');
-           }
-           }
-           if (shift && AA == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('Å');
-           }
-           }*/
         }
       }
     }
@@ -187,7 +150,7 @@ public class TextBox {
   // OVER THE TEXTBOX
   private boolean overBox(int x, int y) {
     if (x >= position.x && x <= position.x + size.x) {
-      if (y >= position.y && y <= position.y + size.y) {
+      if (y >= position.y + scroll && y <= position.y + size.y + scroll) {
         return true;
       }
     }

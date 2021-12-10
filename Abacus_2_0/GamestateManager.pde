@@ -11,6 +11,8 @@ Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
 
+Scrollbar sb1, sb2, sb3;
+
 
 int[] elevSvarNR = new int[25];
 int[] realtSvarNR = new int[25];
@@ -32,6 +34,9 @@ PFont norm;
 class GameStateManager {
 
   void setupManager() {
+    
+    sb1 = new Scrollbar(new PVector(width-20,0), new PVector(width, height), 100, 2);
+    
 
     norm = createFont("Arial", 18);
     Comic = createFont("Comic Sans MS", 18);
@@ -65,25 +70,17 @@ class GameStateManager {
     textBoxes.add(regPasswordElevTB);
     textBoxes.add(regVerifikationElevTB);
 
-
-    //    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2);
-
-  //  dropdownMenus.add(uddannelsesInstitution);
-
-  //  uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false)); 
-
-
     registerElevBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 50, 3);
     backElevBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
 
     buttons.add(registerElevBut);
     buttons.add(backElevBut);
 
-//    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, 1, 2, new ArrayList<dropdownObject>());
+    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, color(200,200,200), 2, new ArrayList<dropdownObject>());
 
-  //  dropdownMenus.add(uddannelsesInstitution);
+    dropdownMenus.add(uddannelsesInstitution);
 
-  //  uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false));
+    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false));
 
 
     //setup register screeen
@@ -130,13 +127,13 @@ class GameStateManager {
 
   //  dropdownMenus.add(klasseValg);
 
-  //  uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
+    //uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
 
    //   klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
    //   testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
 
-    dropdownMenus.add(klasseValg);
-    dropdownMenus.add(testValg);
+    //dropdownMenus.add(klasseValg);
+    //dropdownMenus.add(testValg);
 
  //   klasseValg.objects.add(new dropdownObject(klasseValg.pos, klasseValg.size, "3a2 I guess (database her)", 1, false));
  //   testValg.objects.add(new dropdownObject(testValg.pos, testValg.size, "IDK IQ something navn", 1, false));
@@ -306,6 +303,8 @@ class GameStateManager {
   }
 
   void RegisterScreenTeacher() {
+    pushMatrix();
+    translate(0,-sb1.spos);
     fill(240);
     stroke(6);
     rect(width/2.8, height/6.8, 550, 770);
@@ -327,6 +326,8 @@ class GameStateManager {
     text("Lære-ID", width/2-200, height/3.7+400);
     textSize(48);
     text("Registrer lærer", width/2.37, height/5.3);
+    translate(0,0);
+    popMatrix();
   }
 
   void StudentProeveMenu() {

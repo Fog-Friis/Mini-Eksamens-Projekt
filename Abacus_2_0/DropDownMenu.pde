@@ -4,29 +4,29 @@ class DropdownMenu {
   PVector size;
   String Text;
   int textSize;
+  color col;
   int visible;
-  int shownObjects;
   int scale = 1;
-  int scroll;
 
+  float scroll;
   float theta = PI/4;
 
   boolean clicked = false;
 
   ArrayList<dropdownObject> objects;
 
-  DropdownMenu(PVector pos, PVector size, String Text, int textSize, int shownObjects, int visible, ArrayList<dropdownObject> objects) {
+  DropdownMenu(PVector pos, PVector size, String Text, int textSize, color col, int visible, ArrayList<dropdownObject> objects) {
     this.pos = pos;
     this.size = size;
     this.Text = Text;
     this.textSize = textSize;
-    this.shownObjects = shownObjects;
+    this.col = col;
     this.visible = visible;
     this.objects = objects;
   }
 
   boolean over() {
-    if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y && mouseY >= pos.y) {
+    if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y+scroll && mouseY >= pos.y+scroll) {
       return true;
     } else {
       return false;
@@ -34,7 +34,7 @@ class DropdownMenu {
   }
 
   boolean overObjects() {
-    if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y+size.y*shownObjects && mouseY >= pos.y+size.y) {
+    if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y+size.y*objects.size()+scroll && mouseY >= pos.y+size.y+scroll) {
       return true;
     } else {
       return false;
@@ -49,6 +49,8 @@ class DropdownMenu {
 
   void display() {
 
+    pushMatrix();
+    translate(0, scroll);
     //update dropdown menu
     if (clicked) {
       for (dropdownObject d : objects) d.visible = true;
@@ -58,38 +60,22 @@ class DropdownMenu {
       scale = -1;
     }
 
-    for (dropdownObject d : objects) {
-      if (d.loc.y+size.y*(d.number) <= pos.y) {
-        d.visible = false;
-      }
-
-      if (d.loc.y+size.y*d.number >= pos.y+(shownObjects-1)*size.y) {
-        d.visible = false;
-      }
-
-      if (d.loc.y >= pos.y) {
-        d.loc.y = pos.y;
-      }
-
-
-      if (d.loc.y + (objects.size()+1.7)*d.size.y <= pos.y+shownObjects*size.y) {
-        d.loc.y = shownObjects*d.size.y;
-      }
-    }
-
     //draw dropdown menu
     if (visible == gamestate) { 
 
       for (dropdownObject d : objects) {
-
+        d.scroll = scroll;
         d.display();
 
         if (d.visible) {
+          fill(0);
           textAlign(CORNER);
           textSize(d.size.y/2);
           text(d.Text, d.loc.x, d.loc.y+(d.number+1)*size.y-size.y/2);
         }
       }
+
+      fill(col);
 
       rect(pos.x, pos.y, size.x, size.y);           
 
@@ -104,7 +90,7 @@ class DropdownMenu {
       rotate(PI);
       scale(scale);
       triangle(-10, -5, 10, -5, 0, 5);
-      fill(255);
+      fill(col);
       noStroke();
       triangle(-10, -10, 10, -10, 0, 0);
       stroke(0);
@@ -112,12 +98,8 @@ class DropdownMenu {
       popMatrix();
       fill(255);
     }
-
-    println(objects.size(), shownObjects);
-    for (dropdownObject d : objects) {
-      d.loc.y -= scroll;
-    }
-    scroll = 0;
+    translate(0, 0);
+    popMatrix();
   }
 }
 
@@ -128,8 +110,9 @@ class dropdownObject {
   String Text;
   int number;
   boolean visible;
-
   boolean clicked;
+  
+  float scroll;
 
   dropdownObject(PVector loc, PVector size, String Text, int number, boolean visible) {
     this.Text = Text;
@@ -140,7 +123,7 @@ class dropdownObject {
   }
 
   boolean over() {
-    if (mouseX <= loc.x+size.x && mouseX >= loc.x && mouseY <= loc.y+(number+1)*size.y && mouseY >= loc.y+number*size.y) {
+    if (mouseX <= loc.x+size.x && mouseX >= loc.x && mouseY <= loc.y+(number+1)*size.y+scroll && mouseY >= loc.y+number*size.y+scroll) {
       return true;
     } else {
       return false;
@@ -161,11 +144,11 @@ class dropdownObject {
     if (visible) {
 
       if (clicked) {
-        fill(0, 255, 0);
+        fill(150, 150, 150);
       } else if (over()) {
-        fill(255, 0, 0);
+        fill(230, 230, 230);
       } else {
-        fill(0, 0, 255);
+        fill(200, 200, 200);
       }
 
       rect(loc.x, (number)*size.y+loc.y, size.x, size.y);
