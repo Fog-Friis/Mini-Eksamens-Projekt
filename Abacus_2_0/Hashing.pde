@@ -22,4 +22,5 @@ void hashing(String Text){
 catch (Exception e) {
   //System.out.println("Exception: "+e);
 }
+
 }
