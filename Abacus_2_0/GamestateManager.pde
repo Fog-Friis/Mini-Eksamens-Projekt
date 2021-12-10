@@ -1,6 +1,7 @@
 int gamestate;
 TextBox regUserLaererTB, regLaererID, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB;
 TextBox logUserTB, logPasswordTB;
+TextBox opgaveTB, svar1TB, svar2TB, svar3TB, svar4TB;
 
 Button loginBut, registerScreenBut;
 Button ElevRegisterBut, LaererRegisterBut, TilbageBut;
@@ -10,6 +11,7 @@ Button resultaterLaererBut;
 Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
+Button annullerBut, gemBut, rsvar1But, rsvar2But, rsvar3But, rsvar4But;
 
 Scrollbar sb1, sb2, sb3;
 
@@ -34,7 +36,7 @@ PFont norm;
 class GameStateManager {
 
   void setupManager() {
-    
+
     //setup scroll bars
     sb1 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 2);
     sb2 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 6);    
@@ -55,7 +57,7 @@ class GameStateManager {
 
     buttons.add(loginBut);
     buttons.add(registerScreenBut);
-    
+
     //setup choose register screen
 
     regUserElevTB = new TextBox(new PVector(width/2-200, height/3.7+20), new PVector(400, 70), false, 3);
@@ -65,8 +67,8 @@ class GameStateManager {
     textBoxes.add(regUserElevTB);
     textBoxes.add(regPasswordElevTB);
     textBoxes.add(regVerifikationElevTB);
-    
-    
+
+
     ElevRegisterBut = new Button(new PVector(width/2.72+40, height/3.2+30), new PVector(180, 340), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Elev", 50, 1);
     LaererRegisterBut = new Button(new PVector(width/2+40, height/3.2+30), new PVector(180, 340), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Lærer", 50, 1);
     TilbageBut = new Button(new PVector(width/2.72+40, height/1.45+30), new PVector(425, 40), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Tilbage", 50, 1);
@@ -74,7 +76,7 @@ class GameStateManager {
     buttons.add(ElevRegisterBut);
     buttons.add(LaererRegisterBut);
     buttons.add(TilbageBut);
-    
+
     //setup student register screen
     registerElevBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 50, 3);
     backElevBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
@@ -105,7 +107,7 @@ class GameStateManager {
 
     buttons.add(registerLaererBut);
     buttons.add(backLaererBut);
-    
+
     //setup student results-screen
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 4);
     resultaterElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 4);
@@ -152,7 +154,6 @@ class GameStateManager {
     svar3But = new Button(new PVector(width-width/3., height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
     svar4But = new Button(new PVector(width-width/3., height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
 
-
     buttons.add(opgaveTilbageBut);
     buttons.add(opgaveFremBut);
     buttons.add(opgaveSlutBut);
@@ -160,6 +161,34 @@ class GameStateManager {
     buttons.add(svar2But);
     buttons.add(svar3But);
     buttons.add(svar4But);
+
+    //setup OpretProeve screen
+
+    opgaveTB = new TextBox(new PVector(width/2-400, height/3.7+40), new PVector(800, 70), false, 5);
+    svar1TB = new TextBox(new PVector(width/2-400, height/3.7+140), new PVector(400, 70), false, 5);
+    svar2TB = new TextBox(new PVector(width/2-400, height/3.7+240), new PVector(400, 70), false, 5);
+    svar3TB = new TextBox(new PVector(width/2-400, height/3.7+340), new PVector(400, 70), false, 5);
+    svar4TB = new TextBox(new PVector(width/2-400, height/3.7+440), new PVector(400, 70), false, 5);
+
+    textBoxes.add(opgaveTB);
+    textBoxes.add(svar1TB);
+    textBoxes.add(svar2TB);
+    textBoxes.add(svar3TB);
+    textBoxes.add(svar4TB);
+
+    annullerBut = new Button(new PVector(width-width/3., height/3.7), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 20);
+    gemBut = new Button(new PVector(width-width/3., height/3.7), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 5);
+    rsvar1But = new Button(new PVector(width/2+200, height/3.7+160), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+    rsvar2But = new Button(new PVector(width/2+200, height/3.7+260), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+    rsvar3But = new Button(new PVector(width/2+200, height/3.7+360), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+    rsvar4But = new Button(new PVector(width/2+200, height/3.7+460), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+
+    buttons.add(annullerBut);
+    buttons.add(gemBut);
+    buttons.add(rsvar1But);
+    buttons.add(rsvar2But);
+    buttons.add(rsvar3But);
+    buttons.add(rsvar4But);
   }
 
   void manage() {
@@ -179,7 +208,7 @@ class GameStateManager {
     case 1:
       ChooseRegister();
       break;
-      
+
       //display register teacher screen
     case 2:
       RegisterScreenTeacher();
@@ -346,9 +375,10 @@ class GameStateManager {
     }
   }
 
+  boolean showrect = true;
   void TeacherProeveMenu() {
     textFont(Comic);
-    text("LÆREr", 10, 10, 99, 99);
+    text("LÆRER", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
     fill(0);
@@ -365,7 +395,14 @@ class GameStateManager {
     if (uddelProeveBut.clicked) {
       gamestate = 6;
     }
+    if (opretProeveBut.clicked) {
+      showrect = false;
+    }
   }
+
+  void OpretProeve() {
+  }
+
   void TeacherUddelProeveMenu() {
 
     pushMatrix();
@@ -489,5 +526,65 @@ class GameStateManager {
     if (svar4But.clicked == true) {
       elevSvarNR[currentopgave-1] = 4;
     }
+    switch(elevSvarNR[currentopgave-1]) {
+    case 1:
+      svar1But.col = color(0, 200, 50);
+      svar2But.col = color(150, 150, 200);
+      svar3But.col = color(150, 150, 200);
+      svar4But.col = color(150, 150, 200);
+      break;
+
+    case 2:
+      svar1But.col = color(150, 150, 200);
+      svar2But.col = color(0, 200, 50);
+      svar3But.col = color(150, 150, 200);
+      svar4But.col = color(150, 150, 200);
+      break;
+
+    case 3:
+      svar1But.col = color(150, 150, 200);
+      svar2But.col = color(150, 150, 200);
+      svar3But.col = color(0, 200, 50);
+      svar4But.col = color(150, 150, 200);
+      break;
+
+    case 4:
+      svar1But.col = color(150, 150, 200);
+      svar2But.col = color(150, 150, 200);
+      svar3But.col = color(150, 150, 200);
+      svar4But.col = color(0, 200, 50);
+      break;
+
+    default:
+      svar1But.col = color(150, 150, 200);
+      svar2But.col = color(150, 150, 200);
+      svar3But.col = color(150, 150, 200);
+      svar4But.col = color(150, 150, 200);
+      break;
+    }
+  }
+  float theta = 0, theta1 = radians(60), rad = 30;
+  void loadingScreen() {
+    rad = 5*cos(theta/2)+10+20;
+
+    theta += 0.1;
+    fill(0);
+    textSize(48);
+    pushMatrix();
+    translate(width/2+250, height/2);
+    text("Loading, please wait", -550, 15);
+    rotate(theta);
+    circle(0, rad, 10);
+    rotate(theta1);
+    circle(0, rad, 10);
+    rotate(theta1);
+    circle(0, rad, 10);
+    rotate(theta1);
+    circle(0, rad, 10);
+    rotate(theta1);
+    circle(0, rad, 10);
+    rotate(theta1);
+    circle(0, rad, 10);
+    popMatrix();
   }
 }

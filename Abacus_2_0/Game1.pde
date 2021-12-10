@@ -43,6 +43,8 @@ class Game1 {
     sb2.run();
     sb3.run();
 
+
+
     for (TextBox t : textBoxes) {
       if (gamestate <6) t.scroll = -sb1.spos;
       if (gamestate == 6) t.scroll = -sb2.spos;
@@ -60,6 +62,10 @@ class Game1 {
       if (gamestate == 6) d.scroll = -sb2.spos;
       if (gamestate > 6) d.scroll = -sb3.spos;
       d.display();
+    }
+    fill(255);
+    if (gamestateManager.showrect && gamestate == 5) {
+      rect(opgaveTB.position.x, opgaveTB.position.y, +opgaveTB.size.x, 7*rsvar4But.pos.y/10);
     }
 
     errorHandler.display();
