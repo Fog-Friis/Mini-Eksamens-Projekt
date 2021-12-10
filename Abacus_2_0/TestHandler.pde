@@ -3,6 +3,8 @@ String[] opgaveSvar1Data = new String[25];
 String[] opgaveSvar2Data = new String[25];
 String[] opgaveSvar3Data = new String[25];
 String[] opgaveSvar4Data = new String[25];
+String lokalbrugernavn;
+int lokalelevID, lokalklasseID;
 
 java.sql.Statement Tstmt, Tstmt2, Tstmt3, Tstmt4, Tstmt5, Tstmt6, Tstmt7, Tstmt8, Tstmt9, Tstmt10;
 ResultSet Trs, Trs2, Trs3, Trs4, Trs5, Trs6, Trs7, Trs8, Trs9, Trs10;
@@ -658,11 +660,41 @@ if (25 <= maxopgaver){
     println(e);
   }
 }
-
 }
 
-
 //Find elevprøver
+void elevLoadOpgaver(){
+String TQUERY9 = "SELECT elevID FROM elev WHERE brugernavn = '"+lokalbrugernavn+"';";
+String TQUERY7 = "SELECT klasseID FROM elev WHERE elevID = '"+lokalelevID+"';";
+//lokalklasseID = Trs7.getInt("klasseID");
+String TQUERY8 = "SELECT opgaveantalklasse FROM klasse WHERE klasseID = '"+lokalklasseID+"';";
+lokalklasseID = 123451;
+String TQUERY6 = "SELECT opgaveID FROM klasseopgaver WHERE klasseID = '"+lokalklasseID+"';";
+String TQUERY10 = "SELECT opgaveNavn FROM klasseopgaver WHERE klasseID = '"+lokalklasseID+"';";
+//https://stackoverflow.com/questions/7332731/sql-server-select-top-10-20-results
+//http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_top.asp.html
+  try {
+    Connection Tconn6 = DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt6 = Tconn.createStatement();
+    ResultSet Trs6 = Tstmt6.executeQuery(TQUERY6);
 
-//Uddel elevprøver
-//Oprette prøver
+    while (Trs6.next()) {
+   // lokalelevID = Trs6.getInt("elevID");
+    println(Trs6);
+    }
+    Tconn6.close();
+  }
+  catch(Exception e) {
+    println(e);
+  }
+}
+ //Uddel elevprøver
+ void uddelOpgaver(){
+ }
+ 
+ void OpretOpgaver(){
+ //String TQUERYx = "SELECT opgaveID, MAX(opgaveID) FROM opgavetabel GROUP BY opgaveID";
+ //maxID2=Trsx
+ 
+ }
+ //Oprette prøver
