@@ -128,7 +128,9 @@ String TQUERY6 = "SELECT opgaveAntal FROM opgavetabel WHERE opgaveID = "+opgaveI
   }
 }
 
-void tjekResultat(){}
+void tjekResultat(){
+
+}
 
 void uploadResultat(){}
 
