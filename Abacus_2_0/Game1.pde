@@ -44,21 +44,21 @@ class Game1 {
     sb3.run();
 
     for (TextBox t : textBoxes) {
-      if (gamestate == 2) t.scroll = -sb1.spos;
+      if (gamestate <6) t.scroll = -sb1.spos;
       if (gamestate == 6) t.scroll = -sb2.spos;
-      if (gamestate == 8) t.scroll = -sb3.spos;
+      if (gamestate >6) t.scroll = -sb3.spos;
       t.display();
     }
     for (Button b : buttons) { 
-      if (gamestate == 2) b.scroll = -sb1.spos;
+      if (gamestate < 6) b.scroll = -sb1.spos;
       if (gamestate == 6) b.scroll = -sb2.spos;
-      if (gamestate == 8) b.scroll = -sb3.spos;
+      if (gamestate > 8) b.scroll = -sb3.spos;
       b.display();
     }
     for (DropdownMenu d : dropdownMenus) { 
-      if (gamestate == 2) d.scroll = -sb1.spos;
+      if (gamestate < 6) d.scroll = -sb1.spos;
       if (gamestate == 6) d.scroll = -sb2.spos;
-      if (gamestate == 8) d.scroll = -sb3.spos;
+      if (gamestate > 6) d.scroll = -sb3.spos;
       d.display();
     }
 
