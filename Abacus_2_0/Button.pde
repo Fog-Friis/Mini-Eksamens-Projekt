@@ -1,21 +1,29 @@
 class Button {
 
+  //buttons position and size
   float scroll;
   PVector pos;
   PVector size;
 
+  //colors
   color col, overCol, pressedCol;
 
-  float radius, textSize;
+  //radius of circles
+  float radius;
 
+  //boxes positions and size
   PVector box1size, box1pos, box2size, box2pos;
   PVector circle1pos, circle2pos, circle3pos, circle4pos;
 
+  //visibility
   int visible;
-
+  
+  //if button is clicked
   boolean clicked;
 
+  //text and textsize
   String Text;
+  float textSize;
 
   //Constructor
   Button(PVector p, PVector s, float r, color col, color ocol, color pcol, String Text, float textSize, int visible) {
@@ -42,7 +50,8 @@ class Button {
     circle3pos = new PVector(pos.x+size.x, pos.y+size.y);
     circle4pos = new PVector(pos.x, pos.y+size.y);
   }
-
+  
+  //check if mouse is over button
   boolean over() {
     if ((mouseX <= box1pos.x+box1size.x && mouseX >= box1pos.x && mouseY <= box1pos.y+box1size.y+scroll && mouseY >= box1pos.y+scroll) ||
       (mouseX <= box2pos.x+box2size.x && mouseX >= box2pos.x && mouseY <= box2pos.y+box2size.y+scroll && mouseY >= box2pos.y+scroll) ||
@@ -56,13 +65,14 @@ class Button {
     }
   }
 
+  //check if mouse was pressed
   void pressed() {
     if (over()) {
       clicked = true;
     }
   }
 
-
+  //draw and run the button
   void display() {
     
     pushMatrix();

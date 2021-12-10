@@ -1,20 +1,31 @@
 class DropdownMenu {
 
+  //position and size
   PVector pos;
   PVector size;
+  float scroll;
+
+  //text and textsize
   String Text;
   int textSize;
-  color col;
-  int visible;
-  int scale = 1;
 
-  float scroll;
+  //color
+  color col;
+
+  //visibility
+  int visible;
+
+  //flip arrow
+  int scale = 1;
   float theta = PI/4;
 
+  //if dropdownmenu has been clicked
   boolean clicked = false;
 
+  //dropdownmenus list of objects
   ArrayList<dropdownObject> objects;
 
+  //constructor
   DropdownMenu(PVector pos, PVector size, String Text, int textSize, color col, int visible, ArrayList<dropdownObject> objects) {
     this.pos = pos;
     this.size = size;
@@ -25,6 +36,7 @@ class DropdownMenu {
     this.objects = objects;
   }
 
+  //check if mouse is over dropdownmenu
   boolean over() {
     if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y+scroll && mouseY >= pos.y+scroll) {
       return true;
@@ -33,6 +45,7 @@ class DropdownMenu {
     }
   }
 
+  //check if mouse is over dropdownmenus list of objects
   boolean overObjects() {
     if (mouseX <= pos.x+size.x && mouseX >= pos.x && mouseY <= pos.y+size.y+size.y*objects.size()+scroll && mouseY >= pos.y+size.y+scroll) {
       return true;
@@ -41,12 +54,14 @@ class DropdownMenu {
     }
   }
 
+  //check if mouse has been pressed
   void pressed() {
     if (over()) {
       clicked = !clicked;
     }
   }
 
+  //display dropdown menu
   void display() {
 
     pushMatrix();
@@ -84,7 +99,7 @@ class DropdownMenu {
       textAlign(CORNER);
       textSize(textSize);
       text(Text, pos.x+10, pos.y+size.y/2+5);
-
+      //draw dropdown menus arrow
       pushMatrix();
       translate(pos.x+size.x-30, pos.y + size.y - size.y/2);
       rotate(PI);
@@ -103,17 +118,27 @@ class DropdownMenu {
   }
 }
 
+//dropdown menus object in list of objects
 class dropdownObject {
 
+  //location and size
   PVector loc;
   PVector size;
-  String Text;
-  int number;
-  boolean visible;
-  boolean clicked;
-  
   float scroll;
 
+  //text
+  String Text;
+
+  //number in list
+  int number;
+
+  //visibility (wether dropdownmenu has been pressed)
+  boolean visible;
+
+  //if mouse has been pressed
+  boolean clicked;
+
+  //constructor
   dropdownObject(PVector loc, PVector size, String Text, int number, boolean visible) {
     this.Text = Text;
     this.loc = loc;
@@ -122,6 +147,7 @@ class dropdownObject {
     this.visible = visible;
   }
 
+  //check if mouse is over object
   boolean over() {
     if (mouseX <= loc.x+size.x && mouseX >= loc.x && mouseY <= loc.y+(number+1)*size.y+scroll && mouseY >= loc.y+number*size.y+scroll) {
       return true;
@@ -130,15 +156,18 @@ class dropdownObject {
     }
   }
 
+  //check if mouse has been pressed
   void pressed() {
     if (over()) {
       clicked = true;
-    }
+    }    
   }
+  //check if mouse has been released
   void released() {
     clicked = false;
   }
 
+  //display object
   void display() {
 
     if (visible) {
