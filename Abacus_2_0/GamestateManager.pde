@@ -34,9 +34,10 @@ PFont norm;
 class GameStateManager {
 
   void setupManager() {
-    
-    sb1 = new Scrollbar(new PVector(width-20,0), new PVector(width, height), 100, 2);
-    
+
+    sb1 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 2);
+    sb2 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 6);    
+    sb3 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 8);
 
     norm = createFont("Arial", 18);
     Comic = createFont("Comic Sans MS", 18);
@@ -76,7 +77,7 @@ class GameStateManager {
     buttons.add(registerElevBut);
     buttons.add(backElevBut);
 
-    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, color(200,200,200), 2, new ArrayList<dropdownObject>());
+    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, color(200, 200, 200), 2, new ArrayList<dropdownObject>());
 
     dropdownMenus.add(uddannelsesInstitution);
 
@@ -123,20 +124,20 @@ class GameStateManager {
     buttons.add(resultaterLaererBut);
 
 
-   //   klasseValg= new DropdownMenu(new PVector(width/2, height/2), new PVector(500, 50), "Vælg uddannelses institution", 40, 10, 6);
+    //   klasseValg= new DropdownMenu(new PVector(width/2, height/2), new PVector(500, 50), "Vælg uddannelses institution", 40, 10, 6);
 
-  //  dropdownMenus.add(klasseValg);
+    //  dropdownMenus.add(klasseValg);
 
     //uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "3a2 I guess (database her)", 1, false)); 
 
-   //   klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
-   //   testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
+    //   klasseValg= new DropdownMenu(new PVector(width/2-275, height/2-150), new PVector(550, 50), "Klasse", 32, 10, 6);
+    //   testValg= new DropdownMenu(new PVector(width/2-275, height/2), new PVector(550, 50), "Test", 32, 10, 6);
 
     //dropdownMenus.add(klasseValg);
     //dropdownMenus.add(testValg);
 
- //   klasseValg.objects.add(new dropdownObject(klasseValg.pos, klasseValg.size, "3a2 I guess (database her)", 1, false));
- //   testValg.objects.add(new dropdownObject(testValg.pos, testValg.size, "IDK IQ something navn", 1, false));
+    //   klasseValg.objects.add(new dropdownObject(klasseValg.pos, klasseValg.size, "3a2 I guess (database her)", 1, false));
+    //   testValg.objects.add(new dropdownObject(testValg.pos, testValg.size, "IDK IQ something navn", 1, false));
 
 
 
@@ -219,12 +220,12 @@ class GameStateManager {
       break;
 
     case 9:
-    if (update == false){
-      opgaveID =1;
-      antalOpgaver();
-      setupTekst();
-      update = true;
-    }
+      if (update == false) {
+        opgaveID =1;
+        antalOpgaver();
+        setupTekst();
+        update = true;
+      }
       hentOpgave();
       updatetest();
       testscreen();
@@ -304,7 +305,7 @@ class GameStateManager {
 
   void RegisterScreenTeacher() {
     pushMatrix();
-    translate(0,-sb1.spos);
+    translate(0, -sb1.spos);
     fill(240);
     stroke(6);
     rect(width/2.8, height/6.8, 550, 770);
@@ -326,7 +327,7 @@ class GameStateManager {
     text("Lære-ID", width/2-200, height/3.7+400);
     textSize(48);
     text("Registrer lærer", width/2.37, height/5.3);
-    translate(0,0);
+    translate(0, 0);
     popMatrix();
   }
 
@@ -369,6 +370,9 @@ class GameStateManager {
     }
   }
   void TeacherUddelProeveMenu() {
+
+    pushMatrix();
+    translate(0, -sb2.spos);    
     textFont(Comic);
     text("LÆREr", 10, 10, 99, 99);
     textFont(norm);
@@ -390,6 +394,8 @@ class GameStateManager {
     fill(0);
     textSize(38);
     text("Uddel opgavesæt", width/2-140, height/6.8+60, 999, 100);
+    translate(0, 0);
+    popMatrix();
   }
 
 
@@ -411,6 +417,8 @@ class GameStateManager {
     }
   }
   void TeacherResultatMenu() {
+    pushMatrix();
+    translate(0, -sb3.spos);
     textFont(Comic);
     text("LÆREr", 10, 10, 99, 99);
     textFont(norm);
@@ -426,15 +434,15 @@ class GameStateManager {
     if (proeverLaererBut.clicked == true) {
       gamestate = 5;
     }
+    translate(0, 0);
+    popMatrix();
   }
   void setupTekst() {
-  for (int i = 0; i <= 24; i++)
+    for (int i = 0; i <= 24; i++)
     {
-    opgavetekst[i] = "IkkeLoadet";
-    elevSvarNR[i] = 0;
+      opgavetekst[i] = "IkkeLoadet";
+      elevSvarNR[i] = 0;
     }
-   
-    
   }
   void updatetest() {
     currentSvar1Tekst =opgaveSvar1[currentopgave-1];
@@ -461,14 +469,10 @@ class GameStateManager {
     if (opgaveTilbageBut.clicked == true && currentopgave != 1) {
       currentopgave -= 1;
       gamestate = 9;
-
-      
     }
     if (opgaveFremBut.clicked == true && currentopgave != maxopgaver) {
       currentopgave += 1;
       gamestate =9;
-    
-      
     }
     if (opgaveSlutBut.clicked == true) {
       tjekSvar();

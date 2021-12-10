@@ -38,8 +38,10 @@ class Game1 {
   }
 
   void display() {    
-    sb1.run();
     gamestateManager.manage();
+    sb1.run();
+    sb2.run();
+    sb3.run();
 
     for (TextBox t : textBoxes) {
       if (gamestate == 2) t.scroll = -sb1.spos;
