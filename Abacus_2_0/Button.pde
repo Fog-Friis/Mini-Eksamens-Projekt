@@ -1,20 +1,29 @@
 class Button {
 
+  //buttons position and size
+  float scroll;
   PVector pos;
   PVector size;
 
+  //colors
   color col, overCol, pressedCol;
 
-  float radius, textSize;
+  //radius of circles
+  float radius;
 
+  //boxes positions and size
   PVector box1size, box1pos, box2size, box2pos;
   PVector circle1pos, circle2pos, circle3pos, circle4pos;
 
+  //visibility
   int visible;
-
+  
+  //if button is clicked
   boolean clicked;
 
+  //text and textsize
   String Text;
+  float textSize;
 
   //Constructor
   Button(PVector p, PVector s, float r, color col, color ocol, color pcol, String Text, float textSize, int visible) {
@@ -41,28 +50,33 @@ class Button {
     circle3pos = new PVector(pos.x+size.x, pos.y+size.y);
     circle4pos = new PVector(pos.x, pos.y+size.y);
   }
-
+  
+  //check if mouse is over button
   boolean over() {
-    if ((mouseX <= box1pos.x+box1size.x && mouseX >= box1pos.x && mouseY <= box1pos.y+box1size.y && mouseY >= box1pos.y) ||
-      (mouseX <= box2pos.x+box2size.x && mouseX >= box2pos.x && mouseY <= box2pos.y+box2size.y && mouseY >= box2pos.y) ||
-      (dist(mouseX, mouseY, circle1pos.x, circle1pos.y)<radius/2) ||
-      (dist(mouseX, mouseY, circle2pos.x, circle2pos.y)<radius/2) ||
-      (dist(mouseX, mouseY, circle3pos.x, circle3pos.y)<radius/2) ||
-      (dist(mouseX, mouseY, circle4pos.x, circle4pos.y)<radius/2)) {
+    if ((mouseX <= box1pos.x+box1size.x && mouseX >= box1pos.x && mouseY <= box1pos.y+box1size.y+scroll && mouseY >= box1pos.y+scroll) ||
+      (mouseX <= box2pos.x+box2size.x && mouseX >= box2pos.x && mouseY <= box2pos.y+box2size.y+scroll && mouseY >= box2pos.y+scroll) ||
+      (dist(mouseX, mouseY-scroll, circle1pos.x, circle1pos.y)<radius/2) ||
+      (dist(mouseX, mouseY-scroll, circle2pos.x, circle2pos.y)<radius/2) ||
+      (dist(mouseX, mouseY-scroll, circle3pos.x, circle3pos.y)<radius/2) ||
+      (dist(mouseX, mouseY-scroll, circle4pos.x, circle4pos.y)<radius/2)) {
       return true;
     } else {
       return false;
     }
   }
 
+  //check if mouse was pressed
   void pressed() {
     if (over()) {
       clicked = true;
     }
   }
 
-
+  //draw and run the button
   void display() {
+    
+    pushMatrix();
+    translate(0,scroll);
     
     clicked=false;
     
@@ -93,5 +107,7 @@ class Button {
     text(Text, pos.x+size.x/2, pos.y+2*textSize/3);
     textAlign(CORNER);
     }
-  }
+    translate(0,0);
+    popMatrix();
+  }  
 }

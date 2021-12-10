@@ -39,30 +39,46 @@ class Game1 {
 
   void display() {    
     gamestateManager.manage();
+    sb1.run();
+    sb2.run();
+    sb3.run();
 
-    for (TextBox t : textBoxes) t.display();
-    for (Button b : buttons) b.display();
-   // for (DropdownMenu d : dropdownMenus) d.display();
+    for (TextBox t : textBoxes) {
+      if (gamestate <6) t.scroll = -sb1.spos;
+      if (gamestate == 6) t.scroll = -sb2.spos;
+      if (gamestate >6) t.scroll = -sb3.spos;
+      t.display();
+    }
+    for (Button b : buttons) { 
+      if (gamestate < 6) b.scroll = -sb1.spos;
+      if (gamestate == 6) b.scroll = -sb2.spos;
+      if (gamestate > 8) b.scroll = -sb3.spos;
+      b.display();
+    }
+    for (DropdownMenu d : dropdownMenus) { 
+      if (gamestate < 6) d.scroll = -sb1.spos;
+      if (gamestate == 6) d.scroll = -sb2.spos;
+      if (gamestate > 6) d.scroll = -sb3.spos;
+      d.display();
+    }
 
     errorHandler.display();
   }
 
   void pressMouse() {    
     for (TextBox t : textBoxes) t.pressed(mouseX, mouseY);
-/*
+
     for (DropdownMenu d : dropdownMenus) {
       d.pressed();
       for (dropdownObject o : d.objects) o.pressed();
     }
-    */
   }
 
   void releaseMouse() {
-    /*
+
     for (DropdownMenu d : dropdownMenus) {
       for (dropdownObject o : d.objects) o.released();
     }
-    */
   }
 
   void clickMouse() {

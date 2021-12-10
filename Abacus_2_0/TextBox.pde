@@ -6,39 +6,49 @@ boolean shift;
 
 public class TextBox {
 
+  //position and size
   PVector position, size;
-  public int TEXTSIZE = 48;
-  public boolean isProtected;
+  float scroll;
+  
+  //visibility
   int visible;
 
-  // COLORS
+  //colors
   public color Background = color(140, 140, 140);
   public color Foreground = color(0, 0, 0);
   public color BackgroundSelected = color(160, 160, 160);
   public color Border = color(30, 30, 30);
 
+  //border
   public boolean BorderEnable = false;
   public int BorderWeight = 1;
 
+  //text and textsize
+  public int TEXTSIZE = 48;
+  public boolean isProtected;
   public String Text = "";
   public String protectedText = "";
   public int TextLength = 0;
 
+  //if button is clicked
   private boolean selected = false;
 
   TextBox() {
-    // CREATE OBJECT DEFAULT TEXTBOX
   }
-
+  //constructor
   TextBox(PVector position, PVector size, boolean isProtected, int visible) {
     this.position = position;
     this.size = size;
     this.isProtected = isProtected;
     this.visible = visible;
   }
-
+  
+  //display and run textbox
   void display() {
-
+    
+    pushMatrix();
+    translate(0,scroll);
+    
     if (visible == gamestate) {
       // DRAWING THE BACKGROUND
       if (selected) {
@@ -71,10 +81,11 @@ public class TextBox {
       //sletter texten når man ikke er på menuen længere
       clearText();
     }
+    translate(0,0);
+    popMatrix();
   }
 
-  // IF THE KEYCODE IS ENTER RETURN 1
-  // ELSE RETURN 0
+  //check if key has been typed
   boolean keyWasTyped(char KEY, int KEYCODE) {
 
     if (visible == gamestate) {
@@ -114,68 +125,28 @@ public class TextBox {
             }
             addText('.');
           }
-          /*if (AE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('æ');
-           }
-           }
-           if (OE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('ø');
-           }
-           }
-           if (AA == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('å');
-           }
-           }
-           
-           if (shift && AE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('Æ');
-           }
-           }
-           if (shift && OE == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('Ø');
-           }
-           }
-           if (shift && AA == true) {
-           if (isProtected) {
-           addText('*');
-           } else {
-           addText('Å');
-           }
-           }*/
         }
       }
     }
     return false;
   }
-
+  
+  //add text to textbox
   private void addText(char text) {
-    // IF THE TEXT WIDHT IS IN BOUNDARIES OF THE TEXTBOX
     if (textWidth(Text + text) < (size.x -size.x/5)) {
       Text += text;
       TextLength++;
     }
   }
+  
+  //add asterisk if textbox is a password textbox
   private void addProtection(char text) {
     if (textWidth(Text + text) < (size.x - size.x/5)) {
       protectedText += text;
     }
   }
 
+  //remove text if backspace is pressed
   private void backSpace() {
     if (TextLength - 1 >= 0) {
       Text = Text.substring(0, TextLength - 1);
@@ -183,11 +154,10 @@ public class TextBox {
     }
   }
 
-  // FUNCTION FOR TESTING IS THE POINT
-  // OVER THE TEXTBOX
+  //check if mouse is over box
   private boolean overBox(int x, int y) {
     if (x >= position.x && x <= position.x + size.x) {
-      if (y >= position.y && y <= position.y + size.y) {
+      if (y >= position.y + scroll && y <= position.y + size.y + scroll) {
         return true;
       }
     }
@@ -195,6 +165,7 @@ public class TextBox {
     return false;
   }
 
+  //check if mouse has been pressed
   void pressed(int x, int y) {
     if (overBox(x, y)) {
       selected = true;
@@ -202,7 +173,8 @@ public class TextBox {
       selected = false;
     }
   }
-
+  
+  //remove all text
   void clearText() {
     TextLength = 0;
     Text = "";
