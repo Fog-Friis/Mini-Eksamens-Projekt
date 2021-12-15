@@ -13,8 +13,9 @@ Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
 Button annullerBut, gemBut, rsvar1But, rsvar2But, rsvar3But, rsvar4But;
 
-Scrollbar sb1, sb2, sb3;
+Scrollbar sb1, sb2, sb3, sb4;
 
+DropdownMenu opgaveliste;
 
 int[] elevSvarNR = new int[25];
 int[] realtSvarNR = new int[25];
@@ -39,8 +40,9 @@ class GameStateManager {
 
     //setup scroll bars
     sb1 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 2);
-    sb2 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 6);    
-    sb3 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 8);
+    sb2 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 5);    
+    sb3 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 6);
+    sb4 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 8);
 
     norm = createFont("Arial", 18);
     Comic = createFont("Comic Sans MS", 18);
@@ -179,11 +181,11 @@ class GameStateManager {
 
     //setup OpretProeve screen
 
-    opgaveTB = new TextBox(new PVector(width/2-400, height/3.7+40), new PVector(800, 70), false, 5);
-    svar1TB = new TextBox(new PVector(width/2-400, height/3.7+140), new PVector(400, 70), false, 5);
-    svar2TB = new TextBox(new PVector(width/2-400, height/3.7+240), new PVector(400, 70), false, 5);
-    svar3TB = new TextBox(new PVector(width/2-400, height/3.7+340), new PVector(400, 70), false, 5);
-    svar4TB = new TextBox(new PVector(width/2-400, height/3.7+440), new PVector(400, 70), false, 5);
+    opgaveTB = new TextBox(new PVector(width/2-300, height/3), new PVector(800, 70), false, 5);
+    svar1TB = new TextBox(new PVector(width/2-300, height/3+100), new PVector(400, 70), false, 5);
+    svar2TB = new TextBox(new PVector(width/2-300, height/3+200), new PVector(400, 70), false, 5);
+    svar3TB = new TextBox(new PVector(width/2-300, height/3+300), new PVector(400, 70), false, 5);
+    svar4TB = new TextBox(new PVector(width/2-300, height/3+400), new PVector(400, 70), false, 5);
 
     textBoxes.add(opgaveTB);
     textBoxes.add(svar1TB);
@@ -191,12 +193,12 @@ class GameStateManager {
     textBoxes.add(svar3TB);
     textBoxes.add(svar4TB);
 
-    annullerBut = new Button(new PVector(width-width/3., height/3.7), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 20);
-    gemBut = new Button(new PVector(width-width/3., height/3.7), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 20);
-    rsvar1But = new Button(new PVector(width/2+200, height/3.7+160), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
-    rsvar2But = new Button(new PVector(width/2+200, height/3.7+260), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
-    rsvar3But = new Button(new PVector(width/2+200, height/3.7+360), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
-    rsvar4But = new Button(new PVector(width/2+200, height/3.7+460), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
+    annullerBut = new Button(new PVector(width/4-180, height/4.5), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "annuller", 24, 5);
+    gemBut = new Button(new PVector(width-width/4+100, height/4.5), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "gem", 24, 5);
+    rsvar1But = new Button(new PVector(width/2+300, height/3+120), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+    rsvar2But = new Button(new PVector(width/2+300, height/3+220), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+    rsvar3But = new Button(new PVector(width/2+300, height/3+320), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+    rsvar4But = new Button(new PVector(width/2+300, height/3+420), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
 
     buttons.add(annullerBut);
     buttons.add(gemBut);
@@ -204,6 +206,16 @@ class GameStateManager {
     buttons.add(rsvar2But);
     buttons.add(rsvar3But);
     buttons.add(rsvar4But);
+
+    opgaveliste = new DropdownMenu(new PVector(width/4-200, height/3), new PVector(300, 50), "Opgaver", 24, color(200, 200, 200), 5, new ArrayList<dropdownObject>());
+    dropdownMenus.add(opgaveliste);
+
+    int i=1;
+    while (i <= 30) {
+      opgaveliste.objects.add(new dropdownObject(new PVector(opgaveliste.pos.x, opgaveliste.pos.y), new PVector(opgaveliste.size.x, opgaveliste.size.y), "opgave " + i, i, false));
+
+      i++;
+    }
   }
 
   void manage() {
@@ -422,8 +434,10 @@ class GameStateManager {
     }
   }
 
-  boolean showrect = true;
+  boolean showButs = false;
   void TeacherProeveMenu() {
+    pushMatrix();
+    translate(0, -sb2.spos);
     textFont(Comic);
     text("LÆRER", 10, 10, 99, 99);
     textFont(norm);
@@ -443,17 +457,136 @@ class GameStateManager {
       gamestate = 6;
     }
     if (opretProeveBut.clicked) {
-      showrect = false;
+      showButs = true;
     }
+    if (showButs == true) {
+      annullerBut.visible = 5;
+      gemBut.visible = 5;
+      rsvar1But.visible = 5;
+      rsvar2But.visible = 5;
+      rsvar3But.visible = 5;
+      rsvar4But.visible = 5;
+
+      opgaveTB.visible = 5;
+      svar1TB.visible = 5;
+      svar2TB.visible = 5;
+      svar3TB.visible = 5;
+      svar4TB.visible = 5;
+
+      opgaveliste.visible = 5;
+
+      uddelProeveBut.visible = 20;
+      opretProeveBut.visible = 20;
+
+      OpretProeve();
+    } else {
+      annullerBut.visible = 20;
+      gemBut.visible = 20;
+      rsvar1But.visible = 20;
+      rsvar2But.visible = 20;
+      rsvar3But.visible = 20;
+      rsvar4But.visible = 20;
+
+      opgaveTB.visible = 20;
+      svar1TB.visible = 20;
+      svar2TB.visible = 20;
+      svar3TB.visible = 20;
+      svar4TB.visible = 20;
+
+      opgaveliste.visible = 20;
+
+      uddelProeveBut.visible = 5;
+      opretProeveBut.visible = 5;
+    }
+    popMatrix();
   }
 
+  int valgtOpgave = 1;
+  int rigtigtSvar = 0;
   void OpretProeve() {
+
+    if (annullerBut.visible == gamestate && annullerBut.clicked) {
+      showButs = false;
+    }
+
+    stroke(0);
+    fill(240);
+    rect(200, height/5.5, width-400, 800);
+    fill(0);
+    textSize(38);
+    text("Opret opgavesæt", width/2-140, height/6.8+60, 999, 100);
+
+    for (dropdownObject o : opgaveliste.objects) {
+      if (o.clicked) {
+        rigtigtSvar = 0;
+        valgtOpgave = o.number;
+        opgaveTB.Text = "";
+        svar1TB.Text = "";
+        svar2TB.Text = "";
+        svar3TB.Text = "";
+        svar4TB.Text = "";
+      }
+
+      if (o.number == valgtOpgave) {
+        text(o.Text + ":", width/2-300, height/3.5, 999, 100);
+      }
+    }
+    if (rsvar1But.clicked) {
+      rigtigtSvar = 1;
+    } else if (rsvar2But.clicked) { 
+      rigtigtSvar = 2;
+    } else if (rsvar3But.clicked) { 
+      rigtigtSvar = 3;
+    } else if (rsvar4But.clicked) { 
+      rigtigtSvar = 4;
+    }
+
+    color marked = color(0, 200, 50);
+    color unmarked = color(150, 150, 200);
+
+    switch(rigtigtSvar) {
+
+    case 1:
+      rsvar1But.col = marked;
+      rsvar2But.col = unmarked;
+      rsvar3But.col = unmarked;
+      rsvar4But.col = unmarked;
+      break;
+
+    case 2:
+      rsvar1But.col = unmarked;
+      rsvar2But.col = marked;
+      rsvar3But.col = unmarked;
+      rsvar4But.col = unmarked;      
+      break;
+
+    case 3:
+      rsvar1But.col = unmarked;
+      rsvar2But.col = unmarked;
+      rsvar3But.col = marked;
+      rsvar4But.col = unmarked;
+      break;
+
+    case 4:
+      rsvar1But.col = unmarked;
+      rsvar2But.col = unmarked;
+      rsvar3But.col = unmarked;
+      rsvar4But.col = marked;
+      break;
+
+    default:
+      rsvar1But.col = unmarked;
+      rsvar2But.col = unmarked;
+      rsvar3But.col = unmarked;
+      rsvar4But.col = unmarked;
+      break;
+    }
   }
 
   void TeacherUddelProeveMenu() {
 
     pushMatrix();
-    translate(0, -sb2.spos);    
+    translate(0, -sb3.spos);    
     textFont(Comic);
     text("LÆREr", 10, 10, 99, 99);
     textFont(norm);
@@ -499,7 +632,7 @@ class GameStateManager {
   }
   void TeacherResultatMenu() {
     pushMatrix();
-    translate(0, -sb3.spos);
+    translate(0, -sb4.spos);
     textFont(Comic);
     text("LÆREr", 10, 10, 99, 99);
     textFont(norm);
@@ -573,48 +706,54 @@ class GameStateManager {
     if (svar4But.clicked == true) {
       elevSvarNR[currentopgave-1] = 4;
     }
+    
+    color marked = color(0, 200, 50);
+    color unmarked = color(150, 150, 200);
+    
     switch(elevSvarNR[currentopgave-1]) {
     case 1:
-      svar1But.col = color(0, 200, 50);
-      svar2But.col = color(150, 150, 200);
-      svar3But.col = color(150, 150, 200);
-      svar4But.col = color(150, 150, 200);
+      svar1But.col = marked;
+      svar2But.col = unmarked;
+      svar3But.col = unmarked;
+      svar4But.col = unmarked;
       break;
 
     case 2:
-      svar1But.col = color(150, 150, 200);
-      svar2But.col = color(0, 200, 50);
-      svar3But.col = color(150, 150, 200);
-      svar4But.col = color(150, 150, 200);
+      svar1But.col = unmarked;
+      svar2But.col = marked;
+      svar3But.col = unmarked;
+      svar4But.col = unmarked;
       break;
 
     case 3:
-      svar1But.col = color(150, 150, 200);
-      svar2But.col = color(150, 150, 200);
-      svar3But.col = color(0, 200, 50);
-      svar4But.col = color(150, 150, 200);
+      svar1But.col = unmarked;
+      svar2But.col = unmarked;
+      svar3But.col = marked;
+      svar4But.col = unmarked;
       break;
 
     case 4:
-      svar1But.col = color(150, 150, 200);
-      svar2But.col = color(150, 150, 200);
-      svar3But.col = color(150, 150, 200);
-      svar4But.col = color(0, 200, 50);
+      svar1But.col = unmarked;
+      svar2But.col = unmarked;
+      svar3But.col = unmarked;
+      svar4But.col = marked;
       break;
 
     default:
-      svar1But.col = color(150, 150, 200);
-      svar2But.col = color(150, 150, 200);
-      svar3But.col = color(150, 150, 200);
-      svar4But.col = color(150, 150, 200);
+      svar1But.col = unmarked;
+      svar2But.col = unmarked;
+      svar3But.col = unmarked;
+      svar4But.col = unmarked;
       break;
     }
   }
+  
   float theta = 0, theta1 = radians(60), rad = 30;
   void loadingScreen() {
     rad = 5*cos(theta/2)+10+20;
 
     theta += 0.1;
+    background(255);
     fill(0);
     textSize(48);
     pushMatrix();
