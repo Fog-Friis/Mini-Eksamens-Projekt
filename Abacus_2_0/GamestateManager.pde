@@ -2,8 +2,8 @@ int gamestate;
 TextBox regUserLaererTB, regLaererID, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB;
 TextBox logUserTB, logPasswordTB;
 TextBox opgaveTB, svar1TB, svar2TB, svar3TB, svar4TB;
-
-Button loginBut, registerScreenBut;
+  
+Button loginBut, registerScreenBut, laererLoginBut;
 Button ElevRegisterBut, LaererRegisterBut, TilbageBut;
 Button registerElevBut, backElevBut, registerLaererBut, backLaererBut;
 Button logoutBut, resultaterElevBut;
@@ -53,38 +53,53 @@ class GameStateManager {
     textBoxes.add(logPasswordTB);
 
     loginBut = new Button(new PVector(width/2 + 30, height / 2 + 20), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Login", 50, 0);
-    registerScreenBut = new Button(new PVector(width/2 - 180, height / 2 + 20), new PVector(160, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 0);
+    registerScreenBut = new Button(new PVector(width/2 - 180, height / 2 + 20), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 0);
+    laererLoginBut = new Button(new PVector(width/2-180, height/2+120), new PVector(365, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Lærer-login", 50, 0);
 
+    buttons.add(laererLoginBut);
+    buttons.add(loginBut);
+    buttons.add(registerScreenBut);
+    
+    logUserTB = new TextBox(new PVector(width/2-200, height/3.2), new PVector(400, 70), false, 1);
+    logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), false, 1);
+
+    textBoxes.add(logUserTB);
+    textBoxes.add(logPasswordTB);
+
+    loginBut = new Button(new PVector(width/2 + 30, height / 2 + 20), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Login", 50, 1);
+    registerScreenBut = new Button(new PVector(width/2 - 180, height / 2 + 20), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Register", 50, 1);
+    laererLoginBut = new Button(new PVector(width/2-180, height/2+120), new PVector(365, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Elev-login", 50, 1);
+
+    buttons.add(laererLoginBut);
     buttons.add(loginBut);
     buttons.add(registerScreenBut);
 
-    //setup choose register screen
-
-    regUserElevTB = new TextBox(new PVector(width/2-200, height/3.7+20), new PVector(400, 70), false, 3);
-    regPasswordElevTB = new TextBox(new PVector(width/2-200, height/3.7+150), new PVector(400, 70), false, 3);
-    regVerifikationElevTB = new TextBox(new PVector(width/2-200, height/3.7+280), new PVector(400, 70), false, 3);
-
-    textBoxes.add(regUserElevTB);
-    textBoxes.add(regPasswordElevTB);
-    textBoxes.add(regVerifikationElevTB);
-
-
-    ElevRegisterBut = new Button(new PVector(width/2.72+40, height/3.2+30), new PVector(180, 340), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Elev", 50, 1);
-    LaererRegisterBut = new Button(new PVector(width/2+40, height/3.2+30), new PVector(180, 340), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Lærer", 50, 1);
-    TilbageBut = new Button(new PVector(width/2.72+40, height/1.45+30), new PVector(425, 40), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Tilbage", 50, 1);
+    ElevRegisterBut = new Button(new PVector(width/2.72+40, height/3.2+30), new PVector(180, 340), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Elev", 50, 2);
+    LaererRegisterBut = new Button(new PVector(width/2+40, height/3.2+30), new PVector(180, 340), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Lærer", 50, 2);
+    TilbageBut = new Button(new PVector(width/2.72+40, height/1.45+30), new PVector(425, 40), 40, color(100), color(120, 120, 180), color(200, 200, 255), "Tilbage", 50, 2);
 
     buttons.add(ElevRegisterBut);
     buttons.add(LaererRegisterBut);
     buttons.add(TilbageBut);
 
+    //setup choose register screen
+
+    regUserElevTB = new TextBox(new PVector(width/2-200, height/3.7+20), new PVector(400, 70), false, 4);
+    regPasswordElevTB = new TextBox(new PVector(width/2-200, height/3.7+150), new PVector(400, 70), false, 4);
+    regVerifikationElevTB = new TextBox(new PVector(width/2-200, height/3.7+280), new PVector(400, 70), false, 4);
+
+    textBoxes.add(regUserElevTB);
+    textBoxes.add(regPasswordElevTB);
+    textBoxes.add(regVerifikationElevTB);
+
     //setup student register screen
-    registerElevBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 50, 3);
-    backElevBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
+    registerElevBut = new Button(new PVector(width/2 + 30, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 50, 4);
+    backElevBut = new Button(new PVector(width/2 -180, height / 2 + 190), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 4);
 
     buttons.add(registerElevBut);
     buttons.add(backElevBut);
 
-    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, color(200, 200, 200), 2, new ArrayList<dropdownObject>());
+    uddannelsesInstitution= new DropdownMenu(new PVector(width/2-200, height/2+63), new PVector(400, 50), "Vælg uddannelses institution", 24, color(200, 200, 200), 3, new ArrayList<dropdownObject>());
 
     dropdownMenus.add(uddannelsesInstitution);
 
@@ -92,33 +107,33 @@ class GameStateManager {
 
 
     //setup teacher register screeen
-    regUserLaererTB = new TextBox(new PVector(width/2-200, height/3.7), new PVector(400, 70), false, 2);
-    regPasswordLaerer1 = new TextBox(new PVector(width/2-200, height/3.7+110), new PVector(400, 70), false, 2);
-    regPasswordLaerer2 = new TextBox(new PVector(width/2-200, height/3.7+220), new PVector(400, 70), false, 2);
-    regLaererID = new TextBox(new PVector(width/2-200, height/3.7+410), new PVector(400, 70), false, 2);
+    regUserLaererTB = new TextBox(new PVector(width/2-200, height/3.7), new PVector(400, 70), false, 3);
+    regPasswordLaerer1 = new TextBox(new PVector(width/2-200, height/3.7+110), new PVector(400, 70), false, 3);
+    regPasswordLaerer2 = new TextBox(new PVector(width/2-200, height/3.7+220), new PVector(400, 70), false, 3);
+    regLaererID = new TextBox(new PVector(width/2-200, height/3.7+410), new PVector(400, 70), false, 3);
 
     textBoxes.add(regUserLaererTB);
     textBoxes.add(regPasswordLaerer1);
     textBoxes.add(regPasswordLaerer2);
     textBoxes.add(regLaererID);
 
-    registerLaererBut = new Button(new PVector(width/2 + 30, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 40, 2);
-    backLaererBut = new Button(new PVector(width/2 -180, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 2);
+    registerLaererBut = new Button(new PVector(width/2 + 30, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 40, 3);
+    backLaererBut = new Button(new PVector(width/2 -180, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
 
     buttons.add(registerLaererBut);
     buttons.add(backLaererBut);
 
     //setup student results-screen
-    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 4);
-    resultaterElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 4);
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 5);
+    resultaterElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 5);
 
     buttons.add(logoutBut);
     buttons.add(resultaterElevBut);
 
-    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 5);
-    resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 5);
-    opretProeveBut = new Button(new PVector(width/4, height - 200), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Opret opgavesæt", 40, 5);
-    uddelProeveBut = new Button(new PVector(width/4, height - 100), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Uddel opgavesæt", 40, 5);
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 6);
+    resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 6);
+    opretProeveBut = new Button(new PVector(width/4, height - 200), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Opret opgavesæt", 40, 6);
+    uddelProeveBut = new Button(new PVector(width/4, height - 100), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Uddel opgavesæt", 40, 6);
 
     buttons.add(opretProeveBut);
     buttons.add(uddelProeveBut);
@@ -126,33 +141,33 @@ class GameStateManager {
     buttons.add(resultaterLaererBut);
 
     //setup teacher results-screen
-    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 6);
-    resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 6);
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
+    resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 7);
 
     buttons.add(logoutBut);
     buttons.add(resultaterLaererBut);
 
     //setup tests screen
-    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
-    proeverElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 7);
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 8);
+    proeverElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 8);
 
     buttons.add(logoutBut);
     buttons.add(proeverElevBut);
 
-    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 8);
-    proeverLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 8);
+    logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 9);
+    proeverLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 9);
 
     buttons.add(logoutBut);
     buttons.add(proeverLaererBut);
 
     //Testscreen
-    opgaveFremBut= new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Frem", 24, 9);
-    opgaveTilbageBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Tilbage", 24, 9);
-    opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 9);
-    svar1But = new Button(new PVector(width-width/3., height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 9);
-    svar2But = new Button(new PVector(width-width/3., height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 9);
-    svar3But = new Button(new PVector(width-width/3., height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 9);
-    svar4But = new Button(new PVector(width-width/3., height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 9);
+    opgaveFremBut= new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Frem", 24, 10);
+    opgaveTilbageBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Tilbage", 24, 10);
+    opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 10);
+    svar1But = new Button(new PVector(width-width/3., height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 10);
+    svar2But = new Button(new PVector(width-width/3., height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 10);
+    svar3But = new Button(new PVector(width-width/3., height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 10);
+    svar4But = new Button(new PVector(width-width/3., height - 300), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar4", 24, 10);
 
     buttons.add(opgaveTilbageBut);
     buttons.add(opgaveFremBut);
@@ -177,11 +192,11 @@ class GameStateManager {
     textBoxes.add(svar4TB);
 
     annullerBut = new Button(new PVector(width-width/3., height/3.7), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 20);
-    gemBut = new Button(new PVector(width-width/3., height/3.7), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 5);
-    rsvar1But = new Button(new PVector(width/2+200, height/3.7+160), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
-    rsvar2But = new Button(new PVector(width/2+200, height/3.7+260), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
-    rsvar3But = new Button(new PVector(width/2+200, height/3.7+360), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
-    rsvar4But = new Button(new PVector(width/2+200, height/3.7+460), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 5);
+    gemBut = new Button(new PVector(width-width/3., height/3.7), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 20);
+    rsvar1But = new Button(new PVector(width/2+200, height/3.7+160), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
+    rsvar2But = new Button(new PVector(width/2+200, height/3.7+260), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
+    rsvar3But = new Button(new PVector(width/2+200, height/3.7+360), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
+    rsvar4But = new Button(new PVector(width/2+200, height/3.7+460), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
 
     buttons.add(annullerBut);
     buttons.add(gemBut);
@@ -199,53 +214,58 @@ class GameStateManager {
     }
 
     switch(gamestate) {
-      //display loginscreen
-    case 0:
-      LoginScreen();
+
+      case 0:
+      LoginElevScreen();
       break;
 
-      //display choose register screen
+    
     case 1:
+      LoginLaererScreen();
+      break;
+
+    
+    case 2:
       ChooseRegister();
       break;
 
-      //display register teacher screen
-    case 2:
+    
+    case 3:
       RegisterScreenTeacher();
       break;
 
-      //display register student screen
-    case 3:
+    
+    case 4:
       RegisterScreenStudent();
       break;
 
-      //display student test menu screen
-    case 4:
+    
+    case 5:
       StudentProeveMenu();
       break;
 
-      //display teacher test menu screen
-    case 5:
+    
+    case 6:
       TeacherProeveMenu();
       break;
 
-      //display teacher assing tests screen
-    case 6:
+    
+    case 7:
       TeacherUddelProeveMenu();
       break;
 
-      //display students result screen
-    case 7:
+    
+    case 8:
       StudentResultatMenu();
       break;
 
-      //display teachers result screen
-    case 8:
+    
+    case 9:
       TeacherResultatMenu();
       break;
 
-      //display test screen
-    case 9:
+    
+    case 10:
       if (update == false) {
         opgaveID =1;
         antalOpgaver();
@@ -257,18 +277,22 @@ class GameStateManager {
       testscreen();
       break;
 
+    
     default:
       gamestate = 0;
       break;
     }
   }
 
-  void LoginScreen() {
+  void LoginElevScreen() {
     fill(240);
     stroke(6);
     strokeWeight(2);
     rect(width/2.8, height/5, 550, 600);
     if (registerScreenBut.clicked) {
+      gamestate = 2;
+    }
+    if (laererLoginBut.clicked) {
       gamestate = 1;
     }
 
@@ -280,7 +304,30 @@ class GameStateManager {
     text("Brugernavn", width/2-200, height/3.2-10);
     text("Adgangskode", width/2-200, height/2.4-10);
     textSize(48);
-    text("Login", width/2.1, height/4);
+    text("Elev-login", width/2.205, height/4);
+  }
+  
+  void LoginLaererScreen() {
+    fill(240);
+    stroke(6);
+    strokeWeight(2);
+    rect(width/2.8, height/5, 550, 600);
+    if (registerScreenBut.clicked) {
+      gamestate = 2;
+    }
+    if (laererLoginBut.clicked) {
+      gamestate = 0;
+    }
+
+    if (loginBut.clicked) {
+      errorHandler.loginUpdate();
+    }
+    fill(0);
+    textSize(32);
+    text("Brugernavn", width/2-200, height/3.2-10);
+    text("Adgangskode", width/2-200, height/2.4-10);
+    textSize(48);
+    text("Lærer-login", width/2.212, height/4);
   }
 
   void ChooseRegister() {
