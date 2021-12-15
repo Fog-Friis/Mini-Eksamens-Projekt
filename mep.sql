@@ -2,10 +2,10 @@
 -- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 10, 2021 at 12:36 PM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Vært: 127.0.0.1
+-- Genereringstid: 15. 12 2021 kl. 10:42:44
+-- Serverversion: 5.7.14
+-- PHP-version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `elev`
+-- Struktur-dump for tabellen `elev`
 --
 
 CREATE TABLE `elev` (
@@ -34,7 +34,7 @@ CREATE TABLE `elev` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `elev`
+-- Data dump for tabellen `elev`
 --
 
 INSERT INTO `elev` (`elevID`, `klasseID`, `brugernavn`, `password`) VALUES
@@ -43,14 +43,16 @@ INSERT INTO `elev` (`elevID`, `klasseID`, `brugernavn`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `klasse`
+-- Struktur-dump for tabellen `klasse`
 --
 
 CREATE TABLE `klasse` (
   `klasseID` int(200) NOT NULL,
   `klassenavn` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
-  `aargang` int(200) NOT NULL,
+  `skole` int(200) NOT NULL,
   `underviserID` varchar(200) COLLATE latin1_danish_ci NOT NULL DEFAULT 'ingen',
+  `opgaveantalklasse` int(255) NOT NULL DEFAULT '0',
+  `elevAntal` int(11) DEFAULT '0',
   `elevID1` int(255) DEFAULT NULL,
   `elevID2` int(255) DEFAULT NULL,
   `elevID3` int(255) DEFAULT NULL,
@@ -86,20 +88,29 @@ CREATE TABLE `klasse` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `klasseopgaver`
+-- Struktur-dump for tabellen `klasseopgaver`
 --
 
 CREATE TABLE `klasseopgaver` (
   `klasseID` int(255) NOT NULL,
   `opgaveID` int(255) NOT NULL,
-  `opgaveNavn` varchar(255) NOT NULL,
-  `opgaveOpen` int(11) NOT NULL
+  `opgavenavn` varchar(255) NOT NULL,
+  `opgaveOpen` int(255) NOT NULL DEFAULT '-1',
+  `karakter` varchar(255) NOT NULL DEFAULT 'ingen givet'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Data dump for tabellen `klasseopgaver`
+--
+
+INSERT INTO `klasseopgaver` (`klasseID`, `opgaveID`, `opgavenavn`, `opgaveOpen`, `karakter`) VALUES
+(123451, 1, 'opgave1', -1, '-1'),
+(123451, 2, 'opgave2', -1, '-1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgaverlavet`
+-- Struktur-dump for tabellen `opgaverlavet`
 --
 
 CREATE TABLE `opgaverlavet` (
@@ -114,7 +125,7 @@ CREATE TABLE `opgaverlavet` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgavesvar1`
+-- Struktur-dump for tabellen `opgavesvar1`
 --
 
 CREATE TABLE `opgavesvar1` (
@@ -147,7 +158,7 @@ CREATE TABLE `opgavesvar1` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `opgavesvar1`
+-- Data dump for tabellen `opgavesvar1`
 --
 
 INSERT INTO `opgavesvar1` (`opgaveID`, `opgave1Svar1`, `opgave2Svar1`, `opgave3Svar1`, `opgave4Svar1`, `opgave5Svar1`, `opgave6Svar1`, `opgave7Svar1`, `opgave8Svar1`, `opgave9Svar1`, `opgave10Svar1`, `opgave11Svar1`, `opgave12Svar1`, `opgave13Svar1`, `opgave14Svar1`, `opgave15Svar1`, `opgave16Svar1`, `opgave17Svar1`, `opgave18Svar1`, `opgave19Svar1`, `opgave20Svar1`, `opgave21Svar1`, `opgave22Svar1`, `opgave23Svar1`, `opgave24Svar1`, `opgave25Svar1`) VALUES
@@ -156,7 +167,7 @@ INSERT INTO `opgavesvar1` (`opgaveID`, `opgave1Svar1`, `opgave2Svar1`, `opgave3S
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgavesvar2`
+-- Struktur-dump for tabellen `opgavesvar2`
 --
 
 CREATE TABLE `opgavesvar2` (
@@ -189,7 +200,7 @@ CREATE TABLE `opgavesvar2` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `opgavesvar2`
+-- Data dump for tabellen `opgavesvar2`
 --
 
 INSERT INTO `opgavesvar2` (`opgaveID`, `opgave1Svar2`, `opgave2Svar2`, `opgave3Svar2`, `opgave4Svar2`, `opgave5Svar2`, `opgave6Svar2`, `opgave7Svar2`, `opgave8Svar2`, `opgave9Svar2`, `opgave10Svar2`, `opgave11Svar2`, `opgave12Svar2`, `opgave13Svar2`, `opgave14Svar2`, `opgave15Svar2`, `opgave16Svar2`, `opgave17Svar2`, `opgave18Svar2`, `opgave19Svar2`, `opgave20Svar2`, `opgave21Svar2`, `opgave22Svar2`, `opgave23Svar2`, `opgave24Svar2`, `opgave25Svar2`) VALUES
@@ -198,7 +209,7 @@ INSERT INTO `opgavesvar2` (`opgaveID`, `opgave1Svar2`, `opgave2Svar2`, `opgave3S
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgavesvar3`
+-- Struktur-dump for tabellen `opgavesvar3`
 --
 
 CREATE TABLE `opgavesvar3` (
@@ -231,7 +242,7 @@ CREATE TABLE `opgavesvar3` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `opgavesvar3`
+-- Data dump for tabellen `opgavesvar3`
 --
 
 INSERT INTO `opgavesvar3` (`opgaveID`, `opgave1Svar3`, `opgave2Svar3`, `opgave3Svar3`, `opgave4Svar3`, `opgave5Svar3`, `opgave6Svar3`, `opgave7Svar3`, `opgave8Svar3`, `opgave9Svar3`, `opgave10Svar3`, `opgave11Svar3`, `opgave12Svar3`, `opgave13Svar3`, `opgave14Svar3`, `opgave15Svar3`, `opgave16Svar3`, `opgave17Svar3`, `opgave18Svar3`, `opgave19Svar3`, `opgave20Svar3`, `opgave21Svar3`, `opgave22Svar3`, `opgave23Svar3`, `opgave24Svar3`, `opgave25Svar3`) VALUES
@@ -240,7 +251,7 @@ INSERT INTO `opgavesvar3` (`opgaveID`, `opgave1Svar3`, `opgave2Svar3`, `opgave3S
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgavesvar4`
+-- Struktur-dump for tabellen `opgavesvar4`
 --
 
 CREATE TABLE `opgavesvar4` (
@@ -273,7 +284,7 @@ CREATE TABLE `opgavesvar4` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `opgavesvar4`
+-- Data dump for tabellen `opgavesvar4`
 --
 
 INSERT INTO `opgavesvar4` (`opgaveID`, `opgave1Svar4`, `opgave2Svar4`, `opgave3Svar4`, `opgave4Svar4`, `opgave5Svar4`, `opgave6Svar4`, `opgave7Svar4`, `opgave8Svar4`, `opgave9Svar4`, `opgave10Svar4`, `opgave11Svar4`, `opgave12Svar4`, `opgave13Svar4`, `opgave14Svar4`, `opgave15Svar4`, `opgave16Svar4`, `opgave17Svar4`, `opgave18Svar4`, `opgave19Svar4`, `opgave20Svar4`, `opgave21Svar4`, `opgave22Svar4`, `opgave23Svar4`, `opgave24Svar4`, `opgave25Svar4`) VALUES
@@ -282,7 +293,7 @@ INSERT INTO `opgavesvar4` (`opgaveID`, `opgave1Svar4`, `opgave2Svar4`, `opgave3S
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgavesvarark`
+-- Struktur-dump for tabellen `opgavesvarark`
 --
 
 CREATE TABLE `opgavesvarark` (
@@ -315,7 +326,7 @@ CREATE TABLE `opgavesvarark` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `opgavesvarark`
+-- Data dump for tabellen `opgavesvarark`
 --
 
 INSERT INTO `opgavesvarark` (`opgaveID`, `opgave1Svar`, `opgave2Svar`, `opgave3Svar`, `opgave4Svar`, `opgave5Svar`, `opgave6Svar`, `opgave7Svar`, `opgave8Svar`, `opgave9Svar`, `opgave10Svar`, `opgave11Svar`, `opgave12Svar`, `opgave13Svar`, `opgave14Svar`, `opgave15Svar`, `opgave16Svar`, `opgave17Svar`, `opgave18Svar`, `opgave19Svar`, `opgave20Svar`, `opgave21Svar`, `opgave22Svar`, `opgave23Svar`, `opgave24Svar`, `opgave25Svar`) VALUES
@@ -324,7 +335,7 @@ INSERT INTO `opgavesvarark` (`opgaveID`, `opgave1Svar`, `opgave2Svar`, `opgave3S
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgavetabel`
+-- Struktur-dump for tabellen `opgavetabel`
 --
 
 CREATE TABLE `opgavetabel` (
@@ -334,7 +345,7 @@ CREATE TABLE `opgavetabel` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `opgavetabel`
+-- Data dump for tabellen `opgavetabel`
 --
 
 INSERT INTO `opgavetabel` (`opgaveID`, `opgaveNavn`, `opgaveAntal`) VALUES
@@ -343,7 +354,7 @@ INSERT INTO `opgavetabel` (`opgaveID`, `opgaveNavn`, `opgaveAntal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opgavetext`
+-- Struktur-dump for tabellen `opgavetext`
 --
 
 CREATE TABLE `opgavetext` (
@@ -376,7 +387,7 @@ CREATE TABLE `opgavetext` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Dumping data for table `opgavetext`
+-- Data dump for tabellen `opgavetext`
 --
 
 INSERT INTO `opgavetext` (`opgaveID`, `opgaveTekst1`, `opgaveTekst2`, `opgaveTekst3`, `opgaveTekst4`, `opgaveTekst5`, `opgaveTekst6`, `opgaveTekst7`, `opgaveTekst8`, `opgaveTekst9`, `opgaveTekst10`, `opgaveTekst11`, `opgaveTekst12`, `opgaveTekst13`, `opgaveTekst14`, `opgaveTekst15`, `opgaveTekst16`, `opgaveTekst17`, `opgaveTekst18`, `opgaveTekst19`, `opgaveTekst20`, `opgaveTekst21`, `opgaveTekst22`, `opgaveTekst23`, `opgaveTekst24`, `opgaveTekst25`) VALUES
@@ -385,7 +396,7 @@ INSERT INTO `opgavetext` (`opgaveID`, `opgaveTekst1`, `opgaveTekst2`, `opgaveTek
 -- --------------------------------------------------------
 
 --
--- Table structure for table `underviser`
+-- Struktur-dump for tabellen `underviser`
 --
 
 CREATE TABLE `underviser` (
@@ -397,95 +408,78 @@ CREATE TABLE `underviser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
--- Indexes for dumped tables
+-- Data dump for tabellen `underviser`
+--
+
+INSERT INTO `underviser` (`underviserID`, `brugernavn`, `password`, `skole`, `initialer`) VALUES
+(1, 'test', '937E8D5FBB48BD4949536CD65B8D35C426B80D2F830C5C308E2CDEC422AE2244', 'test', 't');
+
+--
+-- Begrænsninger for dumpede tabeller
 --
 
 --
--- Indexes for table `elev`
+-- Indeks for tabel `elev`
 --
 ALTER TABLE `elev`
   ADD PRIMARY KEY (`elevID`),
   ADD UNIQUE KEY `brugernavn` (`brugernavn`);
 
 --
--- Indexes for table `klasse`
+-- Indeks for tabel `klasse`
 --
 ALTER TABLE `klasse`
   ADD PRIMARY KEY (`klasseID`);
 
 --
--- Indexes for table `klasseopgaver`
---
-ALTER TABLE `klasseopgaver`
-  ADD PRIMARY KEY (`klasseID`),
-  ADD UNIQUE KEY `opgaveID` (`opgaveID`),
-  ADD UNIQUE KEY `opgaveNavn` (`opgaveNavn`);
-
---
--- Indexes for table `opgaverlavet`
+-- Indeks for tabel `opgaverlavet`
 --
 ALTER TABLE `opgaverlavet`
   ADD PRIMARY KEY (`elevID`);
 
 --
--- Indexes for table `opgavesvar2`
+-- Indeks for tabel `opgavesvar2`
 --
 ALTER TABLE `opgavesvar2`
   ADD PRIMARY KEY (`opgaveID`);
 
 --
--- Indexes for table `opgavesvar3`
+-- Indeks for tabel `opgavesvar3`
 --
 ALTER TABLE `opgavesvar3`
   ADD PRIMARY KEY (`opgaveID`);
 
 --
--- Indexes for table `opgavesvar4`
+-- Indeks for tabel `opgavesvar4`
 --
 ALTER TABLE `opgavesvar4`
   ADD PRIMARY KEY (`opgaveID`);
 
 --
--- Indexes for table `opgavesvarark`
+-- Indeks for tabel `opgavesvarark`
 --
 ALTER TABLE `opgavesvarark`
   ADD PRIMARY KEY (`opgaveID`);
 
 --
--- Indexes for table `opgavetabel`
+-- Indeks for tabel `opgavetabel`
 --
 ALTER TABLE `opgavetabel`
   ADD PRIMARY KEY (`opgaveID`),
   ADD UNIQUE KEY `opgaveNavn` (`opgaveNavn`);
 
 --
--- Indexes for table `opgavetext`
+-- Indeks for tabel `opgavetext`
 --
 ALTER TABLE `opgavetext`
   ADD PRIMARY KEY (`opgaveID`);
 
 --
--- Indexes for table `underviser`
+-- Indeks for tabel `underviser`
 --
 ALTER TABLE `underviser`
   ADD PRIMARY KEY (`underviserID`),
   ADD UNIQUE KEY `brugernavn` (`brugernavn`);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `klasse`
---
-ALTER TABLE `klasse`
-  ADD CONSTRAINT `klasseID_r` FOREIGN KEY (`klasseID`) REFERENCES `elev` (`elevID`);
-
---
--- Constraints for table `underviser`
---
-ALTER TABLE `underviser`
-  ADD CONSTRAINT `underviserID_r` FOREIGN KEY (`underviserID`) REFERENCES `klasse` (`klasseID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

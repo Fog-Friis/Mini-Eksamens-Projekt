@@ -3,7 +3,8 @@ String[] opgaveSvar1Data = new String[25];
 String[] opgaveSvar2Data = new String[25];
 String[] opgaveSvar3Data = new String[25];
 String[] opgaveSvar4Data = new String[25];
-String lokalbrugernavn;
+String lokalbrugernavn, opgavenavn, karakter="ingen givet";
+boolean karaktergivet = false;
 int lokalelevID, lokalklasseID;
 
 java.sql.Statement Tstmt, Tstmt2, Tstmt3, Tstmt4, Tstmt5, Tstmt6, Tstmt7, Tstmt8, Tstmt9, Tstmt10;
@@ -664,15 +665,21 @@ if (25 <= maxopgaver){
 
 //Find elevprøver
 void elevLoadOpgaver(){
-String TQUERY9 = "SELECT elevID FROM elev WHERE brugernavn = '"+lokalbrugernavn+"';";
+String TQUERY6 = "SELECT elevID FROM elev WHERE brugernavn = '"+lokalbrugernavn+"';";
 String TQUERY7 = "SELECT klasseID FROM elev WHERE elevID = '"+lokalelevID+"';";
 //lokalklasseID = Trs7.getInt("klasseID");
-String TQUERY8 = "SELECT opgaveantalklasse FROM klasse WHERE klasseID = '"+lokalklasseID+"';";
 lokalklasseID = 123451;
-String TQUERY6 = "SELECT opgaveID FROM klasseopgaver WHERE klasseID = '"+lokalklasseID+"';";
-String TQUERY10 = "SELECT opgaveNavn FROM klasseopgaver WHERE klasseID = '"+lokalklasseID+"';";
-//https://stackoverflow.com/questions/7332731/sql-server-select-top-10-20-results
-//http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_top.asp.html
+String TQUERY8 = "SELECT opgaveantalklasse FROM klasse WHERE klasseID = '"+lokalklasseID+"';";
+//String TQUERY9del1 = "SELECT TOP "+opgaveantalklasse+" opgaveID FROM klasseopgaver WHERE klasseID ORDER BY ID = '"+lokalklasseID+"'; ";
+String TQUERY10 = "SELECT opgaveNavn FROM klasseopgaver WHERE opgaveID = '"+lokalklasseID+"';";
+String TQUERY11 = "SELECT opgaveOpen FROM klasseopgaver WHERE opgaveID = '"+lokalklasseID+"';";
+/*
+if (Trs11 != -1)
+String TQUERY12 SELECT opgaveAntal FROM opgaverlavet WHERE elevID = '"+lokalelevID+"'; AND opgaveID";
+String TQUERY13 SELECT rigtigeSvar FROM opgaverlavet WHERE elevID = '"+lokalelevID+"'; AND opgaveID";
+String TQUERY14 SELECT opgaveAntal FROM opgaverlavet WHERE elevID = '"+lokalelevID+"'; AND opgaveID";
+String TQUERY15 SELECT karakterVis FROM opgaverlavet WHERE elevID = '"+lokalelevID+"'; AND opgaveID";
+*/
   try {
     Connection Tconn6 = DriverManager.getConnection(DB_URL, USER, PASS);
     java.sql.Statement Tstmt6 = Tconn.createStatement();
@@ -688,13 +695,41 @@ String TQUERY10 = "SELECT opgaveNavn FROM klasseopgaver WHERE klasseID = '"+loka
     println(e);
   }
 }
+
+/*
+ 
+
+
  //Uddel elevprøver
  void uddelOpgaver(){
+   int valgtklasseID =0;
+   int valgtopgaveID =0;
+ String TQUERYx = "SELECT opgaveantalklasse FROM klasse WHERE klasseID = "+valgtklasseID+";";
+ nyopgaveantal=Trsx+1
+ String TQUERYx = "klasse SET opgaveantalklasse = "+nyopgaveantal+"  WHERE klasseID = "+valgtklasseID+";";
+ String TQUERYx = "SELECT opgaveNavn FROM opgavetabel WHERE opgaveID = "+valgtopgaveID+";"; 
+ Trsx = opgavenavn;
+   
+ String TQUERYx = "SELECT elevAntal FROM klasse WHERE klasseID = "+valgtklasseID+";";
+ 
+ String TQUERYx = "SELECT elevID FROM klasse WHERE klasseID = "+valgtklasseID+";";
+ if (karaktergivet == true)
+ {
+   karakter ="er givet"
+ String TQUERYx = "INSERT INTO klasseopgaver (klasseID, opgaveID, opgavenavn, karakter) VALUES ("+valgtklasseID+", "+valgtopgaveID+", "+opgavenavn+");";
+
+ }
+   
  }
  
  void OpretOpgaver(){
- //String TQUERYx = "SELECT opgaveID, MAX(opgaveID) FROM opgavetabel GROUP BY opgaveID";
- //maxID2=Trsx
- //String TQUERYx = "INSERT INTO () VALUES ( );");
+ String TQUERYx = "SELECT opgaveID, MAX(opgaveID) FROM opgavetabel GROUP BY opgaveID";
+ maxID2=Trsx
+ String TQUERYx = "INSERT INTO opgavetabel (opgaveID, opgaveNavn, opgaveAntal) VALUES (maxID2, '"+opgaveNavn+"', "+opgaveAntal+" );");
+ String TQUERYx = "INSERT INTO opgavetext (opgaveID, opgaveTekst1, opgaveTekst1+1) VALUES (maxID2, '"+opgaveTekst[1-1]+"', "+opgaveTekst[2-1]+" );");
+ String TQUERYx = "INSERT INTO opgavesvar1 (opgaveID, opgave1Svar1, opgave2Svar1,) VALUES (maxID2, '"+opgaveSvar1[1-1]+"', "+opgaveSvar1[2-1+" );");
+ String TQUERYx = "INSERT INTO opgavesvar2 (opgaveID, opgave1Svar2, opgave2Svar2,) VALUES (maxID2, '"+opgaveSvar2[1-1]+"', "+opgaveSvar2[2-1+" );");
+ String TQUERYx = "INSERT INTO opgavesvar3 (opgaveID, opgave1Svar3, opgave2Svar3,) VALUES (maxID2, '"+opgaveSvar3[1-1]+"', "+opgaveSvar3[2-1+" );");
+ String TQUERYx = "INSERT INTO opgavesvar4 (opgaveID, opgave1Svar4, opgave2Svar4,) VALUES (maxID2, '"+opgaveSvar4[1-1]+"', "+opgaveSvar4[2-1+" );");
  }
- //Oprette prøver
+ */
