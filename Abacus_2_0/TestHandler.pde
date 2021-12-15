@@ -695,6 +695,6 @@ String TQUERY10 = "SELECT opgaveNavn FROM klasseopgaver WHERE klasseID = '"+loka
  void OpretOpgaver(){
  //String TQUERYx = "SELECT opgaveID, MAX(opgaveID) FROM opgavetabel GROUP BY opgaveID";
  //maxID2=Trsx
- 
+ //String TQUERYx = "INSERT INTO () VALUES ( );");
  }
  //Oprette prøver
