@@ -37,4 +37,5 @@ void mouseReleased(){
 void draw(){
   background(255);
   game1.display();
+  println(gamestateManager.showButs);
 }
