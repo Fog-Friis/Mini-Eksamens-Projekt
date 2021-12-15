@@ -17,7 +17,7 @@ class Button {
 
   //visibility
   int visible;
-  
+
   //if button is clicked
   boolean clicked;
 
@@ -50,7 +50,7 @@ class Button {
     circle3pos = new PVector(pos.x+size.x, pos.y+size.y);
     circle4pos = new PVector(pos.x, pos.y+size.y);
   }
-  
+
   //check if mouse is over button
   boolean over() {
     if ((mouseX <= box1pos.x+box1size.x && mouseX >= box1pos.x && mouseY <= box1pos.y+box1size.y+scroll && mouseY >= box1pos.y+scroll) ||
@@ -71,43 +71,46 @@ class Button {
       clicked = true;
     }
   }
+  
+  void released(){
+    clicked = false;
+  }
 
   //draw and run the button
   void display() {
-    
+
     pushMatrix();
-    translate(0,scroll);
-    
-    clicked=false;
-    
-    if(visible == gamestate){
-    noStroke();
+    translate(0, scroll);    
 
-    if (clicked) {
-      fill(pressedCol);
-    } else if (over()) {
-      fill(overCol);
-    } else {
-      fill(col);
+    if (visible == gamestate) {
+      noStroke();
+
+      if (clicked) {
+        fill(pressedCol);
+        clicked=false;
+      } else if (over()) {
+        fill(overCol);
+      } else {
+        fill(col);
+      }
+
+      //rectangles
+      rect(box1pos.x, box1pos.y, box1size.x, box1size.y);
+      rect(box2pos.x, box2pos.y, box2size.x, box2size.y);
+
+      //rounded corners
+      circle(circle1pos.x, circle1pos.y, radius);
+      circle(circle2pos.x, circle2pos.y, radius);
+      circle(circle3pos.x, circle3pos.y, radius);
+      circle(circle4pos.x, circle4pos.y, radius);
+
+      textAlign(CENTER);
+      fill(0, 0, 0);
+      textSize(textSize);
+      text(Text, pos.x+size.x/2, pos.y+2*textSize/3);
+      textAlign(CORNER);
     }
-
-    //rectangles
-    rect(box1pos.x, box1pos.y, box1size.x, box1size.y);
-    rect(box2pos.x, box2pos.y, box2size.x, box2size.y);
-
-    //rounded corners
-    circle(circle1pos.x, circle1pos.y, radius);
-    circle(circle2pos.x, circle2pos.y, radius);
-    circle(circle3pos.x, circle3pos.y, radius);
-    circle(circle4pos.x, circle4pos.y, radius);
-
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    textSize(textSize);
-    text(Text, pos.x+size.x/2, pos.y+2*textSize/3);
-    textAlign(CORNER);
-    }
-    translate(0,0);
+    translate(0, 0);
     popMatrix();
-  }  
+  }
 }

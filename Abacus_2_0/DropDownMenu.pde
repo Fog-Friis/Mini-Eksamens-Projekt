@@ -179,7 +179,6 @@ class dropdownObject {
       } else {
         fill(200, 200, 200);
       }
-
       rect(loc.x, (number)*size.y+loc.y, size.x, size.y);
       fill(255);
     }

@@ -42,32 +42,31 @@ class Game1 {
     sb1.run();
     sb2.run();
     sb3.run();
-
+    sb4.run();
 
 
     for (TextBox t : textBoxes) {
-      if (gamestate <6) t.scroll = -sb1.spos;
-      if (gamestate == 6) t.scroll = -sb2.spos;
-      if (gamestate >6) t.scroll = -sb3.spos;
+      if (gamestate == 2) t.scroll = -sb1.spos;
+      if (gamestate == 5) t.scroll = -sb2.spos;
+      if (gamestate == 6) t.scroll = -sb3.spos;
+      if (gamestate == 8) t.scroll = -sb4.spos;
       t.display();
     }
     for (Button b : buttons) { 
-      if (gamestate < 6) b.scroll = -sb1.spos;
-      if (gamestate == 6) b.scroll = -sb2.spos;
-      if (gamestate > 8) b.scroll = -sb3.spos;
+      if (gamestate == 2) b.scroll = -sb1.spos;
+      if (gamestate == 5) b.scroll = -sb2.spos;
+      if (gamestate == 6) b.scroll = -sb3.spos;
+      if (gamestate == 8) b.scroll = -sb4.spos;
       b.display();
     }
     for (DropdownMenu d : dropdownMenus) { 
-      if (gamestate < 6) d.scroll = -sb1.spos;
-      if (gamestate == 6) d.scroll = -sb2.spos;
-      if (gamestate > 6) d.scroll = -sb3.spos;
+      if (gamestate == 2) d.scroll = -sb1.spos;
+      if (gamestate == 5) d.scroll = -sb2.spos;
+      if (gamestate == 6) d.scroll = -sb3.spos;
+      if (gamestate == 8) d.scroll = -sb4.spos;
       d.display();
     }
     fill(255);
-    if (gamestateManager.showrect && gamestate == 5) {
-      rect(opgaveTB.position.x, opgaveTB.position.y, +opgaveTB.size.x, 7*rsvar4But.pos.y/10);
-    }
-
     errorHandler.display();
   }
 
@@ -78,6 +77,7 @@ class Game1 {
       d.pressed();
       for (dropdownObject o : d.objects) o.pressed();
     }
+    for (Button b : buttons) b.pressed();
   }
 
   void releaseMouse() {
@@ -85,9 +85,11 @@ class Game1 {
     for (DropdownMenu d : dropdownMenus) {
       for (dropdownObject o : d.objects) o.released();
     }
+    
+    for (Button b : buttons)b.released();
   }
 
   void clickMouse() {
-    for (Button b : buttons) b.pressed();
+    //for (Button b : buttons) b.pressed();
   }
 }
