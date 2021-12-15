@@ -709,27 +709,61 @@ String TQUERY15 SELECT karakterVis FROM opgaverlavet WHERE elevID = '"+lokalelev
  String TQUERYx = "klasse SET opgaveantalklasse = "+nyopgaveantal+"  WHERE klasseID = "+valgtklasseID+";";
  String TQUERYx = "SELECT opgaveNavn FROM opgavetabel WHERE opgaveID = "+valgtopgaveID+";"; 
  Trsx = opgavenavn;
-   
- String TQUERYx = "SELECT elevAntal FROM klasse WHERE klasseID = "+valgtklasseID+";";
  
- String TQUERYx = "SELECT elevID FROM klasse WHERE klasseID = "+valgtklasseID+";";
- if (karaktergivet == true)
+ String TQUERYx = "SELECT elevAntal FROM klasse WHERE klasseID = "+valgtklasseID+";";
+ if elevAntal >= 1; 
+ {
+ String TQUERYx = "SELECT elevID1 FROM klasse WHERE klasseID = "+valgtklasseID+";";
+  if (karaktergivet == true)
  {
    karakter ="er givet"
- String TQUERYx = "INSERT INTO klasseopgaver (klasseID, opgaveID, opgavenavn, karakter) VALUES ("+valgtklasseID+", "+valgtopgaveID+", "+opgavenavn+");";
-
  }
+ String TQUERYx = "INSERT INTO klasseopgaver (klasseID, opgaveID, opgavenavn, karakter) VALUES ("+valgtklasseID+", "+valgtopgaveID+", "+opgavenavn+", '"+karakter+"');";
    
- }
+ } 
  
+ 
+ }
  void OpretOpgaver(){
  String TQUERYx = "SELECT opgaveID, MAX(opgaveID) FROM opgavetabel GROUP BY opgaveID";
- maxID2=Trsx
+ maxID2=Trsx+1;
  String TQUERYx = "INSERT INTO opgavetabel (opgaveID, opgaveNavn, opgaveAntal) VALUES (maxID2, '"+opgaveNavn+"', "+opgaveAntal+" );");
- String TQUERYx = "INSERT INTO opgavetext (opgaveID, opgaveTekst1, opgaveTekst1+1) VALUES (maxID2, '"+opgaveTekst[1-1]+"', "+opgaveTekst[2-1]+" );");
- String TQUERYx = "INSERT INTO opgavesvar1 (opgaveID, opgave1Svar1, opgave2Svar1,) VALUES (maxID2, '"+opgaveSvar1[1-1]+"', "+opgaveSvar1[2-1+" );");
- String TQUERYx = "INSERT INTO opgavesvar2 (opgaveID, opgave1Svar2, opgave2Svar2,) VALUES (maxID2, '"+opgaveSvar2[1-1]+"', "+opgaveSvar2[2-1+" );");
- String TQUERYx = "INSERT INTO opgavesvar3 (opgaveID, opgave1Svar3, opgave2Svar3,) VALUES (maxID2, '"+opgaveSvar3[1-1]+"', "+opgaveSvar3[2-1+" );");
- String TQUERYx = "INSERT INTO opgavesvar4 (opgaveID, opgave1Svar4, opgave2Svar4,) VALUES (maxID2, '"+opgaveSvar4[1-1]+"', "+opgaveSvar4[2-1+" );");
+ 
+ String TQUERYx = "INSERT INTO opgavetext(opgaveID, opgaveTekst1,opgaveTekst2,opgaveTekst3,opgaveTekst4,opgaveTekst5,opgaveTekst6,opgaveTekst7,opgaveTekst8,opgaveTekst9,opgaveTekst10,opgaveTekst11,opgaveTekst12,opgaveTekst13,opgaveTekst14,opgaveTekst15,opgaveTekst16
+ ,opgaveTekst17,opgaveTekst18,opgaveTekst19,opgaveTekst20,opgaveTekst21,opgaveTekst22,opgaveTekst23,opgaveTekst24,opgaveTekst25) 
+ VALUES (”maxID2”, ’"+opgavetekst[1-1]+"’, ’"+opgavetekst[2-1]+"’, ’"+opgavetekst[3-1]+"’, ’"+opgavetekst[4-1]+"’, ’"+opgavetekst[5-1]+"’, ’"+opgavetekst[6-1]+"’, ’"+opgavetekst[7-1]+"’, ’"+opgavetekst[8-1]+"’, ’"+opgavetekst[9-1]+"’, ’"+opgavetekst[10-1]+"’,
+  ’"+opgavetekst[11-1]+"’, ’"+opgavetekst[12-1]+"’, ’"+opgavetekst[13-1]+"’, ’"+opgavetekst[14-1]+"’, ’"+opgavetekst[15-1]+"’, ’"opgavetekst[16-1]+"’, ’"+opgavetekst[17-1]+"’, 
+  ’"+opgavetekst[18-1]+"’, ’"+opgavetekst[19-1]+"’, ’"+opgavetekst[20-1]+"’, ’"+opgavetekst[21-1]+"’, ’"+opgavetekst[22-1]+"’, ’"+opgavetekst[23-1]+"’, ’"+opgavetekst[24-1]+"’, ’"+opgavetekst[25-1]+"’);";
+ 
+ String TQUERYx = "INSERT INTO opgavesvar1 (opgaveID, opgave1Svar1,opgave2Svar1,opgave3Svar1,opgave4Svar1,opgave5Svar1,opgave6Svar1,opgave7Svar1,opgave8Svar1,opgave9Svar1,opgave10Svar1,opgave11Svar1,opgave12Svar1,opgave13Svar1,opgave14Svar1,opgave15Svar1,opgave16Svar1
+ ,opgave17Svar1,opgave18Svar1,opgave19Svar1,opgave20Svar1,opgave21Svar1,opgave22Svar1,opgave23Svar1,opgave24Svar1,opgave25Svar1) 
+ VALUES (”maxID2”, ’"+opgaveSvar1[1-1]+"’, ’"+opgaveSvar1[2-1]+"’, ’"+opgaveSvar1[3-1]+"’, ’"+opgaveSvar1[4-1]+"’, ’"+opgaveSvar1[5-1]+"’, ’"+opgaveSvar1[6-1]+"’, ’"+opgaveSvar1[7-1]+"’, ’"+opgaveSvar1[8-1]+"’, ’"+opgaveSvar1[9-1]+"’, ’"+opgaveSvar1[10-1]+"’,
+  ’"+opgaveSvar1[11-1]+"’, ’"+opgaveSvar1[12-1]+"’, ’"+opgaveSvar1[13-1]+"’, ’"+opgaveSvar1[14-1]+"’, ’"+opgaveSvar1[15-1]+"’, ’"opgaveSvar1[16-1]+"’, ’"+opgaveSvar1[17-1]+"’, 
+  ’"+opgaveSvar1[18-1]+"’, ’"+opgaveSvar1[19-1]+"’, ’"+opgaveSvar1[20-1]+"’, ’"+opgaveSvar1[21-1]+"’, ’"+opgaveSvar1[22-1]+"’, ’"+opgaveSvar1[23-1]+"’, ’"+opgaveSvar1[24-1]+"’, ’"+opgaveSvar1[25-1]+"’);";
+
+ String TQUERYx = "INSERT INTO opgavesvar2 (opgaveID, opgave1Svar2,opgave2Svar2,opgave3Svar2,opgave4Svar2,opgave5Svar2,opgave6Svar2,opgave7Svar2,opgave8Svar2,opgave9Svar2,opgave10Svar2,opgave11Svar2,opgave12Svar2,opgave13Svar2,opgave14Svar2,opgave15Svar2,opgave16Svar2
+ ,opgave17Svar2,opgave18Svar2,opgave19Svar2,opgave20Svar2,opgave21Svar2,opgave22Svar2,opgave23Svar2,opgave24Svar2,opgave25Svar2) 
+ VALUES (”maxID2”, ’"+opgaveSvar2[1-1]+"’, ’"+opgaveSvar2[2-1]+"’, ’"+opgaveSvar2[3-1]+"’, ’"+opgaveSvar2[4-1]+"’, ’"+opgaveSvar2[5-1]+"’, ’"+opgaveSvar2[6-1]+"’, ’"+opgaveSvar2[7-1]+"’, ’"+opgaveSvar2[8-1]+"’, ’"+opgaveSvar2[9-1]+"’, ’"+opgaveSvar2[10-1]+"’,
+  ’"+opgaveSvar2[11-1]+"’, ’"+opgaveSvar2[12-1]+"’, ’"+opgaveSvar2[13-1]+"’, ’"+opgaveSvar2[14-1]+"’, ’"+opgaveSvar2[15-1]+"’, ’"opgaveSvar2[16-1]+"’, ’"+opgaveSvar2[17-1]+"’, 
+  ’"+opgaveSvar2[18-1]+"’, ’"+opgaveSvar2[19-1]+"’, ’"+opgaveSvar2[20-1]+"’, ’"+opgaveSvar2[21-1]+"’, ’"+opgaveSvar2[22-1]+"’, ’"+opgaveSvar2[23-1]+"’, ’"+opgaveSvar2[24-1]+"’, ’"+opgaveSvar2[25-1]+"’);";
+
+ String TQUERYx = "INSERT INTO opgavesvar3 (opgaveID, opgave1Svar3,opgave2Svar3,opgave3Svar3,opgave4Svar3,opgave5Svar3,opgave6Svar3,opgave7Svar3,opgave8Svar3,opgave9Svar3,opgave10Svar3,opgave11Svar3,opgave12Svar3,opgave13Svar3,opgave14Svar3,opgave15Svar3,opgave16Svar3
+ ,opgave17Svar3,opgave18Svar3,opgave19Svar3,opgave20Svar3,opgave21Svar3,opgave22Svar3,opgave23Svar3,opgave24Svar3,opgave25Svar3) 
+ VALUES (”maxID2”, ’"+opgaveSvar3[1-1]+"’, ’"+opgaveSvar3[2-1]+"’, ’"+opgaveSvar3[3-1]+"’, ’"+opgaveSvar3[4-1]+"’, ’"+opgaveSvar3[5-1]+"’, ’"+opgaveSvar3[6-1]+"’, ’"+opgaveSvar3[7-1]+"’, ’"+opgaveSvar3[8-1]+"’, ’"+opgaveSvar3[9-1]+"’, ’"+opgaveSvar3[10-1]+"’,
+  ’"+opgaveSvar3[11-1]+"’, ’"+opgaveSvar3[12-1]+"’, ’"+opgaveSvar3[13-1]+"’, ’"+opgaveSvar3[14-1]+"’, ’"+opgaveSvar3[15-1]+"’, ’"opgaveSvar3[16-1]+"’, ’"+opgaveSvar3[17-1]+"’, 
+  ’"+opgaveSvar3[18-1]+"’, ’"+opgaveSvar3[19-1]+"’, ’"+opgaveSvar3[20-1]+"’, ’"+opgaveSvar3[21-1]+"’, ’"+opgaveSvar3[22-1]+"’, ’"+opgaveSvar3[23-1]+"’, ’"+opgaveSvar3[24-1]+"’, ’"+opgaveSvar3[25-1]+"’);";
+
+ String TQUERYx = "INSERT INTO opgavesvar4 (opgaveID, opgave1Svar4,opgave2Svar4,opgave3Svar4,opgave4Svar4,opgave5Svar4,opgave6Svar4,opgave7Svar4,opgave8Svar4,opgave9Svar4,opgave10Svar4,opgave11Svar4,opgave12Svar4,opgave13Svar4,opgave14Svar4,opgave15Svar4,opgave16Svar4
+ ,opgave17Svar4,opgave18Svar4,opgave19Svar4,opgave20Svar4,opgave21Svar4,opgave22Svar4,opgave23Svar4,opgave24Svar4,opgave25Svar4) 
+ VALUES (”maxID2”, ’"+opgaveSvar4[1-1]+"’, ’"+opgaveSvar4[2-1]+"’, ’"+opgaveSvar4[3-1]+"’, ’"+opgaveSvar4[4-1]+"’, ’"+opgaveSvar4[5-1]+"’, ’"+opgaveSvar4[6-1]+"’, ’"+opgaveSvar4[7-1]+"’, ’"+opgaveSvar4[8-1]+"’, ’"+opgaveSvar4[9-1]+"’, ’"+opgaveSvar4[10-1]+"’,
+  ’"+opgaveSvar4[11-1]+"’, ’"+opgaveSvar4[12-1]+"’, ’"+opgaveSvar4[13-1]+"’, ’"+opgaveSvar4[14-1]+"’, ’"+opgaveSvar4[15-1]+"’, ’"opgaveSvar4[16-1]+"’, ’"+opgaveSvar4[17-1]+"’, 
+  ’"+opgaveSvar4[18-1]+"’, ’"+opgaveSvar4[19-1]+"’, ’"+opgaveSvar4[20-1]+"’, ’"+opgaveSvar4[21-1]+"’, ’"+opgaveSvar4[22-1]+"’, ’"+opgaveSvar4[23-1]+"’, ’"+opgaveSvar4[24-1]+"’, ’"+opgaveSvar4[25-1]+"’);";
+ 
+ 
+ String TQUERYx = "INSERT INTO opgavesvarark (opgaveID, opgave1Svar,opgave2Svar,opgave3Svar,opgave4Svar,opgave5Svar,opgave6Svar,opgave7Svar,opgave8Svar,opgave9Svar,opgave10Svar,opgave11Svar,opgave12Svar,opgave13Svar,opgave14Svar,opgave15Svar,opgave16Svar
+ ,opgave17Svar,opgave18Svar,opgave19Svar,opgave20Svar,opgave21Svar,opgave22Svar,opgave23Svar,opgave24Svar,opgave25Svar) 
+ VALUES ("+maxID2+", "+realtSvarNR[1-1]+", "+realtSvarNR[2-1]+", "+realtSvarNR[3-1]+", "+realtSvarNR[4-1]+", "+realtSvarNR[5-1]+", "+realtSvarNR[6-1]+", "+realtSvarNR[7-1]+", "+realtSvarNR[8-1]+", "+realtSvarNR[9-1]+", "+realtSvarNR[10-1]+",
+  "+realtSvarNR[11-1]+", "+realtSvarNR[12-1]+", "+realtSvarNR[13-1]+", "+realtSvarNR[14-1]+", "+realtSvarNR[15-1]+", "+realtSvarNR[16-1]+", "+realtSvarNR[17-1]+", 
+  "+realtSvarNR[18-1]+", "+realtSvarNR[19-1]+", "+realtSvarNR[20-1]+", "+realtSvarNR[21-1]+", "+realtSvarNR[22-1]+", "+realtSvarNR[23-1]+", "+realtSvarNR[24-1]+", "+realtSvarNR[25-1]+");";
  }
  */
