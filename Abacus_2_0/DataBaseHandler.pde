@@ -20,7 +20,7 @@ int lokalunderviserID;
 void elevLoginCheck(){
   
       try{
-      
+      lokalbrugernavn = logUserTB.Text;
       hashedPassword = outputString;
       // String QUERY = "SELECT password FROM underviser WHERE brugernavn = '"+usernameInput+"';";
        String QUERY = "SELECT password FROM elev WHERE brugernavn = '"+logUserTB.Text+"';";
@@ -46,7 +46,7 @@ void elevLoginCheck(){
     }
 }
 void underviserLoginCheck(){
-
+    lokalbrugernavn = logUserTB.Text;
   try{    
       hashedPassword = outputString;
        String QUERY8 = "SELECT password FROM underviser WHERE brugernavn = '"+logUserTB.Text+"';";
@@ -73,7 +73,7 @@ void underviserLoginCheck(){
     
   void elevRegister(){
     try{
-
+          
        //String QUERY2 = "SELECT underviserID, MAX(underviserID) FROM underviser GROUP BY underviserID";
        String QUERY2 = "SELECT elevID, MAX(elevID) FROM elev GROUP BY elevID";      
      Connection conn2 = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -94,7 +94,7 @@ void underviserLoginCheck(){
  
    try {
      hashedPassword = outputString;
-     
+         lokalbrugernavn = regUserElevTB.Text;
    //   String QUERY3 = ("INSERT INTO underviser (underviserID, brugernavn, password) VALUES ('"+maxID2+"', '"+textFraUsernametextbox+"', '"+hashedPassword+"');");    
      String QUERY3 = ("INSERT INTO elev (elevID, brugernavn, password, klasseID) VALUES ( "+maxID2+", '"+regUserElevTB.Text+"', '"+hashedPassword+"', "+regVerifikationElevTB.Text+");");
       Connection conn3 = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -160,7 +160,7 @@ void underviserRegister(){
  
    try {
      hashedPassword = outputString;
-     
+     lokalbrugernavn = regUserLaererTB.Text;
      String QUERY10 = ("INSERT INTO underviser (underviserID, brugernavn, password, skole, initialer ) VALUES ('"+maxID2+"', '"+regUserLaererTB.Text+"', '"+hashedPassword+"','"+"test"+"', '"+regLaererID+"');");    
    //  String QUERY3 = ("INSERT INTO elev (elevID, brugernavn, password, klasseID) VALUES ( "+maxID2+", '"+regUserElevTB.Text+"', '"+hashedPassword+"', "+regVerifikationElevTB.Text+");");
       Connection conn10 = DriverManager.getConnection(DB_URL, USER, PASS);
