@@ -309,7 +309,9 @@ class GameStateManager {
     }
 
     if (loginBut.clicked) {
-      errorHandler.loginUpdate();
+     // errorHandler.loginUpdate();
+     hashing (passwordInput);
+     elevLoginCheck();
     }
     fill(0);
     textSize(32);
@@ -682,15 +684,15 @@ class GameStateManager {
 
     if (opgaveTilbageBut.clicked == true && currentopgave != 1) {
       currentopgave -= 1;
-      gamestate = 9;
+      gamestate = 10;
     }
     if (opgaveFremBut.clicked == true && currentopgave != maxopgaver) {
       currentopgave += 1;
-      gamestate =9;
+      gamestate =10;
     }
     if (opgaveSlutBut.clicked == true) {
       tjekSvar();
-      gamestate = 7;
+      gamestate = 8;
       update = false;
       println(rigtigesvar);
     }
