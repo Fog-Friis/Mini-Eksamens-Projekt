@@ -39,7 +39,7 @@ class GameStateManager {
   void setupManager() {
 
     //setup scroll bars
-    sb1 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 2);
+    sb1 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 3);
     sb2 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 6);    
     sb3 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 7);
     sb4 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 9);
@@ -213,7 +213,7 @@ class GameStateManager {
     int i=1;
     while (i <= 25) {
       opgaveliste.objects.add(new dropdownObject(new PVector(opgaveliste.pos.x, opgaveliste.pos.y), new PVector(opgaveliste.size.x, opgaveliste.size.y), "opgave " + i, i, false));
-      
+
       realtSvarNR[i-1] = 0;
       opgaveSvar1[i-1] = "";
       opgaveSvar2[i-1] = "";
@@ -465,13 +465,13 @@ class GameStateManager {
     }
     if (opretProeveBut.clicked) {
       showButs = true;
-      valgtOpgave = 1;
+      rigtigtSvar = realtSvarNR[valgtOpgave-1];
       rigtigtSvar = 0;
-      opgaveTB.Text = "";
-      svar1TB.Text = "";
-      svar2TB.Text = "";
-      svar3TB.Text = "";
-      svar4TB.Text = "";
+      opgaveTB.Text = opgavetekst[valgtOpgave-1];
+      svar1TB.Text = opgaveSvar1[valgtOpgave-1];
+      svar2TB.Text = opgaveSvar2[valgtOpgave-1];
+      svar3TB.Text = opgaveSvar3[valgtOpgave-1];
+      svar4TB.Text = opgaveSvar4[valgtOpgave-1];
     }
     if (showButs == true) {
       annullerBut.visible = 6;
