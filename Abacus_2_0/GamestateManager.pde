@@ -51,7 +51,7 @@ class GameStateManager {
 
     //setup login screen
     logUserTB = new TextBox(new PVector(width/2-200, height/3.2), new PVector(400, 70), false, 0);
-    logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), false, 0);
+    logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), true, 0);
 
     textBoxes.add(logUserTB);
     textBoxes.add(logPasswordTB);

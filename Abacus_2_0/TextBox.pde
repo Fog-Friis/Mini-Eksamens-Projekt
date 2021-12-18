@@ -22,6 +22,7 @@ class TextBox {
   public boolean isProtected;
   public String Text = "";
   public String protectedText = "";
+  public int protectedTextLength = 0;
   public int TextLength = 0;
 
   //if button is clicked
@@ -49,7 +50,9 @@ class TextBox {
       } else {
         fill(Background);
       }
-
+      
+      println(Text, protectedText);
+      
       if (BorderEnable) {
         strokeWeight(BorderWeight);
         stroke(Border);
@@ -88,9 +91,8 @@ class TextBox {
         } else if (KEYCODE == 32) {
           if (isProtected) {
             addProtection('*');
-          } else { 
-            addText(' ');
           }
+          addText(' ');
         } else if (KEYCODE == (int)ENTER) {
           return true;
         } else {
@@ -127,19 +129,32 @@ class TextBox {
 
   //add asterisk if textbox is a password textbox
   private void addProtection(char text) {
-    if (textWidth(Text + text) < (size.x)) {
+    while (textWidth(protectedText+text)*TEXTSIZE/48*size.x/400 > size.x-15) {
+      TEXTSIZE--;
+    }
+    if (textWidth(protectedText + text)*TEXTSIZE/48*size.x/400 < (size.x)) {
       protectedText += text;
+      protectedTextLength++;
     }
   }
 
   //remove text if backspace is pressed
   private void backSpace() {
-  if (TextLength - 1 >= 0) {
-        Text = Text.substring(0, TextLength - 1);
+
+    if (TextLength - 1 >= 0) {
+      Text = Text.substring(0, TextLength - 1);
       TextLength--;
       if (textWidth(Text)*TEXTSIZE/48*size.x/400 < size.x-15*size.x/400*size.x/400 && TEXTSIZE <= 48) {
         TEXTSIZE++;
       }
+    }
+
+    if (protectedTextLength - 1 >=0) {
+      protectedText = protectedText.substring(0, protectedTextLength - 1);
+      protectedTextLength--;
+    }
+    if (textWidth(protectedText) < size.x-15 && TEXTSIZE <= 48) {
+      TEXTSIZE++;
     }
   }
 
