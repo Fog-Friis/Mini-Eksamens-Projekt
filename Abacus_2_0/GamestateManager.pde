@@ -40,7 +40,7 @@ class GameStateManager {
 
     //setup scroll bars
     sb1 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 3);
-    sb2 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 6);    
+    sb2 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 400, 6);    
     sb3 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 7);
     sb4 = new Scrollbar(new PVector(width-20, 0), new PVector(width, height), 100, 9);
 
@@ -316,9 +316,9 @@ class GameStateManager {
     }
 
     if (loginBut.clicked) {
-     // errorHandler.loginUpdate();
-     hashing (passwordInput);
-     elevLoginCheck();
+      // errorHandler.loginUpdate();
+      hashing (passwordInput);
+      elevLoginCheck();
     }
     fill(0);
     textSize(32);
@@ -466,6 +466,7 @@ class GameStateManager {
       gamestate = 6;
     }
     if (opretProeveBut.clicked) {
+
       showButs = true;
       rigtigtSvar = realtSvarNR[valgtOpgave-1];
       rigtigtSvar = 0;
@@ -543,6 +544,7 @@ class GameStateManager {
 
     for (dropdownObject o : opgaveliste.objects) {
       if (o.clicked) {
+
         rigtigtSvar = realtSvarNR[valgtOpgave-1];
         valgtOpgave = o.number;
         opgaveTB.Text = opgavetekst[valgtOpgave-1];

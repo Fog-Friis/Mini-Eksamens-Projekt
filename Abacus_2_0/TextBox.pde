@@ -1,15 +1,9 @@
-boolean altgr = false;
-boolean two = false;
-boolean period = false;
-boolean AE, OE, AA;
-boolean shift;
-
-public class TextBox {
+class TextBox {
 
   //position and size
   PVector position, size;
   float scroll;
-  
+
   //visibility
   int visible;
 
@@ -42,13 +36,12 @@ public class TextBox {
     this.isProtected = isProtected;
     this.visible = visible;
   }
-  
+
   //display and run textbox
   void display() {
-    
     pushMatrix();
-    translate(0,scroll);
-    
+    translate(0, scroll);
+
     if (visible == gamestate) {
       // DRAWING THE BACKGROUND
       if (selected) {
@@ -77,11 +70,11 @@ public class TextBox {
       } else {
         text(Text, position.x + (textWidth("a") / 2), position.y + TEXTSIZE);
       }
-    } else{
+    } else {
       //sletter texten når man ikke er på menuen længere
       clearText();
     }
-    translate(0,0);
+    translate(0, 0);
     popMatrix();
   }
 
@@ -95,53 +88,46 @@ public class TextBox {
         } else if (KEYCODE == 32) {
           if (isProtected) {
             addProtection('*');
-          } 
-          addText(' ');
+          } else { 
+            addText(' ');
+          }
         } else if (KEYCODE == (int)ENTER) {
           return true;
         } else {
           // CHECK IF THE KEY IS A LETTER OR A NUMBER
-          boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Z');
-          boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
+          boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Ø');
+          boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'ø');
           boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
+          boolean isKeySign = (KEY >= 30 && KEY <= 200);
 
 
-
-          if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
+          if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber || isKeySign) {
             if (isProtected) {
               addProtection('*');
             }
             addText(KEY);
-          }
-          if (altgr == true && two == true) {
-            if (isProtected) {
-              addText('*');
-            }
-            addText('@');
-          }
-          if (period == true) {
-            if (isProtected) {
-              addText('*');
-            }
-            addText('.');
           }
         }
       }
     }
     return false;
   }
-  
+
   //add text to textbox
-  private void addText(char text) {
-    if (textWidth(Text + text) < (size.x -size.x/5)) {
+  private void addText(char text) {    
+    while (textWidth(Text+text)*TEXTSIZE/48*size.x/400 > size.x-15) {
+      TEXTSIZE--;
+    }
+
+    if (textWidth(Text+text)*TEXTSIZE/48*size.x/400 < size.x-15) {
       Text += text;
       TextLength++;
     }
   }
-  
+
   //add asterisk if textbox is a password textbox
   private void addProtection(char text) {
-    if (textWidth(Text + text) < (size.x - size.x/5)) {
+    if (textWidth(Text + text) < (size.x)) {
       protectedText += text;
     }
   }
@@ -149,8 +135,16 @@ public class TextBox {
   //remove text if backspace is pressed
   private void backSpace() {
     if (TextLength - 1 >= 0) {
-      Text = Text.substring(0, TextLength - 1);
+      try {
+        Text = Text.substring(0, TextLength - 1);
+      } 
+      catch(Exception e) {
+        println(e);
+      }
       TextLength--;
+      if (textWidth(Text)*TEXTSIZE/48*size.x/400 < size.x-15*size.x/400*size.x/400 && TEXTSIZE <= 48) {
+        TEXTSIZE++;
+      }
     }
   }
 
@@ -173,7 +167,7 @@ public class TextBox {
       selected = false;
     }
   }
-  
+
   //remove all text
   void clearText() {
     TextLength = 0;

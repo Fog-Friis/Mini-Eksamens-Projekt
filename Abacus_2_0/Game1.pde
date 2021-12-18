@@ -18,9 +18,6 @@ class Game1 {
       if (t.keyWasTyped(key, (int)keyCode)) {
       }
     }
-    if (keyCode == 46) {
-      period = true;
-    }
 
     if (key == ENTER) {
       enter = true;
@@ -28,9 +25,6 @@ class Game1 {
   }
 
   void releaseKey() {
-    if (keyCode == 46) {
-      period = false;
-    }
 
     if (key == ENTER) {
       enter = false;
