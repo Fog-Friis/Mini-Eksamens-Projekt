@@ -134,13 +134,8 @@ class TextBox {
 
   //remove text if backspace is pressed
   private void backSpace() {
-    if (TextLength - 1 >= 0) {
-      try {
+  if (TextLength - 1 >= 0) {
         Text = Text.substring(0, TextLength - 1);
-      } 
-      catch(Exception e) {
-        println(e);
-      }
       TextLength--;
       if (textWidth(Text)*TEXTSIZE/48*size.x/400 < size.x-15*size.x/400*size.x/400 && TEXTSIZE <= 48) {
         TEXTSIZE++;

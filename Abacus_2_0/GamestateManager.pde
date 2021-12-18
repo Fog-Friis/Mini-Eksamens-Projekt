@@ -1,7 +1,8 @@
 int gamestate;
 TextBox regUserLaererTB, regLaererID, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB;
 TextBox logUserTB, logPasswordTB;
-TextBox opgaveTB, svar1TB, svar2TB, svar3TB, svar4TB;
+
+TextBox[] opgaveTB, svar1TB, svar2TB, svar3TB, svar4TB;
 
 Button loginBut, registerScreenBut, laererLoginBut;
 Button ElevRegisterBut, LaererRegisterBut, TilbageBut;
@@ -11,7 +12,8 @@ Button resultaterLaererBut;
 Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
-Button annullerBut, gemBut, rsvar1But, rsvar2But, rsvar3But, rsvar4But;
+
+Button annullerBut, gemBut, rsvar1But, rsvar2But, rsvar3But, rsvar4But, powerBut;
 
 Scrollbar sb1, sb2, sb3, sb4;
 
@@ -180,18 +182,27 @@ class GameStateManager {
     buttons.add(svar4But);
 
     //setup OpretProeve screen
+    opgaveTB = new TextBox[25];
+    svar1TB = new TextBox[25];
+    svar2TB = new TextBox[25];
+    svar3TB = new TextBox[25];
+    svar4TB = new TextBox[25];
 
-    opgaveTB = new TextBox(new PVector(width/2-300, height/3), new PVector(800, 70), false, 20);
-    svar1TB = new TextBox(new PVector(width/2-300, height/3+100), new PVector(400, 70), false, 20);
-    svar2TB = new TextBox(new PVector(width/2-300, height/3+200), new PVector(400, 70), false, 20);
-    svar3TB = new TextBox(new PVector(width/2-300, height/3+300), new PVector(400, 70), false, 20);
-    svar4TB = new TextBox(new PVector(width/2-300, height/3+400), new PVector(400, 70), false, 20);
+    int i=1;
+    while (i <= 25) {
+      opgaveTB[i-1] = new TextBox(new PVector(width/2-300, height/3), new PVector(800, 70), false, 20);
+      svar1TB[i-1] = new TextBox(new PVector(width/2-300, height/3+100), new PVector(400, 70), false, 20);
+      svar2TB[i-1] = new TextBox(new PVector(width/2-300, height/3+200), new PVector(400, 70), false, 20);
+      svar3TB[i-1] = new TextBox(new PVector(width/2-300, height/3+300), new PVector(400, 70), false, 20);
+      svar4TB[i-1] = new TextBox(new PVector(width/2-300, height/3+400), new PVector(400, 70), false, 20);
 
-    textBoxes.add(opgaveTB);
-    textBoxes.add(svar1TB);
-    textBoxes.add(svar2TB);
-    textBoxes.add(svar3TB);
-    textBoxes.add(svar4TB);
+      textBoxes.add(opgaveTB[i-1]);
+      textBoxes.add(svar1TB[i-1]);
+      textBoxes.add(svar2TB[i-1]);
+      textBoxes.add(svar3TB[i-1]);
+      textBoxes.add(svar4TB[i-1]);
+      i++;
+    }
 
     annullerBut = new Button(new PVector(width/4-180, height/4.5), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "annuller", 24, 20);
     gemBut = new Button(new PVector(width-width/4+100, height/4.5), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "gem", 24, 20);
@@ -199,6 +210,7 @@ class GameStateManager {
     rsvar2But = new Button(new PVector(width/2+300, height/3+220), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
     rsvar3But = new Button(new PVector(width/2+300, height/3+320), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
     rsvar4But = new Button(new PVector(width/2+300, height/3+420), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
+    powerBut = new Button(new PVector(width/2+550, height/3+25), new PVector(20, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "^", 24, 20);
 
     buttons.add(annullerBut);
     buttons.add(gemBut);
@@ -206,22 +218,23 @@ class GameStateManager {
     buttons.add(rsvar2But);
     buttons.add(rsvar3But);
     buttons.add(rsvar4But);
+    buttons.add(powerBut);
 
     opgaveliste = new DropdownMenu(new PVector(width/4-200, height/3), new PVector(300, 50), "Opgaver", 24, color(200, 200, 200), 6, new ArrayList<dropdownObject>());
     dropdownMenus.add(opgaveliste);
 
-    int i=1;
-    while (i <= 25) {
-      opgaveliste.objects.add(new dropdownObject(new PVector(opgaveliste.pos.x, opgaveliste.pos.y), new PVector(opgaveliste.size.x, opgaveliste.size.y), "opgave " + i, i, false));
+    int k = 1;
+    while (k <= 25) {
+      opgaveliste.objects.add(new dropdownObject(new PVector(opgaveliste.pos.x, opgaveliste.pos.y), new PVector(opgaveliste.size.x, opgaveliste.size.y), "opgave " + k, k, false));
 
-      realtSvarNR[i-1] = 0;
-      opgaveSvar1[i-1] = "";
-      opgaveSvar2[i-1] = "";
-      opgaveSvar3[i-1] = "";
-      opgaveSvar4[i-1] = "";
-      opgavetekst[i-1] = "";
+      realtSvarNR[k-1] = 0;
+      opgaveSvar1[k-1] = "";
+      opgaveSvar2[k-1] = "";
+      opgaveSvar3[k-1] = "";
+      opgaveSvar4[k-1] = "";
+      opgavetekst[k-1] = "";
 
-      i++;
+      k++;
     }
   }
 
@@ -443,7 +456,29 @@ class GameStateManager {
     }
   }
 
+  void hideTBs() {
+    int j = 0;
+    while (j<=24) {
+
+      opgaveTB[j].visible = 20;
+      svar1TB[j].visible = 20;
+      svar2TB[j].visible = 20;
+      svar3TB[j].visible = 20;
+      svar4TB[j].visible = 20;
+
+      j++;
+    }
+    if (showButs) {
+      opgaveTB[valgtOpgave-1].visible = 6;
+      svar1TB[valgtOpgave-1].visible = 6;
+      svar2TB[valgtOpgave-1].visible = 6;
+      svar3TB[valgtOpgave-1].visible = 6;
+      svar4TB[valgtOpgave-1].visible = 6;
+    }
+  }
+
   boolean showButs = false;
+  //int j = 1;
   void TeacherProeveMenu() {
     pushMatrix();
     translate(0, -sb2.spos);
@@ -470,11 +505,11 @@ class GameStateManager {
       showButs = true;
       rigtigtSvar = realtSvarNR[valgtOpgave-1];
       rigtigtSvar = 0;
-      opgaveTB.Text = opgavetekst[valgtOpgave-1];
-      svar1TB.Text = opgaveSvar1[valgtOpgave-1];
-      svar2TB.Text = opgaveSvar2[valgtOpgave-1];
-      svar3TB.Text = opgaveSvar3[valgtOpgave-1];
-      svar4TB.Text = opgaveSvar4[valgtOpgave-1];
+      opgaveTB[valgtOpgave-1].Text = opgavetekst[valgtOpgave-1];
+      svar1TB[valgtOpgave-1].Text = opgaveSvar1[valgtOpgave-1];
+      svar2TB[valgtOpgave-1].Text = opgaveSvar2[valgtOpgave-1];
+      svar3TB[valgtOpgave-1].Text = opgaveSvar3[valgtOpgave-1];
+      svar4TB[valgtOpgave-1].Text = opgaveSvar4[valgtOpgave-1];
     }
     if (showButs == true) {
       annullerBut.visible = 6;
@@ -483,12 +518,13 @@ class GameStateManager {
       rsvar2But.visible = 6;
       rsvar3But.visible = 6;
       rsvar4But.visible = 6;
+      powerBut.visible = 6;
 
-      opgaveTB.visible = 6;
-      svar1TB.visible = 6;
-      svar2TB.visible = 6;
-      svar3TB.visible = 6;
-      svar4TB.visible = 6;
+      opgaveTB[valgtOpgave-1].visible = 6;
+      svar1TB[valgtOpgave-1].visible = 6;
+      svar2TB[valgtOpgave-1].visible = 6;
+      svar3TB[valgtOpgave-1].visible = 6;
+      svar4TB[valgtOpgave-1].visible = 6;
 
       opgaveliste.visible = 6;
 
@@ -497,30 +533,31 @@ class GameStateManager {
 
       OpretProeve();
     } else {
+
       annullerBut.visible = 20;
       gemBut.visible = 20;
       rsvar1But.visible = 20;
       rsvar2But.visible = 20;
       rsvar3But.visible = 20;
       rsvar4But.visible = 20;
+      powerBut.visible = 20;
 
-      opgaveTB.visible = 20;
-      svar1TB.visible = 20;
-      svar2TB.visible = 20;
-      svar3TB.visible = 20;
-      svar4TB.visible = 20;
-
+      hideTBs();
       opgaveliste.visible = 20;
 
       uddelProeveBut.visible = 6;
       opretProeveBut.visible = 6;
-    }
+    }    
     popMatrix();
   }
 
   int valgtOpgave = 1;
   int rigtigtSvar = 0;
   void OpretProeve() {
+
+    if (powerBut.clicked) {
+      opgaveTB[valgtOpgave-1].addText('^');
+    }
 
     if (annullerBut.visible == gamestate && annullerBut.clicked) {
       showButs = false;
@@ -535,11 +572,11 @@ class GameStateManager {
 
     if (gemBut.clicked) {
       realtSvarNR[valgtOpgave-1] = rigtigtSvar;
-      opgaveSvar1[valgtOpgave-1] = svar1TB.Text;
-      opgaveSvar2[valgtOpgave-1] = svar2TB.Text;
-      opgaveSvar3[valgtOpgave-1] = svar3TB.Text;
-      opgaveSvar4[valgtOpgave-1] = svar4TB.Text;
-      opgavetekst[valgtOpgave-1] = opgaveTB.Text;
+      opgaveSvar1[valgtOpgave-1] = svar1TB[valgtOpgave-1].Text;
+      opgaveSvar2[valgtOpgave-1] = svar2TB[valgtOpgave-1].Text;
+      opgaveSvar3[valgtOpgave-1] = svar3TB[valgtOpgave-1].Text;
+      opgaveSvar4[valgtOpgave-1] = svar4TB[valgtOpgave-1].Text;
+      opgavetekst[valgtOpgave-1] = opgaveTB[valgtOpgave-1].Text;
     }
 
     for (dropdownObject o : opgaveliste.objects) {
@@ -547,11 +584,31 @@ class GameStateManager {
 
         rigtigtSvar = realtSvarNR[valgtOpgave-1];
         valgtOpgave = o.number;
-        opgaveTB.Text = opgavetekst[valgtOpgave-1];
-        svar1TB.Text = opgaveSvar1[valgtOpgave-1];
-        svar2TB.Text = opgaveSvar2[valgtOpgave-1];
-        svar3TB.Text = opgaveSvar3[valgtOpgave-1];
-        svar4TB.Text = opgaveSvar4[valgtOpgave-1];
+
+        opgaveTB[valgtOpgave-1].visible = 6;
+        svar1TB[valgtOpgave-1].visible = 6;
+        svar2TB[valgtOpgave-1].visible = 6;
+        svar3TB[valgtOpgave-1].visible = 6;
+        svar4TB[valgtOpgave-1].visible = 6;
+
+        hideTBs();
+
+        opgaveTB[valgtOpgave-1].Text = opgavetekst[valgtOpgave-1];
+        opgaveTB[valgtOpgave-1].TextLength = opgavetekst[valgtOpgave-1].length();        
+
+        println(opgaveTB[valgtOpgave-1].TextLength);
+
+        svar1TB[valgtOpgave-1].Text = opgaveSvar1[valgtOpgave-1];
+        svar1TB[valgtOpgave-1].TextLength = opgaveSvar1[valgtOpgave-1].length();
+
+        svar2TB[valgtOpgave-1].Text = opgaveSvar2[valgtOpgave-1];
+        svar2TB[valgtOpgave-1].TextLength = opgaveSvar2[valgtOpgave-1].length();
+
+        svar3TB[valgtOpgave-1].Text = opgaveSvar3[valgtOpgave-1];
+        svar3TB[valgtOpgave-1].TextLength = opgaveSvar3[valgtOpgave-1].length();
+
+        svar4TB[valgtOpgave-1].Text = opgaveSvar4[valgtOpgave-1];
+        svar4TB[valgtOpgave-1].TextLength = opgaveSvar4[valgtOpgave-1].length();
       }
 
       if (o.number == valgtOpgave) {
