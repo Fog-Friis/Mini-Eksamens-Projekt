@@ -658,13 +658,6 @@ if (25 <= maxopgaver){
 }
 }
 
-void tjekResultat(){
-
-}
-
-void uploadResultat(){
-
-}
 
 //Find elevprøver
 void elevLoadAlleOpgaver(){
@@ -1289,10 +1282,9 @@ catch(Exception e){
  
   //Uddel elevprøver
  void uddelOpgaver(){
-   int valgtklasseID =0;
-   int valgtopgaveID =0;
+
    try {
- String TQUERYx8 = "SELECT opgaveantalklasse FROM klasse WHERE klasseID = "+valgtklasseID+";";
+ String TQUERYx8 = "SELECT opgaveantalklasse FROM klasse WHERE klasseID = "+lokalklasseID+";";
 
   Connection Tconnx8 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement Tstmtx8 = Tconnx8.createStatement(); 
@@ -1310,7 +1302,7 @@ catch(Exception e){
   }
   
   try{
- String TQUERYx9 = "klasse SET opgaveantalklasse = "+nyopgaveantal+"  WHERE klasseID = "+valgtklasseID+";";
+ String TQUERYx9 = "UPDATE klasse SET opgaveantalklasse = "+nyopgaveantal+"  WHERE klasseID = "+lokalklasseID+";";
  Connection Tconnx9 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement Tstmtx9 = Tconnx9.createStatement();
       Tstmtx9.executeUpdate(TQUERYx9);
@@ -1321,7 +1313,7 @@ catch(Exception e){
   } 
   
   try{
- String TQUERYx10 = "SELECT opgaveNavn FROM opgavetabel WHERE opgaveID = "+valgtopgaveID+";"; 
+ String TQUERYx10 = "SELECT opgaveNavn FROM opgavetabel WHERE opgaveID = "+opgaveID+";"; 
  Connection Tconnx10 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement Tstmtx10 = Tconnx10.createStatement(); 
      ResultSet Trsx10 = Tstmtx10.executeQuery(TQUERYx10);
@@ -1338,7 +1330,7 @@ catch(Exception e){
   }
   
  try{
- String TQUERYx11 = "INSERT INTO klasseopgaver (klasseID, opgaveID, opgavenavn, karakter) VALUES ("+valgtklasseID+", "+valgtopgaveID+", "+opgavenavn+", '"+karakter+"');";
+ String TQUERYx11 = "INSERT INTO klasseopgaver (klasseID, opgaveID, opgavenavn, karakter) VALUES ("+lokalklasseID+", "+opgaveID+", "+opgavenavn+", '"+karakter+"');";
  Connection Tconnx11 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement Tstmtx11 = Tconnx11.createStatement();
       Tstmtx11.executeUpdate(TQUERYx11);
@@ -1349,5 +1341,36 @@ catch(Exception e){
   }
  }
  
+ 
+
+void uploadResultat(){
+   try{
+ String TQUERYx45 = "SELECT opgaveNavn FROM opgavetabel WHERE opgaveID = "+opgaveID+";"; 
+ Connection Tconnx45 = DriverManager.getConnection(DB_URL, USER, PASS);
+      java.sql.Statement Tstmtx45 = Tconnx45.createStatement(); 
+     ResultSet Trsx45 = Tstmtx45.executeQuery(TQUERYx45);
+     
+     while (Trsx45.next()) {
+     opgavenavn = Trsx45.getString("opgaveNavn"); 
+     
+    }
+    Tconnx45.close();
+  }
+ 
+  catch(Exception e){
+    println(e);  
+  }
+  try{
+String TQUERYx46 = "INSERT INTO opgaverlavet (elevID, opgaveID, rigtigeSvar, opgaveAntal) VALUES ("+lokalklasseID+", "+opgaveID+", "+opgavenavn+", '"+karakter+"');";
+ Connection Tconnx46 = DriverManager.getConnection(DB_URL, USER, PASS);
+      java.sql.Statement Tstmtx46 = Tconnx46.createStatement();
+      Tstmtx46.executeUpdate(TQUERYx46);
+    Tconnx46.close();
+    }
+catch(Exception e){
+    println(e);      
+  }
+ 
+}
  
  
