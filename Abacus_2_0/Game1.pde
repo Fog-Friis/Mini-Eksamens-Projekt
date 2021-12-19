@@ -82,8 +82,4 @@ class Game1 {
     
     for (Button b : buttons)b.released();
   }
-
-  void clickMouse() {
-    //for (Button b : buttons) b.pressed();
-  }
 }

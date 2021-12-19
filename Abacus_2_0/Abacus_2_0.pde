@@ -14,10 +14,6 @@ void keyReleased(){
   game1.releaseKey();
 }
 
-void mouseClicked() {
-  game1.clickMouse();
-}
-
 void mousePressed(){
   game1.pressMouse();
 }
