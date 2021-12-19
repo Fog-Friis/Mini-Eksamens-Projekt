@@ -1,36 +1,36 @@
 Game1 game1;
 
-void setup(){
+void setup() {
   fullScreen();
   game1 = new Game1();
   game1.initiate();
 }
 
-void keyPressed(){
+void keyPressed() {
   game1.pressKey();
 }
 
-void keyReleased(){
+void keyReleased() {
   game1.releaseKey();
 }
 
-void mousePressed(){
+void mousePressed() {
   game1.pressMouse();
 }
 
 /*void mouseWheel(MouseEvent e){
-  for (DropdownMenu d : dropdownMenus) {
-    if (d.objects.size() > d.shownObjects-1 && d.overObjects() == true) {
-      d.scroll = e.getCount();
-    }
-  }
-}*/
+ for (DropdownMenu d : dropdownMenus) {
+ if (d.objects.size() > d.shownObjects-1 && d.overObjects() == true) {
+ d.scroll = e.getCount();
+ }
+ }
+ }*/
 
-void mouseReleased(){
-  game1.releaseMouse(); 
+void mouseReleased() {
+  game1.releaseMouse();
 }
 
-void draw(){
+void draw() {
   background(255);
   game1.display();
 }
