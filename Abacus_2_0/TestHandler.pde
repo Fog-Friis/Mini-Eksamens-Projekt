@@ -1154,7 +1154,7 @@ void OpretOpgaver() {
   } 
 
   try {
-<<<<<<< Updated upstream
+
        opgavenavn = nameTB.Text;
        nyopgaveantal =0 ;
        for (int i = 0; i <= 24; i++){
@@ -1165,12 +1165,6 @@ void OpretOpgaver() {
       Connection Tconnx1 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement Tstmtx1 = Tconnx1.createStatement();
       Tstmtx1.executeUpdate(TQUERYx1);
-=======
-    String TQUERYx1 = "INSERT INTO opgavetabel (opgaveID, opgaveNavn, opgaveAntal) VALUES (maxID2, '"+opgavenavn+"', "+nyopgaveantal+" );";
-    Connection Tconnx1 = DriverManager.getConnection(DB_URL, USER, PASS);
-    java.sql.Statement Tstmtx1 = Tconnx1.createStatement();
-    Tstmtx1.executeUpdate(TQUERYx1);
->>>>>>> Stashed changes
     Tconnx1.close();
   }
   catch(Exception e) {

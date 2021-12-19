@@ -5,18 +5,18 @@ String USER = "root";
   String DB_URL = "jdbc:mysql://localhost:3306/mep";
 int lokalunderviserID, klasse1, klasse2, klasse3, klasse4, klasse5;
 String knavn1, knavn2, knavn3, knavn4, knavn5;
-
+/*
   java.sql.Statement stmt, stmt2, stmt3, stmt4, stmt5, stmt6, stmt7, stmt8, stmt9, stmt10, stmt11;
   ResultSet rs, rs2, rs3, rs4, rs5, rs6, rs7, rs8, rs9, rs10, rs11;
   Connection conn, conn2, conn3, conn4, conn5, conn6, conn7, conn8, conn9, conn10, conn11; 
-  
+  */
   String test, klassenavn;
   String hashedPassword = "testpassword";
   int maxID = 0, maxID2 = -1;
   int klasseAntal, elevAntal;
   String usernameInput, passwordInput;
 
-  String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY9, QUERY10, QUERY11;
+//  String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY9, QUERY10, QUERY11;
   String result;
 void elevLoginCheck(){
   
