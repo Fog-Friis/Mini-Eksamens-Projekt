@@ -200,7 +200,7 @@ void underviserRegister(){
    try {
      hashedPassword = outputString;
      lokalbrugernavn = regUserLaererTB.Text;
-     String QUERY10 = ("INSERT INTO underviser (underviserID, brugernavn, password, skole, klasseAntal ) VALUES ('"+maxID2+"', '"+lokalbrugernavn+"', '"+hashedPassword+"','"+"test"+"', "+0+");");    
+     String QUERY10 = ("INSERT INTO underviser (underviserID, brugernavn, password, skole, klasseAntal ) VALUES ("+maxID2+", '"+lokalbrugernavn+"', '"+hashedPassword+"','"+skole+"', "+0+");");    
    
       Connection conn10 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt10 = conn10.createStatement();

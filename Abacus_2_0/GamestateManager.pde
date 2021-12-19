@@ -1,6 +1,6 @@
 int gamestate;
 TextBox regUserLaererTB, regLaererID, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB;
-TextBox logUserTB, logPasswordTB;
+TextBox logUserTB, logPasswordTB,  nameTB;
 
 TextBox[] opgaveTB, svar1TB, svar2TB, svar3TB, svar4TB;
 
@@ -13,7 +13,7 @@ Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
 
-Button annullerBut, gemBut, rsvar1But, rsvar2But, rsvar3But, rsvar4But, powerBut;
+Button annullerBut, gemBut, rsvar1But, rsvar2But, rsvar3But, rsvar4But, powerBut, gemAlleBut;
 
 Scrollbar sb1, sb2, sb3, sb4;
 
@@ -27,7 +27,7 @@ String[] opgaveSvar1 = new String[25];
 String[] opgaveSvar2 = new String[25];
 String[] opgaveSvar3 = new String[25];
 String[] opgaveSvar4 = new String[25];
-
+String skole = "H. C. Ørsted Lyngby";
 String currentOpgaveTekst, currentSvar1Tekst, currentSvar2Tekst, currentSvar3Tekst, currentSvar4Tekst;
 boolean update = false;
 DropdownMenu uddannelsesInstitution;
@@ -107,19 +107,19 @@ class GameStateManager {
 
     dropdownMenus.add(uddannelsesInstitution);
 
-    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, "H. C. Ørsted Lyngby", 1, false));
+    uddannelsesInstitution.objects.add(new dropdownObject(uddannelsesInstitution.pos, uddannelsesInstitution.size, skole, 1, false));
 
 
     //setup teacher register screeen
     regUserLaererTB = new TextBox(new PVector(width/2-200, height/3.7), new PVector(400, 70), false, 3);
     regPasswordLaerer1 = new TextBox(new PVector(width/2-200, height/3.7+110), new PVector(400, 70), false, 3);
     regPasswordLaerer2 = new TextBox(new PVector(width/2-200, height/3.7+220), new PVector(400, 70), false, 3);
-    regLaererID = new TextBox(new PVector(width/2-200, height/3.7+410), new PVector(400, 70), false, 3);
+   // regLaererID = new TextBox(new PVector(width/2-200, height/3.7+410), new PVector(400, 70), false, 3);
 
     textBoxes.add(regUserLaererTB);
     textBoxes.add(regPasswordLaerer1);
     textBoxes.add(regPasswordLaerer2);
-    textBoxes.add(regLaererID);
+  //  textBoxes.add(regLaererID);
 
     registerLaererBut = new Button(new PVector(width/2 + 30, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 40, 3);
     backLaererBut = new Button(new PVector(width/2 -180, height / 2 + 290), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Tilbage", 50, 3);
@@ -203,7 +203,7 @@ class GameStateManager {
       textBoxes.add(svar4TB[i-1]);
       i++;
     }
-
+    nameTB = new TextBox(new PVector(width/2-180, height/6.8+60), new PVector(600, 70), false, 20);
     annullerBut = new Button(new PVector(width/4-180, height/4.5), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "annuller", 24, 20);
     gemBut = new Button(new PVector(width-width/4+100, height/4.5), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "gem", 24, 20);
     rsvar1But = new Button(new PVector(width/2+300, height/3+120), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
@@ -211,7 +211,9 @@ class GameStateManager {
     rsvar3But = new Button(new PVector(width/2+300, height/3+320), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
     rsvar4But = new Button(new PVector(width/2+300, height/3+420), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
     powerBut = new Button(new PVector(width/2+550, height/3+25), new PVector(20, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "^", 24, 20);
-
+    gemAlleBut = new Button(new PVector(width-width/4+100, height/3+575), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Gem opgavesæt", 24, 20);
+   
+    textBoxes.add(nameTB);
     buttons.add(annullerBut);
     buttons.add(gemBut);
     buttons.add(rsvar1But);
@@ -219,14 +221,15 @@ class GameStateManager {
     buttons.add(rsvar3But);
     buttons.add(rsvar4But);
     buttons.add(powerBut);
-
+    buttons.add(gemAlleBut);
+    
     opgaveliste = new DropdownMenu(new PVector(width/4-200, height/3), new PVector(300, 50), "Opgaver", 24, color(200, 200, 200), 6, new ArrayList<dropdownObject>());
     dropdownMenus.add(opgaveliste);
 
     int k = 1;
     while (k <= 25) {
       opgaveliste.objects.add(new dropdownObject(new PVector(opgaveliste.pos.x, opgaveliste.pos.y), new PVector(opgaveliste.size.x, opgaveliste.size.y), "opgave " + k, k, false));
-
+    
       realtSvarNR[k-1] = 0;
       opgaveSvar1[k-1] = "";
       opgaveSvar2[k-1] = "";
@@ -405,7 +408,7 @@ class GameStateManager {
     text("Brugernavn", width/2-200, height/3.7+10);
     text("Adgangskode", width/2-200, height/3.7+140);
     text("Uni-login", width/2-200, height/3.7-22);
-    text("Verifikationskode", width/2-200, height/3.7+270);
+    text("Klassekode", width/2-200, height/3.7+270);
     textSize(48);
     text("Registrer elev  ", width/2.37, height/5.3);
   }
@@ -431,7 +434,7 @@ class GameStateManager {
     text("Brugernavn", width/2-200, height/3.7-10);
     text("Adgangskode", width/2-200, height/3.7+100);
     text("Gentag adgangskode", width/2-200, height/3.7+210);
-    text("Lære-ID", width/2-200, height/3.7+400);
+   // text("Lære-ID", width/2-200, height/3.7+400);
     textSize(48);
     text("Registrer lærer", width/2.37, height/5.3);
     translate(0, 0);
@@ -519,7 +522,9 @@ class GameStateManager {
       rsvar3But.visible = 6;
       rsvar4But.visible = 6;
       powerBut.visible = 6;
-
+      nameTB.visible = 6;
+      gemAlleBut.visible = 6;
+      
       opgaveTB[valgtOpgave-1].visible = 6;
       svar1TB[valgtOpgave-1].visible = 6;
       svar2TB[valgtOpgave-1].visible = 6;
@@ -567,8 +572,8 @@ class GameStateManager {
     fill(240);
     rect(200, height/5.5, width-400, 800);
     fill(0);
-    textSize(38);
-    text("Opret opgavesæt", width/2-140, height/6.8+60, 999, 100);
+    textSize(36);
+    text("Navn:", width/2-280, height/6.8+60, 999, 100);
 
     if (gemBut.clicked) {
       realtSvarNR[valgtOpgave-1] = rigtigtSvar;
@@ -672,7 +677,7 @@ class GameStateManager {
     pushMatrix();
     translate(0, -sb3.spos);    
     textFont(Comic);
-    text("LÆREr", 10, 10, 99, 99);
+    text("LÆRER", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
     fill(0);
@@ -718,7 +723,7 @@ class GameStateManager {
     pushMatrix();
     translate(0, -sb4.spos);
     textFont(Comic);
-    text("LÆREr", 10, 10, 99, 99);
+    text("LÆRER", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
     fill(0);
@@ -758,9 +763,9 @@ class GameStateManager {
     text(opgaveSvar3[currentopgave-1], width/1.3, height/1.75, 999, 999);
     text(opgaveSvar4[currentopgave-1], width/1.3, height/1.4, 999, 999);
 
-    text("dit svar:"+elevSvarNR[currentopgave-1], width/1.43, height/4.2, 999, 999);
-    textFont(Comic);
-    text("Prøvesæt1", 10, 10, 99, 99);
+    //text("dit svar:"+elevSvarNR[currentopgave-1], width/1.43, height/4.2, 999, 999);
+    //textFont(Comic);
+   // text("Prøvesæt1", 10, 10, 99, 99);
     textFont(norm);
     textSize(48);
 
