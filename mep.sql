@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 15. 12 2021 kl. 10:42:44
+-- Genereringstid: 19. 12 2021 kl. 21:33:48
 -- Serverversion: 5.7.14
 -- PHP-version: 5.6.25
 
@@ -38,7 +38,8 @@ CREATE TABLE `elev` (
 --
 
 INSERT INTO `elev` (`elevID`, `klasseID`, `brugernavn`, `password`) VALUES
-(1, 123451, 'test', '937E8D5FBB48BD4949536CD65B8D35C426B80D2F830C5C308E2CDEC422AE2244');
+(1, 123451, 'test', '937E8D5FBB48BD4949536CD65B8D35C426B80D2F830C5C308E2CDEC422AE2244'),
+(2, 11125482, 'thor', 'E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855');
 
 -- --------------------------------------------------------
 
@@ -49,7 +50,7 @@ INSERT INTO `elev` (`elevID`, `klasseID`, `brugernavn`, `password`) VALUES
 CREATE TABLE `klasse` (
   `klasseID` int(200) NOT NULL,
   `klassenavn` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
-  `skole` int(200) NOT NULL,
+  `skole` varchar(200) COLLATE latin1_danish_ci DEFAULT NULL,
   `underviserID` varchar(200) COLLATE latin1_danish_ci NOT NULL DEFAULT 'ingen',
   `opgaveantalklasse` int(255) NOT NULL DEFAULT '0',
   `elevAntal` int(11) DEFAULT '0',
@@ -84,6 +85,14 @@ CREATE TABLE `klasse` (
   `elevID29` int(255) DEFAULT NULL,
   `elevID30` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
+
+--
+-- Data dump for tabellen `klasse`
+--
+
+INSERT INTO `klasse` (`klasseID`, `klassenavn`, `skole`, `underviserID`, `opgaveantalklasse`, `elevAntal`, `elevID1`, `elevID2`, `elevID3`, `elevID4`, `elevID5`, `elevID6`, `elevID7`, `elevID8`, `elevID9`, `elevID10`, `elevID11`, `elevID12`, `elevID13`, `elevID14`, `elevID15`, `elevID16`, `elevID17`, `elevID18`, `elevID19`, `elevID20`, `elevID21`, `elevID22`, `elevID23`, `elevID24`, `elevID25`, `elevID26`, `elevID27`, `elevID28`, `elevID29`, `elevID30`) VALUES
+(11125482, 'klasseThor', 'H. C. Ørsted Lyngby', '2', 0, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(46032822, 'ThorKlasse', 'H. C. Ørsted Lyngby', '2', 0, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -330,7 +339,8 @@ CREATE TABLE `opgavesvarark` (
 --
 
 INSERT INTO `opgavesvarark` (`opgaveID`, `opgave1Svar`, `opgave2Svar`, `opgave3Svar`, `opgave4Svar`, `opgave5Svar`, `opgave6Svar`, `opgave7Svar`, `opgave8Svar`, `opgave9Svar`, `opgave10Svar`, `opgave11Svar`, `opgave12Svar`, `opgave13Svar`, `opgave14Svar`, `opgave15Svar`, `opgave16Svar`, `opgave17Svar`, `opgave18Svar`, `opgave19Svar`, `opgave20Svar`, `opgave21Svar`, `opgave22Svar`, `opgave23Svar`, `opgave24Svar`, `opgave25Svar`) VALUES
-(1, 1, 3, 2, 4, 4, 2, 3, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
+(1, 1, 3, 2, 4, 4, 2, 3, 3, 3, 4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1),
+(2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -341,15 +351,16 @@ INSERT INTO `opgavesvarark` (`opgaveID`, `opgave1Svar`, `opgave2Svar`, `opgave3S
 CREATE TABLE `opgavetabel` (
   `opgaveID` int(255) NOT NULL,
   `opgaveNavn` varchar(255) COLLATE latin1_danish_ci NOT NULL,
-  `opgaveAntal` int(255) DEFAULT NULL
+  `opgaveAntal` int(255) DEFAULT NULL,
+  `Tid` int(11) NOT NULL DEFAULT '1440'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
 -- Data dump for tabellen `opgavetabel`
 --
 
-INSERT INTO `opgavetabel` (`opgaveID`, `opgaveNavn`, `opgaveAntal`) VALUES
-(1, 'opgave1', 10);
+INSERT INTO `opgavetabel` (`opgaveID`, `opgaveNavn`, `opgaveAntal`, `Tid`) VALUES
+(1, 'opgave1', 10, 9999);
 
 -- --------------------------------------------------------
 
@@ -404,15 +415,16 @@ CREATE TABLE `underviser` (
   `brugernavn` varchar(200) COLLATE latin1_danish_ci NOT NULL,
   `password` varchar(200) COLLATE latin1_danish_ci NOT NULL,
   `skole` varchar(255) COLLATE latin1_danish_ci NOT NULL,
-  `initialer` varchar(255) COLLATE latin1_danish_ci NOT NULL
+  `klasseAntal` int(255) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_danish_ci;
 
 --
 -- Data dump for tabellen `underviser`
 --
 
-INSERT INTO `underviser` (`underviserID`, `brugernavn`, `password`, `skole`, `initialer`) VALUES
-(1, 'test', '937E8D5FBB48BD4949536CD65B8D35C426B80D2F830C5C308E2CDEC422AE2244', 'test', 't');
+INSERT INTO `underviser` (`underviserID`, `brugernavn`, `password`, `skole`, `klasseAntal`) VALUES
+(1, 'Thor1', '6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 'H. C. Ørsted Lyngby', 0),
+(2, 'thortest', '9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08', 'H. C. Ørsted Lyngby', 0);
 
 --
 -- Begrænsninger for dumpede tabeller
