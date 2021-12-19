@@ -51,7 +51,7 @@ class TextBox {
         fill(Background);
       }
       
-      println(Text, protectedText);
+    //  println(Text, protectedText);
       
       if (BorderEnable) {
         strokeWeight(BorderWeight);

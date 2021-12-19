@@ -1,12 +1,12 @@
 int gamestate;
-TextBox regUserLaererTB, regLaererID, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB;
-TextBox logUserTB, logPasswordTB,  nameTB;
+TextBox regUserLaererTB, regLaererID, regPasswordLaerer1, regPasswordLaerer2, regUserElevTB, regPasswordElevTB, regVerifikationElevTB,OpretklasseTB;
+TextBox logUserTB, logPasswordTB,  nameTB,  UlogUserTB, UlogPasswordTB;
 
 TextBox[] opgaveTB, svar1TB, svar2TB, svar3TB, svar4TB;
 
 Button loginBut, registerScreenBut, laererLoginBut, elevLoginBut;
 Button ElevRegisterBut, LaererRegisterBut, TilbageBut;
-Button registerElevBut, backElevBut, registerLaererBut, backLaererBut;
+Button registerElevBut, backElevBut, registerLaererBut, backLaererBut, OpretklasseBut;
 Button logoutBut, resultaterElevBut;
 Button resultaterLaererBut, resultaterLaererBut2;
 Button proeverElevBut;
@@ -51,7 +51,7 @@ class GameStateManager {
 
     //setup login screen
     logUserTB = new TextBox(new PVector(width/2-200, height/3.2), new PVector(400, 70), false, 0);
-    logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), true, 0);
+    logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), false, 0);
 
     textBoxes.add(logUserTB);
     textBoxes.add(logPasswordTB);
@@ -64,11 +64,11 @@ class GameStateManager {
     buttons.add(loginBut);
     buttons.add(registerScreenBut);
 
-    logUserTB = new TextBox(new PVector(width/2-200, height/3.2), new PVector(400, 70), false, 1);
-    logPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), false, 1);
+    UlogUserTB = new TextBox(new PVector(width/2-200, height/3.2), new PVector(400, 70), false, 1);
+    UlogPasswordTB = new TextBox(new PVector(width/2-200, height/2.4), new PVector(400, 70), false, 1);
 
-    textBoxes.add(logUserTB);
-    textBoxes.add(logPasswordTB);
+    textBoxes.add(UlogUserTB);
+    textBoxes.add(UlogPasswordTB);
 
     loginBut = new Button(new PVector(width/2 + 30, height / 2 + 20), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Login", 50, 1);
     registerScreenBut = new Button(new PVector(width/2 - 180, height / 2 + 20), new PVector(155, 40), 40, color(0, 0, 255), color(0, 0, 180), color(200, 200, 255), "Registrer", 40, 1);
@@ -133,17 +133,21 @@ class GameStateManager {
 
     buttons.add(logoutBut);
     buttons.add(resultaterElevBut);
-
+    //Teacher menu
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 6);
     resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 6);
     opretProeveBut = new Button(new PVector(width/4, height - 200), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Opret opgavesæt", 40, 6);
     uddelProeveBut = new Button(new PVector(width/4, height - 100), new PVector(width/2, 40), 40, color(205), color(225), color(225, 225, 235), "Uddel opgavesæt", 40, 6);
+    OpretklasseBut = new Button(new PVector(width/2+500, height - 600 ), new PVector(200, 40), 40, color(205), color(225), color(225, 225, 235), "Opret klasse", 40, 6);
+    OpretklasseTB = new TextBox(new PVector(width/2, height-612), new PVector(400, 70), false, 6);
 
+    textBoxes.add(OpretklasseTB);
     buttons.add(opretProeveBut);
     buttons.add(uddelProeveBut);
     buttons.add(logoutBut);
     buttons.add(resultaterLaererBut);
-
+    buttons.add(OpretklasseBut);
+    
     //setup teacher results-screen
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
     resultaterLaererBut2 = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 7);
@@ -211,7 +215,7 @@ class GameStateManager {
     rsvar3But = new Button(new PVector(width/2+300, height/3+320), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
     rsvar4But = new Button(new PVector(width/2+300, height/3+420), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "sæt rigtigt svar", 24, 20);
     powerBut = new Button(new PVector(width/2+550, height/3+25), new PVector(20, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "^", 24, 20);
-    gemAlleBut = new Button(new PVector(width-width/4+100, height/3+575), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Gem opgavesæt", 24, 20);
+    gemAlleBut = new Button(new PVector(width-width/4+100, height/3+575), new PVector(160, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Gem opgavesæt", 24, 20);
    
     textBoxes.add(nameTB);
     buttons.add(annullerBut);
@@ -332,9 +336,9 @@ class GameStateManager {
     }
 
     if (loginBut.clicked) {
-      // errorHandler.loginUpdate();
-      hashing (passwordInput);
+      hashing (logPasswordTB.Text);
       elevLoginCheck();
+      
     }
     fill(0);
     textSize(32);
@@ -357,7 +361,8 @@ class GameStateManager {
     }
 
     if (loginBut.clicked) {
-      errorHandler.loginUpdate();
+      hashing (UlogPasswordTB.Text);
+      underviserLoginCheck();
     }
     fill(0);
     textSize(32);
@@ -398,11 +403,11 @@ class GameStateManager {
       gamestate = 2;
     }
     if (registerElevBut.clicked) {
-      errorHandler.registerUpdate();
-      if (errorType == 0) {
-        //register user :)
+            hashing (logPasswordTB.Text);
+            elevRegister();
+            gamestate =5;
       }
-    }
+    
     fill(0);
     textSize(32);
     text("Brugernavn", width/2-200, height/3.7+10);
@@ -494,8 +499,38 @@ class GameStateManager {
     text("Prøver:", width/9.8, height/4.7, 999, 999);
     text("Status:", width-width/3.84, height/4.7, 999, 999);
     rect(0, height/3.6, width, 2);
+    if (OpretklasseBut.clicked){
+    klassenavn = OpretklasseTB.Text;
+    opretKlasse();
+    
+
+    }
     if (logoutBut.clicked) {
       gamestate = 0;
+    }
+    if (gemAlleBut.clicked){
+            annullerBut.visible = 6;
+      gemBut.visible = 6;
+      rsvar1But.visible = 6;
+      rsvar2But.visible = 6;
+      rsvar3But.visible = 6;
+      rsvar4But.visible = 6;
+      powerBut.visible = 6;
+      nameTB.visible = 6;
+      gemAlleBut.visible = 6;
+      
+      opgaveTB[valgtOpgave-1].visible = 6;
+      svar1TB[valgtOpgave-1].visible = 6;
+      svar2TB[valgtOpgave-1].visible = 6;
+      svar3TB[valgtOpgave-1].visible = 6;
+      svar4TB[valgtOpgave-1].visible = 6;
+
+      opgaveliste.visible = 6;
+
+      uddelProeveBut.visible = 20;
+      opretProeveBut.visible = 20;
+       OpretOpgaver();
+
     }
     if (resultaterLaererBut.clicked) {
       gamestate = 9;
@@ -532,13 +567,13 @@ class GameStateManager {
       svar4TB[valgtOpgave-1].visible = 6;
 
       opgaveliste.visible = 6;
-
+      OpretklasseBut.visible = 20;
       uddelProeveBut.visible = 20;
       opretProeveBut.visible = 20;
 
-      OpretProeve();
     } else {
-
+    nameTB.visible = 20;
+      gemAlleBut.visible = 20;
       annullerBut.visible = 20;
       gemBut.visible = 20;
       rsvar1But.visible = 20;
@@ -546,12 +581,13 @@ class GameStateManager {
       rsvar3But.visible = 20;
       rsvar4But.visible = 20;
       powerBut.visible = 20;
-
+      
       hideTBs();
       opgaveliste.visible = 20;
-
+      OpretklasseBut.visible = 6;
       uddelProeveBut.visible = 6;
       opretProeveBut.visible = 6;
+      OpretklasseTB.visible = 6;
     }    
     popMatrix();
   }
@@ -566,6 +602,7 @@ class GameStateManager {
 
     if (annullerBut.visible == gamestate && annullerBut.clicked) {
       showButs = false;
+      
     }
 
     stroke(0);

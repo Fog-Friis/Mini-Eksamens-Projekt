@@ -12,22 +12,24 @@ class ErrorHandler {
       errorType = 2;      
     } else {
       errorType = 0;
+
     }
   }
   
   void registerUpdate(){
     if (regUserLaererTB.TextLength == 0) {
       errorType = 3;
-    } else if (regLaererID.TextLength == 0) {
-      errorType = 4;
     } else if (regPasswordLaerer1.TextLength == 0) {
       errorType = 5;
     } else if (regPasswordLaerer2.TextLength == 0) {
       errorType = 6;
-    } else if(regPasswordLaerer1.Text != regPasswordLaerer2.Text){
+    } else if(regPasswordLaerer1.Text.equals(regPasswordLaerer2.Text) == false){
+      
       errorType = 7;
     } else {
+      hashing (regPasswordLaerer1.Text);
       errorType = 0;
+      underviserRegister();
     }
   }
 

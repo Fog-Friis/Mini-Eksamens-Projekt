@@ -1160,6 +1160,7 @@ void OpretOpgaver() {
        for (int i = 0; i <= 24; i++){
        if (opgavetekst[i].equals("") == true);
        nyopgaveantal = nyopgaveantal+1;
+       
        }
       String TQUERYx1 = "INSERT INTO opgavetabel (opgaveID, opgaveNavn, opgaveAntal) VALUES (maxID2, '"+opgavenavn+"', "+nyopgaveantal+" );";
       Connection Tconnx1 = DriverManager.getConnection(DB_URL, USER, PASS);

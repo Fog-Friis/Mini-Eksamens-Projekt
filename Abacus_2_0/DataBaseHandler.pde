@@ -5,23 +5,24 @@ String USER = "root";
   String DB_URL = "jdbc:mysql://localhost:3306/mep";
 int lokalunderviserID, klasse1, klasse2, klasse3, klasse4, klasse5;
 String knavn1, knavn2, knavn3, knavn4, knavn5;
-/*
+
   java.sql.Statement stmt, stmt2, stmt3, stmt4, stmt5, stmt6, stmt7, stmt8, stmt9, stmt10, stmt11;
   ResultSet rs, rs2, rs3, rs4, rs5, rs6, rs7, rs8, rs9, rs10, rs11;
   Connection conn, conn2, conn3, conn4, conn5, conn6, conn7, conn8, conn9, conn10, conn11; 
-  */
+  
   String test, klassenavn;
   String hashedPassword = "testpassword";
   int maxID = 0, maxID2 = -1;
   int klasseAntal, elevAntal;
   String usernameInput, passwordInput;
 
-//  String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY9, QUERY10, QUERY11;
+  String QUERY, QUERY2, QUERY3, QUERY4, QUERY5, QUERY6, QUERY7, QUERY8, QUERY9, QUERY10, QUERY11;
   String result;
 void elevLoginCheck(){
   
       try{
       lokalbrugernavn = logUserTB.Text;
+      
       hashedPassword = outputString;
        String QUERY = "SELECT password FROM elev WHERE brugernavn = '"+lokalbrugernavn+"';";
       Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -31,11 +32,10 @@ void elevLoginCheck(){
       while (rs.next()) {
           test = rs.getString("password"); 
         if (test.equals(hashedPassword) == true){
-          //Skift gamestate     
+         gamestate=5;  
           }
         else{
             
-             System.out.print("password don't match");
         }
               
       }
@@ -47,10 +47,11 @@ void elevLoginCheck(){
 }
 
 void underviserLoginCheck(){
-    lokalbrugernavn = logUserTB.Text;
+    
   try{    
+    lokalbrugernavn = UlogUserTB.Text;
       hashedPassword = outputString;
-       String QUERY8 = "SELECT password FROM underviser WHERE brugernavn = '"+logUserTB.Text+"';";
+       String QUERY8 = "SELECT password FROM underviser WHERE brugernavn = '"+ lokalbrugernavn +"';";
       Connection conn8 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt8 = conn8.createStatement();
       ResultSet rs8 = stmt8.executeQuery(QUERY8);
@@ -58,7 +59,7 @@ void underviserLoginCheck(){
       while (rs8.next()) {
           test = rs8.getString("password"); 
         if (test.equals(hashedPassword) == true){
-          //Skift gamestate     
+          gamestate=6;     
           }
         else{
             
@@ -106,31 +107,6 @@ catch(Exception e){
     println(e);      
   }  
 
-  try{
-    
-      
-     // String QUERY4 = "SELECT underviserID, MAX(underviserID) FROM underviser GROUP BY underviserID";
-       String QUERY4 = "SELECT elevID, MAX(elevID) FROM elev GROUP BY elevID";
-       
-     Connection conn4 = DriverManager.getConnection(DB_URL, USER, PASS);
-      java.sql.Statement stmt4 = conn4.createStatement(); 
-     ResultSet rs4 = stmt4.executeQuery(QUERY4);
-     
-     while (rs4.next()) {
-     maxID2 = ((int)rs4.getInt("elevID"));
-            
-    }
-    conn4.close();
-  }
-  
- 
-  catch(Exception e){
-    println(e);  
-  } 
-if (maxID2 == maxID){
-  println("Username in use");
-}
-else{
   
  try{
     
@@ -142,7 +118,7 @@ else{
      
      while (rs13.next()) {
      elevAntal = ((int)rs13.getInt("elevAntal"));
-     elevAntal = elevAntal+1;       
+    elevAntal = elevAntal+1;    
     }
     conn13.close();
   }
@@ -162,10 +138,10 @@ catch(Exception e){
   }
   try {
      
-     String QUERY15 = ("INSERT INTO klasse (elevID"+elevAntal+") VALUES ( "+maxID2+");");
+     String QUERY15 = ("UPDATE klasse SET elevID"+ elevAntal+" = ( "+maxID2+");");
       Connection conn15 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt15 = conn15.createStatement();
-      stmt3.executeUpdate(QUERY15);
+      stmt15.executeUpdate(QUERY15);
     conn15.close();
 }
 catch(Exception e){
@@ -174,9 +150,10 @@ catch(Exception e){
 
 }
 
-}
+
 
 void underviserRegister(){
+  lokalbrugernavn = regUserLaererTB.Text; 
     try{
 
        String QUERY9 = "SELECT underviserID, MAX(underviserID) FROM underviser GROUP BY underviserID";
@@ -197,15 +174,14 @@ void underviserRegister(){
     println(e);  
   }
 try {
-     hashedPassword = outputString;
-     lokalbrugernavn = regUserLaererTB.Text;   
+     hashedPassword = outputString;  
      String QUERY10 = ("INSERT INTO underviser (underviserID, brugernavn, password, skole, klasseAntal ) VALUES ("+maxID2+", '"+lokalbrugernavn+"', '"+hashedPassword+"','"+skole+"', "+0+");");    
    
       Connection conn10 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt10 = conn10.createStatement();
       stmt10.executeUpdate(QUERY10);
     conn10.close();
-       
+       gamestate = 6;
 }
 catch(Exception e){
     println(e);      
@@ -246,7 +222,7 @@ for (int i = 0; i <= 6; i++) {
 
 }   
    try {
-     String QUERY6 = ("INSERT INTO klasse (klasseID, klassenavn, underviserID) VALUES ("+maxID2+", '"+klassenavn+"', "+maxID+");");
+     String QUERY6 = ("INSERT INTO klasse (klasseID, klassenavn, underviserID) VALUES ("+maxID+", '"+klassenavn+"', "+maxID+");");
       Connection conn6 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt6 = conn6.createStatement();
       stmt6.executeUpdate(QUERY6);
@@ -320,7 +296,10 @@ catch(Exception e){
     println(e);      
   }
   
-  if (klasseAntal >= enplusside){
+
+}
+void findKlasseUpdate(){
+   if (klasseAntal >= enplusside){
   try {
   String QUERY17 = "SELECT klasseID FROM klasse WHERE underviserID ORDER BY ID = "+maxID+" DESC LIMIT (1,"+enplusside+");";
   Connection conn17 = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -457,5 +436,5 @@ catch(Exception e){
   catch(Exception e){
     println(e);  
   }
-  }
+  } 
 }
