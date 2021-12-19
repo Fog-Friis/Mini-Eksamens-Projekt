@@ -182,5 +182,7 @@ class TextBox {
   void clearText() {
     TextLength = 0;
     Text = "";
+    protectedTextLength = 0;
+    protectedText = "";
   }
 }
