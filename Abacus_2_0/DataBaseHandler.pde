@@ -151,7 +151,7 @@ void underviserRegister(){
      maxID2 = maxID+1;
 
     }
-    conn2.close();
+    conn9.close();
   }
  
   catch(Exception e){
