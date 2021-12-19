@@ -8,7 +8,7 @@ Button loginBut, registerScreenBut, laererLoginBut, elevLoginBut;
 Button ElevRegisterBut, LaererRegisterBut, TilbageBut;
 Button registerElevBut, backElevBut, registerLaererBut, backLaererBut;
 Button logoutBut, resultaterElevBut;
-Button resultaterLaererBut;
+Button resultaterLaererBut, resultaterLaererBut2;
 Button proeverElevBut;
 Button proeverLaererBut, opretProeveBut, uddelProeveBut;
 Button opgaveTilbageBut, opgaveFremBut, opgaveSlutBut, svar1But, svar2But, svar3But, svar4But;
@@ -146,10 +146,10 @@ class GameStateManager {
 
     //setup teacher results-screen
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 7);
-    resultaterLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 7);
+    resultaterLaererBut2 = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 7);
 
     buttons.add(logoutBut);
-    buttons.add(resultaterLaererBut);
+    buttons.add(resultaterLaererBut2);
 
     //setup tests screen
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 8);
@@ -159,7 +159,7 @@ class GameStateManager {
     buttons.add(proeverElevBut);
 
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 9);
-    proeverLaererBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 9);
+    proeverLaererBut = new Button(new PVector(width-width/3.4/*-120*/, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Prøver", 24, 9);
 
     buttons.add(logoutBut);
     buttons.add(proeverLaererBut);
@@ -452,7 +452,7 @@ class GameStateManager {
       gamestate = 0;
     }
     if (resultaterElevBut.clicked) {
-      gamestate = 7;
+      gamestate = 8;
     }
   }
 
@@ -495,10 +495,10 @@ class GameStateManager {
       gamestate = 0;
     }
     if (resultaterLaererBut.clicked) {
-      gamestate = 8;
+      gamestate = 9;
     }
     if (uddelProeveBut.clicked) {
-      gamestate = 6;
+      gamestate = 7;
     }
     if (opretProeveBut.clicked) {
 
@@ -683,8 +683,8 @@ class GameStateManager {
     if (logoutBut.clicked) {
       gamestate = 0;
     }
-    if (resultaterLaererBut.clicked) {
-      gamestate = 8;
+    if (resultaterLaererBut2.clicked) {
+      gamestate = 9;
     }
     stroke(0);
     fill(240);
@@ -711,7 +711,7 @@ class GameStateManager {
       gamestate = 0;
     }
     if (proeverElevBut.clicked) {
-      gamestate = 4;
+      gamestate = 5;
     }
   }
   void TeacherResultatMenu() {
@@ -730,7 +730,7 @@ class GameStateManager {
       gamestate = 0;
     }
     if (proeverLaererBut.clicked == true) {
-      gamestate = 5;
+      gamestate = 6;
     }
     translate(0, 0);
     popMatrix();
