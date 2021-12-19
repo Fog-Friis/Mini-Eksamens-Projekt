@@ -299,7 +299,7 @@ class GameStateManager {
 
     case 10:
       if (update == false) {
-        opgaveID =1;
+        //opgaveID =1;
         antalOpgaver();
         setupTekst();
         update = true;
