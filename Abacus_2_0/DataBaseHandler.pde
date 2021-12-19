@@ -3,7 +3,7 @@ boolean underviserlogin = false;
 String USER = "root";
   String PASS = "";
   String DB_URL = "jdbc:mysql://localhost:3306/mep";
-int lokalunderviserID, klasse1, klasse2, klasse3, klasse4, klasse5;
+int lokalunderviserID, klasse1, klasse2, klasse3, klasse4, klasse5, LokalklasseAntal;
 String knavn1, knavn2, knavn3, knavn4, knavn5;
 
   java.sql.Statement stmt, stmt2, stmt3, stmt4, stmt5, stmt6, stmt7, stmt8, stmt9, stmt10, stmt11;
@@ -207,7 +207,6 @@ for (int i = 0; i <= 6; i++) {
      while (rs5.next()) {
      maxID = ((int)rs5.getInt("underviserID"));
      result += maxID;
-    
     }
     conn5.close();
   }
@@ -216,13 +215,8 @@ for (int i = 0; i <= 6; i++) {
     println(e);  
   } 
   
-  try {
-      maxID2 = Integer.parseInt(result);
-} catch (NumberFormatException e) {
-
-}   
    try {
-     String QUERY6 = ("INSERT INTO klasse (klasseID, klassenavn, underviserID) VALUES ("+maxID+", '"+klassenavn+"', "+maxID+");");
+     String QUERY6 = ("INSERT INTO klasse (klasseID, klassenavn, underviserID, skole) VALUES ("+result+", '"+klassenavn+"', "+maxID+", '"+skole+"');");
       Connection conn6 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt6 = conn6.createStatement();
       stmt6.executeUpdate(QUERY6);
@@ -235,10 +229,10 @@ catch(Exception e){
      String QUERY7 = "SELECT klasseAntal FROM underviser WHERE brugernavn = '"+lokalbrugernavn+"';";
       Connection conn7 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt7 = conn7.createStatement();
-      stmt7.executeUpdate(QUERY7);
+      stmt7.executeQuery(QUERY7);
        while (rs7.next()) {
      klasseAntal = ((int)rs7.getInt("klasseAntal"));
-     klasseAntal = klasseAntal+1;
+     
       }
       conn7.close();
      
@@ -246,9 +240,8 @@ catch(Exception e){
 catch(Exception e){
     println(e);      
   } 
-  
   try {
-     String QUERY12 = "UPDATE underviser SET klasseAntal = "+klasseAntal+"  WHERE klasseID = "+maxID+";";
+     String QUERY12 = "UPDATE underviser SET klasseAntal = "+LokalklasseAntal+"  WHERE brugernavn = '"+lokalbrugernavn+"';";
       Connection conn12 = DriverManager.getConnection(DB_URL, USER, PASS);
       java.sql.Statement stmt12 = conn12.createStatement();
       stmt12.executeUpdate(QUERY12);

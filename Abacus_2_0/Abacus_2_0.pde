@@ -32,5 +32,13 @@ void mouseReleased() {
 
 void draw() {
   background(255);
+     if (update == true && previousTime <= 0){
+       previousTime = minute();
+    previousTime -= 1;
+      tjekSvar();
+      gamestate = 8;
+      update = false;
+      
+     }
   game1.display();
 }

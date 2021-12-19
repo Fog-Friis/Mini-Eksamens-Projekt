@@ -4,10 +4,11 @@ String[] opgaveSvar2Data = new String[25];
 String[] opgaveSvar3Data = new String[25];
 String[] opgaveSvar4Data = new String[25];
 String lokalbrugernavn, opgavenavn, karakter="ingen givet", opgnavn1, opgnavn2, opgnavn3, opgnavn4, opgnavn5;
-boolean karaktergivet = false;
+boolean karaktergivet = false, updateTH = false;
 int lokalelevID, lokalklasseID, nyopgaveantal, lokalopgaveantalklasse;
 int enplusside=1, toplusside=2, treplusside=3, fireplusside=4, femplusside=5, opgID1, opgID2, opgID3, opgID4, opgID5, open1, open2, open3, open4, open5, opgantal1, opgantal2, opgantal3, opgantal4, opgantal5, rigtigesvar1, rigtigesvar2, rigtigesvar3, rigtigesvar4, rigtigesvar5, karakter1, karakter2, karakter3, karakter4, karakter5;
-
+int previousTime, timeopen;
+    
 java.sql.Statement Tstmt, Tstmt2, Tstmt3, Tstmt4, Tstmt5, Tstmt6, Tstmt7, Tstmt8, Tstmt9, Tstmt10;
 ResultSet Trs, Trs2, Trs3, Trs4, Trs5, Trs6, Trs7, Trs8, Trs9, Trs10;
 Connection Tconn, Tconn2, Tconn3, Tconn4, Tconn5, Tconn6, Tconn7, Tconn8, Tconn9, Tconn10; 
@@ -30,7 +31,25 @@ int Tjekker, rigtigesvar=0;
 
 
 void hentOpgave() {   
+  
+  if (updateTH == false){
+    try {
+    String TQUERY0 = "SELECT Tid FROM opgavetabel WHERE opgaveID = "+opgaveID+";"; 
+    Connection Tconn0 = DriverManager.getConnection(DB_URL, USER, PASS);
+    java.sql.Statement Tstmt0 = Tconn0.createStatement();
+    ResultSet Trs0 = Tstmt0.executeQuery(TQUERY0);
 
+    while (Trs0.next()) {
+     previousTime = Trs0.getInt("Tid");
+    }
+    Tconn0.close();
+  }
+  catch(Exception e) {
+    println(e);
+  }
+}
+  
+  updateTH = true;
   String TQUERY = "SELECT opgaveTekst"+currentopgave+" FROM opgavetext WHERE opgaveID = "+opgaveID+";";
   String TQUERY2 = "SELECT opgave"+currentopgave+"Svar1 FROM opgavesvar1 WHERE opgaveID = "+opgaveID+";";
   String TQUERY3 = "SELECT opgave"+currentopgave+"Svar2 FROM opgavesvar2 WHERE opgaveID = "+opgaveID+";";

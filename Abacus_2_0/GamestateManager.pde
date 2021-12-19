@@ -4,7 +4,7 @@ TextBox logUserTB, logPasswordTB,  nameTB,  UlogUserTB, UlogPasswordTB;
 
 TextBox[] opgaveTB, svar1TB, svar2TB, svar3TB, svar4TB;
 
-Button loginBut, registerScreenBut, laererLoginBut, elevLoginBut;
+Button loginBut, registerScreenBut, laererLoginBut, elevLoginBut, Test1But;
 Button ElevRegisterBut, LaererRegisterBut, TilbageBut;
 Button registerElevBut, backElevBut, registerLaererBut, backLaererBut, OpretklasseBut;
 Button logoutBut, resultaterElevBut;
@@ -130,7 +130,9 @@ class GameStateManager {
     //setup student results-screen
     logoutBut = new Button(new PVector(width-width/7, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Log ud", 24, 5);
     resultaterElevBut = new Button(new PVector(width-width/3.4, height / 27), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Resultater", 24, 5);
-
+    Test1But = new Button(new PVector(width-500, height/3), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Test", 24, 5);
+    
+    buttons.add(Test1But);
     buttons.add(logoutBut);
     buttons.add(resultaterElevBut);
     //Teacher menu
@@ -171,7 +173,7 @@ class GameStateManager {
     //Testscreen
     opgaveFremBut= new Button(new PVector(width-width/7, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Frem", 24, 10);
     opgaveTilbageBut = new Button(new PVector(width-width/1.1, height - 900), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Tilbage", 24, 10);
-    opgaveSlutBut = new Button(new PVector(width-width/7, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 10);
+    opgaveSlutBut = new Button(new PVector(width-100, height - 1050), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "Opgaveslut", 24, 10);
     svar1But = new Button(new PVector(width-width/3., height - 750), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar1", 24, 10);
     svar2But = new Button(new PVector(width-width/3., height - 600), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar2", 24, 10);
     svar3But = new Button(new PVector(width-width/3., height - 450), new PVector(80, 20), 40, color(150, 150, 200), color(120, 120, 180), color(200, 200, 255), "svar3", 24, 10);
@@ -306,7 +308,7 @@ class GameStateManager {
 
     case 10:
       if (update == false) {
-        //opgaveID =1;
+        opgaveID =1;
         antalOpgaver();
         setupTekst();
         update = true;
@@ -315,7 +317,7 @@ class GameStateManager {
       updatetest();
       testscreen();
       break;
-
+     
 
     default:
       gamestate = 0;
@@ -459,6 +461,9 @@ class GameStateManager {
     if (logoutBut.clicked) {
       gamestate = 0;
     }
+    if (Test1But.clicked) {
+      gamestate = 10;
+    }
     if (resultaterElevBut.clicked) {
       gamestate = 8;
     }
@@ -508,7 +513,9 @@ class GameStateManager {
     if (logoutBut.clicked) {
       gamestate = 0;
     }
+    
     if (gemAlleBut.clicked){
+      /*
             annullerBut.visible = 6;
       gemBut.visible = 6;
       rsvar1But.visible = 6;
@@ -529,12 +536,20 @@ class GameStateManager {
 
       uddelProeveBut.visible = 20;
       opretProeveBut.visible = 20;
+      */
+      showButs = false;
        OpretOpgaver();
 
     }
     if (resultaterLaererBut.clicked) {
       gamestate = 9;
+
     }
+if (annullerBut.clicked){    
+        showButs = false;
+       
+
+}
     if (uddelProeveBut.clicked) {
       gamestate = 7;
     }
@@ -568,6 +583,7 @@ class GameStateManager {
 
       opgaveliste.visible = 6;
       OpretklasseBut.visible = 20;
+      OpretklasseTB.visible = 20;
       uddelProeveBut.visible = 20;
       opretProeveBut.visible = 20;
 
@@ -585,6 +601,7 @@ class GameStateManager {
       hideTBs();
       opgaveliste.visible = 20;
       OpretklasseBut.visible = 6;
+       OpretklasseTB.visible = 6;
       uddelProeveBut.visible = 6;
       opretProeveBut.visible = 6;
       OpretklasseTB.visible = 6;
@@ -749,6 +766,24 @@ class GameStateManager {
     text("Resultater:", width/9.8, height/4.7, 999, 999);
     text("Karakter:", width-width/3.84, height/4.7, 999, 999);
     rect(0, height/3.6, width, 2);
+    
+    if ((rigtigesvar*100)/maxopgaver >= 0 && (rigtigesvar*100)/maxopgaver < 25)
+    {karakter = "-3";}
+    else if ((rigtigesvar*100)/maxopgaver >= 0 && (rigtigesvar*100)/maxopgaver < 50)
+    {karakter = "0";}
+    else if ((rigtigesvar*100)/maxopgaver >= 0 && (rigtigesvar*100)/maxopgaver < 60)
+    {karakter = "2";}
+    else if ((rigtigesvar*100)/maxopgaver >= 0 && (rigtigesvar*100)/maxopgaver < 70)
+    {karakter = "4";}
+    else if ((rigtigesvar*100)/maxopgaver >= 0 && (rigtigesvar*100)/maxopgaver < 80)
+    {karakter = "7";}
+    else if ((rigtigesvar*100)/maxopgaver >= 0 && (rigtigesvar*100)/maxopgaver < 90)
+    {karakter = "10";}
+    else if ((rigtigesvar*100)/maxopgaver >= 0 && (rigtigesvar*100)/maxopgaver < 1000)
+    {karakter = "12";}
+    textSize(32);
+    text(karakter, width-width/3.84, height/3, 999, 999);
+    text(rigtigesvar+" ud af "+maxopgaver, width/9.8, height/3, 999, 999);
     if (logoutBut.clicked) {
       gamestate = 0;
     }
@@ -792,14 +827,15 @@ class GameStateManager {
     currentOpgaveTekst =opgavetekst[currentopgave-1];
   }
   void testscreen() {
-
+        
     background(255);
+    
     text(currentopgave+": "+currentOpgaveTekst, width/9.8, height/3.7, 999, 999);
     text(opgaveSvar1[currentopgave-1], width/1.3, height/3.4, 999, 999);
     text(opgaveSvar2[currentopgave-1], width/1.3, height/2.3, 999, 999);
     text(opgaveSvar3[currentopgave-1], width/1.3, height/1.75, 999, 999);
     text(opgaveSvar4[currentopgave-1], width/1.3, height/1.4, 999, 999);
-
+    text("Tid ialt: "+previousTime+" min", width/50, height-(height-100));
     //text("dit svar:"+elevSvarNR[currentopgave-1], width/1.43, height/4.2, 999, 999);
     //textFont(Comic);
    // text("Prøvesæt1", 10, 10, 99, 99);
