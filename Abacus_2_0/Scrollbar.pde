@@ -2,15 +2,15 @@ class Scrollbar {
   //position and size of scrollbar
   PVector pos;
   PVector size;
-  
+
   //position and size of slider
   float spos;
   float newSpos;
   float sheight;
-  
+
   //wether the slider is supposed to move or not
   boolean locked;
-  
+
   //visibility
   int visible;
 
@@ -23,7 +23,7 @@ class Scrollbar {
     spos = pos.y;
     newSpos = spos;
   }
-  
+
   //update and display scrollbar
   void run() {
     update();
@@ -42,7 +42,7 @@ class Scrollbar {
     }
 
     if (!locked) {
-      newSpos = constrain(mouseY-sheight/2, pos.y, pos.y+size.y);
+        newSpos = constrain(mouseY-sheight/2, pos.y, pos.y+size.y-sheight);
     }
 
     if (locked && gamestate != visible) {
@@ -53,12 +53,12 @@ class Scrollbar {
       spos += (newSpos-spos);
     }
   }
-  
+
   //constrain sliders position to a value
   float constrain(float val, float minv, float maxv) {
     return min(max(val, minv), maxv);
   }
-  
+
   //display scrollbar
   void display() {
     if (gamestate == visible) {
